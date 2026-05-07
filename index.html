@@ -1570,12 +1570,11 @@ samenwerking: ()=>`
           </button>
         </div>
         <iframe 
-          id="wereldwijd-iframe"
-          src="grond.html" 
-          style="width:100%;height:75vh;min-height:500px;border:none;display:block;flex:1;"
-          title="De Wereld van de Goede Bijstand"
-          loading="lazy">
-        </iframe>
+  id="wereldwijd-iframe"
+  src=""
+  style="width:100%;height:75vh;min-height:500px;border:none;display:block;flex:1;"
+  title="De Wereld van de Goede Bijstand">
+</iframe>
       </div>
     </div>
   </div>
@@ -1834,6 +1833,14 @@ function toggleTab(id) {
       btn.style.color = (isTarget && !isOpen) ? 'var(--gold-lt)' : 'var(--stone-mid)';
     }
   });
+
+  // Laad iframe pas bij eerste klik
+  if (id === 'wereldwijd') {
+    const iframe = document.getElementById('wereldwijd-iframe');
+    if (iframe && !iframe.src.includes('grond.html')) {
+      iframe.src = 'grond.html';
+    }
+  }
 }
 
 function toggleFullscreen() {
