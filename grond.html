@@ -277,9 +277,6 @@
     <button class="layer-btn active" id="btn-layer-aarde" onclick="setLayer('aarde')">
       🪨 <span id="layer-aarde-label">Grondbibliotheek</span>
     </button>
-    <button class="layer-btn" id="btn-layer-schelp" onclick="setLayer('schelp')">
-      🐚 <span id="layer-schelp-label">Schelpen van Brussel</span>
-    </button>
   </div>
 
   <div id="map"></div>
@@ -287,38 +284,9 @@
   <div class="map-count" id="map-count"></div>
   <div class="map-caption" id="txt-map-caption">Klik op een punt om de naam van de locatie te zien — zoom met het scrollwiel of de knoppen links</div>
 </section>
-
-<!-- SCHELP FORM PANEL (shown only in schelp layer) -->
-<div class="schelp-panel" id="schelp-panel">
-  <div class="schelp-form-wrap">
-    <div class="schelp-form-title" id="schelp-form-title">📍 Pin uw schelp op de kaart</div>
-    <div class="schelp-form-intro" id="schelp-form-intro">Hebt u een schelp meegenomen uit de Bijstandskerk als geschenk? Laat zien waar ze terechtgekomen is.</div>
-    <div class="schelp-form-row">
-      <div class="schelp-field">
-        <label class="schelp-label" for="sf-city"><span id="lbl-city">Stad of land</span> <span class="schelp-req">*</span></label>
-        <input id="sf-city" type="text" class="schelp-input" placeholder="bijv. Tokyo, Japan" autocomplete="off">
-      </div>
-      <div class="schelp-field">
-        <label class="schelp-label" for="sf-name" id="lbl-name">Uw naam (optioneel)</label>
-        <input id="sf-name" type="text" class="schelp-input" placeholder="bijv. Marie">
-      </div>
-    </div>
-    <div class="schelp-field" style="margin-top:10px;">
-      <label class="schelp-label" for="sf-msg" id="lbl-msg">Berichtje (optioneel)</label>
-      <textarea id="sf-msg" class="schelp-input schelp-textarea" rows="2" placeholder="bijv. Cadeau voor mijn zus"></textarea>
-    </div>
-    <div style="display:flex;align-items:center;flex-wrap:wrap;">
-      <button class="btn-schelp" id="sf-submit" onclick="schelpSubmit()">🐚 <span id="btn-pin-label">Zet pin op de kaart</span></button>
-      <span class="schelp-status" id="sf-status"></span>
-    </div>
   </div>
 </div>
 
-<!-- SCHELP LIST -->
-<div class="schelp-list-wrap" id="schelp-list-wrap" style="display:none;">
-  <div class="schelp-list-title" id="schelp-list-title">Alle schelpen</div>
-  <ul class="schelp-list" id="schelp-list"></ul>
-</div>
 
 <!-- ARTICLE -->
 <section id="verhaal" class="article-section">
@@ -359,7 +327,7 @@ const TX = {
     statLocations:"Locaties", statContinents:"Continenten", statCountries:"Landen", statStories:"Verhalen",
     mapLabel:"Wereldkaart der Bestemmingen",
     mapCaption:"Klik op een punt om de naam van de locatie te zien — zoom met het scrollwiel of de knoppen links",
-    layerAarde:"Grondbibliotheek", layerSchelp:"Schelpen van Brussel",
+    layerAarde:"Grondbibliotheek", 
     continentLabels:{"Afrika":"Afrika","Azië & M-O":"Azië & M-O","Europa":"Europa","Amerika":"Amerika"},
     schelpFormTitle:"📍 Pin uw schelp op de kaart",
     schelpFormIntro:"Hebt u een schelp meegenomen uit de Bijstandskerk als geschenk? Laat zien waar ze terechtgekomen is.",
@@ -392,7 +360,7 @@ const TX = {
     statLocations:"Sites", statContinents:"Continents", statCountries:"Pays", statStories:"Histoires",
     mapLabel:"Carte du Monde des Destinations",
     mapCaption:"Cliquez sur un point pour voir le nom du lieu — zoomez avec la molette ou les boutons à gauche",
-    layerAarde:"Bibliothèque de terres", layerSchelp:"Coquillages de Bruxelles",
+    layerAarde:"Bibliothèque de terres", 
     continentLabels:{"Afrika":"Afrique","Azië & M-O":"Asie & M-O","Europa":"Europe","Amerika":"Amérique"},
     schelpFormTitle:"📍 Épinglez votre coquillage",
     schelpFormIntro:"Avez-vous emporté un coquillage de l'église comme cadeau ? Montrez où il est arrivé.",
@@ -424,7 +392,7 @@ const TX = {
     statLocations:"Standorte", statContinents:"Kontinente", statCountries:"Länder", statStories:"Geschichten",
     mapLabel:"Weltkarte der Reiseziele",
     mapCaption:"Klicken Sie auf einen Punkt, um den Namen des Ortes zu sehen — zoomen Sie mit dem Mausrad oder den Schaltflächen links",
-    layerAarde:"Erdbibliothek", layerSchelp:"Muscheln aus Brüssel",
+    layerAarde:"Erdbibliothek", 
     continentLabels:{"Afrika":"Afrika","Azië & M-O":"Asien & N-O","Europa":"Europa","Amerika":"Amerika"},
     schelpFormTitle:"📍 Ihre Muschel auf der Karte markieren",
     schelpFormIntro:"Haben Sie eine Muschel aus der Kirche als Geschenk mitgenommen? Zeigen Sie, wo sie gelandet ist.",
@@ -456,7 +424,7 @@ const TX = {
     statLocations:"Locations", statContinents:"Continents", statCountries:"Countries", statStories:"Stories",
     mapLabel:"World Map of Destinations",
     mapCaption:"Click on a dot to see the name of the location — zoom with the scroll wheel or the buttons on the left",
-    layerAarde:"Soil Library", layerSchelp:"Shells from Brussels",
+    layerAarde:"Soil Library", 
     continentLabels:{"Afrika":"Africa","Azië & M-O":"Asia & M-E","Europa":"Europe","Amerika":"Americas"},
     schelpFormTitle:"📍 Pin your shell on the map",
     schelpFormIntro:"Did you take a shell from the church as a gift? Show where it ended up.",
@@ -488,7 +456,7 @@ const TX = {
     statLocations:"Lugares", statContinents:"Continentes", statCountries:"Países", statStories:"Historias",
     mapLabel:"Mapa Mundial de Destinos",
     mapCaption:"Haga clic en un punto para ver el nombre del lugar — amplíe con la rueda del ratón o los botones de la izquierda",
-    layerAarde:"Biblioteca de tierras", layerSchelp:"Conchas de Bruselas",
+    layerAarde:"Biblioteca de tierras", 
     continentLabels:{"Afrika":"África","Azië & M-O":"Asia y O-M","Europa":"Europa","Amerika":"América"},
     schelpFormTitle:"📍 Marca tu concha en el mapa",
     schelpFormIntro:"¿Te llevaste una concha de la iglesia como regalo? Muestra dónde ha llegado.",
@@ -609,107 +577,6 @@ function setLayer(layer) {
   if (layer === 'aarde') { buildLegend(activeLang); } 
 }
 
-/* ══════════════════════════════════════════
-   SCHELP STORAGE & RENDERING
-══════════════════════════════════════════ */
-const STORAGE_KEY = 'schelpen-pins';
-
-async function loadSchelpPins() {
-  try {
-    const res = await window.storage.get(STORAGE_KEY, true);
-    schelpPins = res ? JSON.parse(res.value) : [];
-  } catch(e) { schelpPins = []; }
-  renderSchelpMarkers();
-  renderSchelpList();
-  updateCount();
-}
-
-function renderSchelpMarkers() {
-  schelpMarkers.forEach(m => map.removeLayer(m));
-  schelpMarkers = [];
-  const icon = makeShellIcon();
-  schelpPins.forEach(pin => {
-    const m = L.marker([pin.lat, pin.lng], { icon })
-      .bindPopup(buildSchelpPopup(pin));
-    if (activeLayer === 'schelp') m.addTo(map);
-    schelpMarkers.push(m);
-  });
-}
-
-function buildSchelpPopup(pin) {
-  const name = pin.name ? `<strong>${esc(pin.name)}</strong><br>` : '';
-  const msg  = pin.msg  ? `<em>${esc(pin.msg)}</em><br>` : '';
-  return `<div style="min-width:130px;">🐚 <strong style="color:var(--rule);">${esc(pin.city)}</strong><br>${name}${msg}<small style="color:var(--rule);opacity:0.7;">${pin.date}</small></div>`;
-}
-
-function renderSchelpList() {
-  const ul = document.getElementById('schelp-list');
-  const wrap = document.getElementById('schelp-list-wrap');
-  if (!schelpPins.length) { wrap.style.display = 'none'; return; }
-  if (activeLayer === 'schelp') wrap.style.display = 'block';
-  ul.innerHTML = [...schelpPins].reverse().map(pin => {
-    const name = pin.name ? `<strong>${esc(pin.name)}</strong> · ` : '';
-    const msg  = pin.msg  ? `<em>${esc(pin.msg)}</em>` : '';
-    return `<li><span class="schelp-list-left">🐚 <strong>${esc(pin.city)}</strong>${pin.name||pin.msg?' — ':''}${name}${msg}</span><span class="schelp-list-date">${pin.date}</span></li>`;
-  }).join('');
-}
-
-function updateCount() {
-  const el = document.getElementById('map-count');
-  if (!el) return;
-  const tx = TX[activeLang];
-  const n = schelpPins.length;
-  if (n === 0) el.textContent = tx.countSchelp0;
-  else if (n === 1) el.textContent = tx.countSchelp1;
-  else el.textContent = tx.countSchelpN.replace('{n}', n);
-}
-
-function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
-
-/* ══════════════════════════════════════════
-   SCHELP SUBMIT
-══════════════════════════════════════════ */
-window.schelpSubmit = async function() {
-  const tx = TX[activeLang];
-  const cityEl   = document.getElementById('sf-city');
-  const nameEl   = document.getElementById('sf-name');
-  const msgEl    = document.getElementById('sf-msg');
-  const statusEl = document.getElementById('sf-status');
-  const btnEl    = document.getElementById('sf-submit');
-  const city = cityEl.value.trim();
-  if (!city) { cityEl.focus(); statusEl.textContent = tx.errCity; return; }
-  btnEl.disabled = true;
-  statusEl.textContent = tx.searching;
-  let lat, lng, displayName;
-  try {
-    const url = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent(city);
-    const res = await fetch(url, { headers:{ 'Accept-Language': activeLang } });
-    const data = await res.json();
-    if (!data.length) { statusEl.textContent = tx.errNotFound; btnEl.disabled = false; return; }
-    lat = parseFloat(data[0].lat);
-    lng = parseFloat(data[0].lon);
-    displayName = data[0].display_name.split(',')[0];
-  } catch(e) { statusEl.textContent = tx.errGeo; btnEl.disabled = false; return; }
-  const now = new Date();
-  const dateStr = now.toLocaleDateString('nl-BE', { day:'numeric', month:'long', year:'numeric' });
-  const pin = { id:Date.now(), city:displayName||city, name:nameEl.value.trim(), msg:msgEl.value.trim(), lat, lng, date:dateStr };
-  try {
-    await window.storage.set(STORAGE_KEY, JSON.stringify([...schelpPins, pin]), true);
-    schelpPins.push(pin);
-  } catch(e) { statusEl.textContent = tx.errSave; btnEl.disabled = false; return; }
-  cityEl.value = ''; nameEl.value = ''; msgEl.value = '';
-  statusEl.textContent = tx.success.replace('{city}', pin.city);
-  btnEl.disabled = false;
-  const icon = makeShellIcon();
-  const m = L.marker([lat, lng], { icon }).bindPopup(buildSchelpPopup(pin));
-  if (activeLayer === 'schelp') { m.addTo(map); map.flyTo([lat, lng], 6, { duration:1.4 }); setTimeout(() => m.openPopup(), 1500); }
-  schelpMarkers.push(m);
-  renderSchelpList();
-  updateCount();
-  if (activeLayer === 'schelp') document.getElementById('schelp-list-wrap').style.display = 'block';
-};
 
 /* ══════════════════════════════════════════
    LANGUAGE
@@ -758,9 +625,6 @@ function applyLanguage(lang) {
   document.getElementById('txt-map-label').textContent     = t.mapLabel;
   document.getElementById('txt-map-caption').textContent   = t.mapCaption;
   document.getElementById('layer-aarde-label').textContent = t.layerAarde;
-  document.getElementById('layer-schelp-label').textContent= t.layerSchelp;
-  document.getElementById('schelp-form-title').textContent = t.schelpFormTitle;
-  document.getElementById('schelp-form-intro').textContent = t.schelpFormIntro;
   document.getElementById('lbl-city').textContent          = t.lblCity;
   document.getElementById('lbl-name').textContent          = t.lblName;
   document.getElementById('lbl-msg').textContent           = t.lblMsg;
@@ -768,7 +632,6 @@ function applyLanguage(lang) {
   document.getElementById('sf-name').placeholder           = t.namePh;
   document.getElementById('sf-msg').placeholder            = t.msgPh;
   document.getElementById('btn-pin-label').textContent     = t.btnPin;
-  document.getElementById('schelp-list-title').textContent = t.listSchelpTitle;
   document.getElementById('txt-art-headline').textContent  = t.artHeadline;
   document.getElementById('txt-art-deck').textContent      = t.artDeck;
   document.getElementById('txt-art-p1').textContent        = t.artP1;
@@ -885,7 +748,7 @@ function applyLanguage(lang) {
 // Start with aarde layer active
 aardeMarkers.forEach(m => m.addTo(map));
 applyLanguage('nl');
-setLayer('aarde');
+buildLegend('nl');
 ;
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -895,8 +758,6 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
   });
 });
 
-// Load shell pins from shared storage
-loadSchelpPins();
 </script>
 </body>
 </html>
