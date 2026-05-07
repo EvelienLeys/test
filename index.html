@@ -1,902 +1,1828 @@
 <!DOCTYPE html>
 <html lang="nl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>De Wereld van de Goede Bijstand — Grond & Schelpen</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Libre+Baskerville:ital@0;1&display=swap" rel="stylesheet" />
+<!-- ── SEO ── -->
+<meta name="description" content="Onze-Lieve-Vrouw van Goede Bijstand – Nederlandstalige parochie in Brussel-centrum. Vieringen, agenda, geschiedenis en info over de barokke kerk aan de Kolenmarkt 91.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://goedebijstand.brussels/">
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --ink:       #0d1b2a;
-      --sepia:     #2c4a6e;
-      --paper:     #e8f0f7;
-      --parchment: #d4e4f0;
-      --cream:     #f0f6fb;
-      --rule:      #7aaac8;
-      --gold:      #3a7bbf;
-    }
-    html { scroll-behavior: smooth; }
-    body { background: var(--cream); color: var(--ink); font-family: 'EB Garamond', Georgia, serif; font-size: 18px; line-height: 1.7; }
+<!-- ── Open Graph (voor delen op social media) ── -->
+<meta property="og:title" content="Onze-Lieve-Vrouw van Goede Bijstand – Brussel">
+<meta property="og:description" content="Nederlandstalige parochie in Brussel-centrum. Barokke kerk aan de Kolenmarkt 91, open elke dag van 9 tot 17 u.">
+<meta property="og:url" content="https://goedebijstand.brussels/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="nl_BE">
 
-    /* ── LANGUAGE BAR ── */
-    .lang-bar { background: var(--ink); display: flex; justify-content: flex-end; align-items: center; padding: 0 20px; gap: 2px; border-bottom: 2px solid var(--gold); }
-    .lang-label { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rule); margin-right: 10px; padding: 10px 0; opacity: 0.7; }
-    .lang-btn { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rule); background: transparent; border: none; cursor: pointer; padding: 10px 12px; border-bottom: 3px solid transparent; transition: color 0.18s, border-color 0.18s, background 0.18s; position: relative; top: 2px; }
-    .lang-btn:hover { color: var(--paper); background: rgba(255,255,255,0.05); }
-    .lang-btn.active { color: #fff; border-bottom-color: var(--gold); }
+<!-- ── Structured Data (Google begrijpt je beter) ── -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Church",
+  "name": "Onze-Lieve-Vrouw van Goede Bijstand",
+  "url": "https://goedebijstand.brussels",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Kolenmarkt 91",
+    "addressLocality": "Brussel",
+    "postalCode": "1000",
+    "addressCountry": "BE"
+  },
+  "openingHours": ["Mo-Sa 09:00-17:00", "Su 10:00-17:00"],
+  "email": "kerkfabriek@goedebijstand.brussels",
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 50.8467,
+    "longitude": 4.3488
+  }
+}
+</script>
 
-    /* ── MASTHEAD ── */
-    header { background: var(--ink); color: var(--paper); padding: 0; text-align: center; border-bottom: 4px solid var(--gold); }
-    .masthead-rule { display: flex; align-items: center; justify-content: center; gap: 16px; padding: 18px 24px 10px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; font-weight: 300; letter-spacing: 0.25em; text-transform: uppercase; color: var(--rule); }
-    .masthead-rule::before, .masthead-rule::after { content: ''; flex: 1; max-width: 180px; height: 1px; background: var(--gold); opacity: 0.5; }
-    .site-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.6rem, 5vw, 3rem); font-weight: 600; letter-spacing: 0.04em; line-height: 1.15; padding: 4px 24px 6px; color: #e8f0f7; }
-    .site-subtitle { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: clamp(0.9rem, 2.5vw, 1.15rem); color: var(--rule); padding: 0 24px 18px; letter-spacing: 0.01em; }
+<title>Onze-Lieve-Vrouw van Goede Bijstand — Brussel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold:      #4A90C4;
+  --gold-lt:   #E8F1FF;
+  --gold-dk:   #2B5F8A;
+  --stone:     #1B3A5C;
+  --stone-mid: #2B5F8A;
+  --cream:     #F0F6FB;
+  --parchment: #E3EEF7;
+  --white:     #FFFFFF;
+  --muted:     #4A7FA8;
+  --border:    #5A9BC0;
+  --shadow:    0 4px 24px rgba(44,36,22,0.13);
+  --shadow-lg: 0 12px 48px rgba(44,36,22,0.2);
+  --r:         2px;
+  --t:         0.25s ease;
+  --font-disp: 'Playfair Display', serif;
+  --font-ui:   'Jost', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: var(--font-ui); font-weight: 300; background: var(--cream); color: var(--stone); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+img { display: block; max-width: 100%; }
+a { color: var(--gold-dk); text-decoration: none; transition: color var(--t); }
+a:hover { color: var(--gold); }
+p { margin-bottom: 0.75em; }
+p:last-child { margin-bottom: 0; }
 
-    /* ── NAV ── */
-    nav { background: var(--parchment); border-bottom: 1px solid var(--rule); display: flex; justify-content: center; gap: 0; flex-wrap: wrap; }
-    nav a { display: inline-block; padding: 10px 22px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; letter-spacing: 0.18em; text-transform: uppercase; text-decoration: none; color: var(--sepia); border-right: 1px solid var(--rule); transition: background 0.2s, color 0.2s; }
-    nav a:first-child { border-left: 1px solid var(--rule); }
-    nav a:hover { background: var(--ink); color: var(--paper); }
+/* ── HERO ── */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  background: var(--stone);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Exterieur_Knop%204%201%20Icoon%20Kerkgebouw%20Goede%20Bijstand.jpg');
+  background-size: cover; background-position: center 38%;
+  opacity: 0.38;
+  animation: heroZoom 18s ease-in-out infinite alternate;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.06); }
+}
+.hero-vignette {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, transparent 30%, rgba(44,36,22,0.65) 100%);
+}
+.hero-top-bar {
+  position: absolute; top: 0; left: 0; right: 0;
+  display: flex; justify-content: flex-end;
+  padding: 1rem 2rem;
+  gap: 0.4rem;
+  z-index: 5;
+  flex-wrap: wrap;
+}
+.lang-btn {
+  background: transparent;
+  border: 1px solid rgba(201,169,110,0.4);
+  color: rgba(201,169,110,0.7);
+  font-family: var(--font-ui);
+  font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px; cursor: pointer;
+  transition: all var(--t);
+}
+.lang-btn:hover, .lang-btn.active { background: var(--gold); border-color: var(--gold); color: var(--stone); }
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center; padding: 2rem;
+}
+.hero-ornament {
+  display: flex; align-items: center; gap: 1.2rem;
+  justify-content: center; margin-bottom: 1.6rem;
+  animation: fadeDown 1s ease 0.2s both;
+}
+.hero-ornament span { display: block; height: 1px; width: 60px; background: var(--gold); opacity: 0.6; }
+.hero-ornament em { font-family: var(--font-ui); font-style: normal; font-size: 0.6rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); opacity: 0.8; }
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-12px); } to { opacity: 1; transform: translateY(0); } }
+.hero-title {
+  font-family: var(--font-disp);
+  font-size: clamp(2.2rem, 6vw, 4.2rem);
+  font-weight: 700; color: var(--white);
+  line-height: 1.1; letter-spacing: 0.01em;
+  text-shadow: 0 2px 30px rgba(44,36,22,0.6);
+  animation: fadeUp 1s ease 0.4s both;
+}
+.hero-sub {
+  font-family: var(--font-ui); font-style: italic; font-weight: 300;
+  font-size: 1.1rem; color: var(--gold-lt);
+  margin-top: 0.7rem; letter-spacing: 0.08em;
+  text-shadow: 0 1px 10px rgba(44,36,22,0.5);
+  animation: fadeUp 1s ease 0.6s both;
+}
+.hero-date {
+  font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(232,213,168,0.7); margin-top: 0.5rem;
+  animation: fadeUp 1s ease 0.7s both;
+}
+.hero-link a {
+  color: var(--gold-lt);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+}
+.hero-link a:hover {
+  color: var(--white);
+}
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  z-index: 3; cursor: pointer;
+  animation: fadeUp 1s ease 1.2s both;
+}
+.hero-scroll span { font-family: var(--font-ui); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
+.hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+@keyframes scrollPulse { 0%,100%{opacity:0.4;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
 
-    /* ── INTRO ── */
-    .intro { max-width: 760px; margin: 52px auto 0; padding: 0 24px; text-align: center; }
-    .intro-kicker { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
-    .intro h2 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.5rem, 4vw, 2.4rem); font-weight: 600; line-height: 1.25; color: var(--ink); margin-bottom: 20px; }
-    .intro p { font-family: 'EB Garamond', Georgia, serif; font-size: 1.05rem; color: var(--sepia); max-width: 620px; margin: 0 auto 10px; }
-    .intro-divider { width: 60px; height: 2px; background: var(--gold); margin: 28px auto; border: none; }
+/* ── NAV ── */
+.site-nav {
+  background: var(--stone);
+  display: flex; flex-wrap: wrap;
+  justify-content: center;
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 2px solid var(--gold-dk);
+  box-shadow: 0 4px 20px rgba(44,36,22,0.3);
+}
+.site-nav a {
+  font-family: var(--font-ui); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(201,169,110,0.65);
+  padding: 0.9rem 1.1rem;
+  border-right: 1px solid rgba(201,169,110,0.1);
+  transition: all var(--t); cursor: pointer; white-space: nowrap;
+}
+.site-nav a:last-child { border-right: none; }
+.site-nav a:hover, .site-nav a.active { color: var(--gold); background: rgba(201,169,110,0.07); }
+.site-nav a.active { border-bottom: 2px solid var(--gold); margin-bottom: -2px; }
 
-    /* ── STATS ── */
-    .stats-strip { display: flex; justify-content: center; gap: 0; flex-wrap: wrap; max-width: 760px; margin: 0 auto 48px; padding: 0 24px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .stat { flex: 1; min-width: 130px; padding: 18px 12px; text-align: center; border-right: 1px solid var(--rule); }
-    .stat:last-child { border-right: none; }
-    .stat-number { display: block; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 2.2rem; font-weight: 600; color: var(--ink); line-height: 1; }
-    .stat-label { display: block; font-family: 'EB Garamond', Georgia, serif; font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-top: 4px; }
+/* ── RTL support ── */
+body.rtl { direction: rtl; }
+body.rtl .site-nav a { border-right: none; border-left: 1px solid rgba(201,169,110,0.1); }
+body.rtl .site-nav a:last-child { border-left: none; }
+body.rtl .hero-top-bar { flex-direction: row-reverse; justify-content: flex-start; }
+body.rtl .timeline { padding-left: 0; padding-right: 2rem; }
+body.rtl .timeline::before { left: auto; right: 0.5rem; }
+body.rtl .tl-item::before { left: auto; right: -1.55rem; }
+body.rtl .partner { border-left: none; border-right: 4px solid var(--gold); }
+body.rtl .bank-block { border-left: none; border-right: 5px solid var(--gold); }
+body.rtl .contact-box { border-left: none; border-right: 5px solid var(--stone-mid); }
+body.rtl .section-title::after { margin-left: 0; margin-right: 0.5rem; }
 
-    /* ── MAP SECTION ── */
-    .map-section { padding: 0 0 16px; }
-    .section-label { text-align: center; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+/* ── LAYOUT ── */
+.page-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+.two-col { display: grid; grid-template-columns: 1fr 320px; gap: 3rem; align-items: start; }
+@media(max-width:820px){ .two-col{grid-template-columns:1fr;} }
 
-    /* ── LAYER TOGGLE ── */
-    .layer-toggle {
-      display: flex;
-      justify-content: center;
-      gap: 0;
-      margin-bottom: 14px;
-      border: 1px solid var(--rule);
-      border-radius: 3px;
-      overflow: hidden;
-      max-width: 520px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .layer-btn {
-      flex: 1;
-      padding: 10px 16px;
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 13px;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      border: none;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      background: var(--parchment);
-      color: var(--sepia);
-      border-right: 1px solid var(--rule);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-    }
-    .layer-btn:last-child { border-right: none; }
-    .layer-btn.active { background: var(--ink); color: var(--paper); }
-    .layer-btn:hover:not(.active) { background: var(--rule); color: var(--ink); }
+/* ── SECTIONS ── */
+.section { margin-bottom: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); animation: fadeUp 0.4s ease both; }
+.section:last-child { border-bottom: none; margin-bottom: 0; }
+.section-title {
+  font-family: var(--font-disp); font-weight: 500;
+  font-size: 1.7rem; color: var(--stone-mid);
+  margin-bottom: 1.2rem; padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: baseline; gap: 0.8rem;
+}
+.section-title::after { content:''; flex:1; height:1px; background: linear-gradient(to right, var(--gold-lt), transparent); margin-left:0.5rem; }
+.subsection { font-family: var(--font-disp); font-style: italic; font-size: 1.05rem; color: var(--gold-dk); margin: 1.5rem 0 0.5rem; }
+.ornament { text-align: center; color: var(--gold); letter-spacing: 0.6em; font-size: 0.6rem; margin: 2rem 0; opacity: 0.7; }
 
-    #map { width: 100%; height: clamp(320px, 55vw, 560px); border-top: 2px solid var(--rule); border-bottom: 2px solid var(--rule); }
-    .map-caption { text-align: center; font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 0.85rem; color: var(--gold); padding: 10px 24px 0; }
-    .leaflet-container { background: #c9d8e8 !important; font-family: 'EB Garamond', Georgia, serif !important; }
-    .leaflet-popup-content-wrapper { background: var(--ink); color: var(--paper); border-radius: 2px; box-shadow: 0 4px 20px rgba(0,0,0,0.35); border: 1px solid var(--gold); }
-    .leaflet-popup-tip { background: var(--ink); }
-    .leaflet-popup-content { margin: 10px 14px; font-family: 'EB Garamond', Georgia, serif; font-size: 14px; line-height: 1.5; }
-    .leaflet-popup-content strong { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 16px; display: block; color: var(--rule); letter-spacing: 0.02em; }
-    .leaflet-popup-close-button { color: var(--rule) !important; }
+/* ── AGENDA ── */
+.agenda-wrap { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); }
+.agenda-month { background: var(--stone); color: var(--gold); font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.35rem 1rem; }
+.agenda-row { display: grid; grid-template-columns: 80px 1fr; border-bottom: 1px solid var(--border); background: var(--white); }
+.agenda-row:last-child { border-bottom: none; }
+.agenda-row.weekend .date-cell { background: var(--parchment); }
+.date-cell { background: var(--cream); border-right: 2px solid var(--border); padding: 0.5rem 0.7rem; display: flex; flex-direction: column; justify-content: center; }
+.date-cell .dn { font-family: var(--font-ui); font-size: 0.57rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.date-cell .dd { font-family: var(--font-disp); font-size: 1.3rem; font-weight: 400; color: var(--stone-mid); line-height: 1; }
+.date-cell .dm { font-size: 0.55rem; font-weight: 500; text-transform: uppercase; color: var(--muted); letter-spacing: 0.06em; }
+.events-cell { padding: 0.4rem 1rem; display: flex; flex-direction: column; justify-content: center; }
+.ev-row { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.06rem 0; font-size: 0.86rem; color: var(--stone); }
+.ev-time { font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600; color: var(--gold-dk); min-width: 40px; flex-shrink: 0; }
+.ev-dot { font-size: 0.5rem; color: var(--gold); flex-shrink: 0; }
+.agenda-empty { padding: 1.2rem; font-style: italic; color: var(--muted); font-size: 0.9rem; }
 
-    .map-legend { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; padding: 14px 24px 0; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; letter-spacing: 0.08em; }
-    .legend-item { display: flex; align-items: center; gap: 6px; color: var(--sepia); }
-    .legend-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+/* ── CARDS ── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; margin-top: 1.2rem; }
+.card {
+  background: var(--white); border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--r); padding: 1.4rem 1.5rem;
+  box-shadow: var(--shadow); transition: box-shadow var(--t), transform var(--t);
+  cursor: pointer;
+}
+.card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.card h3 { font-family: var(--font-disp); font-size: 1.05rem; font-weight: 500; color: var(--stone-mid); margin-bottom: 0.4rem; }
+.card p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+.card a { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; display: inline-block; margin-top: 0.6rem; color: var(--gold-dk); }
+.card a:hover { color: var(--gold); }
+.card .card-icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
 
-    /* ── MAP COUNT ── */
-    .map-count { text-align: center; font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 0.85rem; color: var(--rule); padding: 8px 24px 0; min-height: 1.5em; }
+/* ── PARTNER LIST ── */
+.partner { background: var(--white); border: 1px solid var(--border); border-left: 4px solid var(--gold); padding: 1rem 1.4rem; border-radius: var(--r); margin-bottom: 0.8rem; box-shadow: var(--shadow); }
+.partner strong { color: var(--stone-mid); font-weight: 600; font-family: var(--font-disp); font-style: italic; }
+.partner p { font-size: 0.9rem; color: var(--muted); margin-top: 0.2rem; }
 
-    /* ── SCHELP FORM ── */
-    .schelp-panel {
-      display: none;
-      max-width: 700px;
-      margin: 28px auto 0;
-      padding: 0 24px;
-    }
-    .schelp-panel.visible { display: block; }
-    .schelp-form-wrap {
-      background: var(--parchment);
-      border: 1px solid var(--rule);
-      border-left: 4px solid var(--gold);
-      border-radius: 2px;
-      padding: 22px 26px;
-    }
-    .schelp-form-title {
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 1.1rem;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      color: var(--ink);
-      margin-bottom: 4px;
-    }
-    .schelp-form-intro {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 0.95rem;
-      color: var(--sepia);
-      margin-bottom: 16px;
-    }
-    .schelp-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-    @media (max-width: 520px) { .schelp-form-row { grid-template-columns: 1fr; } }
-    .schelp-field { display: flex; flex-direction: column; gap: 4px; }
-    .schelp-label { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sepia); }
-    .schelp-req { color: var(--gold); }
-    .schelp-input {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 1rem;
-      color: var(--ink);
-      background: var(--cream);
-      border: 1px solid var(--rule);
-      border-radius: 2px;
-      padding: 7px 10px;
-      outline: none;
-      transition: border-color 0.18s, box-shadow 0.18s;
-      width: 100%;
-    }
-    .schelp-input:focus { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(58,123,191,0.15); }
-    .schelp-textarea { resize: vertical; min-height: 56px; }
-    .btn-schelp {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 10px 28px;
-      background: var(--ink);
-      color: var(--paper);
-      font-family: 'Cormorant Garamond', Georgia, serif;
-      font-size: 13px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      border: 1px solid var(--ink);
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-    .btn-schelp:hover { background: var(--paper); color: var(--ink); }
-    .btn-schelp:disabled { opacity: 0.5; cursor: default; }
-    .schelp-status { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 0.9rem; color: var(--gold); margin-left: 12px; }
+/* ── PAST EVENTS ── */
+.past-item { display: flex; align-items: baseline; gap: 1rem; padding: 0.5rem 0; border-bottom: 1px solid var(--border); font-size: 0.92rem; }
+.past-item:last-child { border-bottom: none; }
+.past-item a { flex: 1; color: var(--stone-mid); }
+.past-item a:hover { color: var(--gold-dk); }
+.past-date { font-style: italic; font-size: 0.78rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
 
-    /* ── SCHELP LIST ── */
-    .schelp-list-wrap {
-      max-width: 700px;
-      margin: 20px auto 0;
-      padding: 0 24px;
-    }
-    .schelp-list-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-    .schelp-list { list-style: none; border-top: 1px solid var(--rule); }
-    .schelp-list li { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 7px 0; border-bottom: 1px solid var(--parchment); font-size: 0.92rem; }
-    .schelp-list-left { color: var(--ink); }
-    .schelp-list-date { font-style: italic; font-size: 0.78rem; color: var(--rule); white-space: nowrap; flex-shrink: 0; }
+/* ── HUREN ── */
+.huren-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 1.2rem; }
+@media(max-width:540px){ .huren-grid{grid-template-columns:1fr;} }
+.info-box { background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--stone-mid); padding: 1.2rem 1.4rem; border-radius: var(--r); box-shadow: var(--shadow); }
+.info-box h3 { font-family: var(--font-ui); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone-mid); margin-bottom: 0.6rem; }
+.info-box p { font-size: 0.9rem; color: var(--stone); }
 
-    /* ── ARTICLE SECTION ── */
-    .article-section { background: var(--parchment); border-top: 3px double var(--rule); border-bottom: 3px double var(--rule); padding: 56px 24px; }
-    .article-inner { max-width: 700px; margin: 0 auto; }
-    .article-dateline { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; }
-    .article-headline { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.5rem, 4vw, 2.3rem); font-weight: 600; line-height: 1.2; color: var(--ink); margin-bottom: 6px; }
-    .article-deck { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 1.1rem; color: var(--sepia); border-left: 3px solid var(--gold); padding-left: 16px; margin: 18px 0 28px; line-height: 1.55; }
-    .article-rule { border: none; border-top: 1px solid var(--rule); margin: 24px 0; }
-    .article-body p { font-family: 'EB Garamond', Georgia, serif; font-size: 1.05rem; color: var(--ink); margin-bottom: 1.1em; text-align: justify; hyphens: auto; }
-    .article-link-wrap { margin-top: 32px; text-align: center; }
-    .btn-article { display: inline-block; padding: 12px 32px; background: var(--ink); color: var(--paper); text-decoration: none; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; letter-spacing: 0.2em; text-transform: uppercase; border: 1px solid var(--ink); transition: background 0.25s, color 0.25s; }
-    .btn-article:hover { background: var(--paper); color: var(--ink); }
+/* ── STEUNEN / BANK ── */
+.bank-block { background: var(--parchment); border: 1px solid var(--border); border-left: 5px solid var(--gold); padding: 1.3rem 1.6rem; border-radius: var(--r); margin-top: 1rem; box-shadow: var(--shadow); }
+.bank-block .bank-name { font-size: 0.78rem; color: var(--muted); margin-bottom: 0.25rem; }
+.bank-block .iban { font-family: var(--font-disp); font-size: 1.4rem; font-weight: 500; color: var(--stone-mid); }
+.bank-block .bic { font-size: 0.85rem; color: var(--muted); margin-top: 0.2rem; }
+.qr-row { display: flex; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap; }
+.qr-item { text-align: center; }
+.qr-item img { width: 130px; height: 130px; object-fit: contain; border: 2px solid var(--border); border-radius: var(--r); }
+.qr-item span { display: block; font-size: 0.78rem; font-style: italic; color: var(--muted); margin-top: 0.3rem; }
 
-    /* ── LIST SECTION ── */
-    .list-section { padding: 52px 24px; text-align: center; }
-    .list-section h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-size: clamp(1.3rem, 3.5vw, 2rem); font-weight: 600; color: var(--ink); margin-bottom: 14px; }
-    .list-section p { font-family: 'EB Garamond', Georgia, serif; font-style: italic; color: var(--sepia); font-size: 1rem; max-width: 480px; margin: 0 auto 28px; }
-    .btn-list { display: inline-block; padding: 13px 36px; background: transparent; color: var(--ink); text-decoration: none; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; letter-spacing: 0.22em; text-transform: uppercase; border: 1px solid var(--ink); transition: background 0.25s, color 0.25s; margin: 0 8px 10px; }
-    .btn-list:hover { background: var(--ink); color: var(--paper); }
+/* ── CONTACT ── */
+.contact-box { background: var(--parchment); border: 1px solid var(--border); border-left: 5px solid var(--stone-mid); padding: 1.4rem 1.8rem; border-radius: var(--r); box-shadow: var(--shadow); display: flex; align-items: center; gap: 1.4rem; flex-wrap: wrap; margin-top: 1rem; }
+.contact-box .icon { font-size: 2.2rem; flex-shrink: 0; }
+.contact-box .txt strong { color: var(--stone-mid); }
+.contact-box .txt p { font-size: 0.9rem; color: var(--stone); margin-bottom: 0.2rem; }
+.btn { display: inline-block; padding: 0.55rem 1.6rem; background: var(--stone-mid); color: var(--gold-lt); font-family: var(--font-ui); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; border-radius: var(--r); transition: background var(--t); border: none; cursor: pointer; }
+.btn:hover { background: var(--stone); color: var(--gold); }
+.btn-outline { background: transparent; border: 1px solid var(--gold-dk); color: var(--gold-dk); }
+.btn-outline:hover { background: var(--gold-dk); color: var(--white); }
 
-    /* ── FOOTER ── */
-    footer { background: var(--ink); color: var(--rule); text-align: center; padding: 28px 24px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; letter-spacing: 0.12em; }
-    footer a { color: var(--rule); text-decoration: none; }
-    footer a:hover { color: var(--paper); }
+/* ── SIDEBAR ── */
+aside { font-size: 0.9rem; color: var(--stone); }
+.sidebar-img { width: 100%; height: 160px; object-fit: cover; border-radius: var(--r); border: 2px solid var(--border); margin-bottom: 1.4rem; box-shadow: var(--shadow); }
+.sidebar-box { background: var(--white); border: 1px solid var(--border); border-top: 3px solid var(--gold-dk); padding: 1.1rem 1.2rem; margin-bottom: 1.2rem; border-radius: var(--r); box-shadow: var(--shadow); }
+.sidebar-box h3 { font-family: var(--font-ui); font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--stone-mid); margin-bottom: 0.7rem; padding-bottom: 0.45rem; border-bottom: 1px solid var(--border); }
+.sidebar-box p { font-size: 0.88rem; color: var(--stone); margin-bottom: 0.35rem; }
+.sidebar-box .addr { font-style: italic; color: var(--muted); font-size: 0.85rem; line-height: 1.55; }
+.sidebar-box .hl { font-family: var(--font-disp); font-size: 1rem; font-weight: 500; color: var(--stone-mid); }
 
-    @media (max-width: 520px) {
-      nav a { padding: 9px 14px; font-size: 11px; letter-spacing: 0.1em; }
-      .stat { min-width: 100px; }
-      .map-legend { gap: 10px; font-size: 12px; }
-      .lang-label { display: none; }
-      .lang-btn { padding: 10px 8px; font-size: 10px; }
-    }
-  </style>
+/* ── PHOTO GRID ── */
+.photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 1.2rem 0; }
+.photo-grid img { width: 100%; height: 210px; object-fit: cover; border-radius: var(--r); border: 2px solid var(--border); box-shadow: var(--shadow); }
+@media(max-width:480px){ .photo-grid{grid-template-columns:1fr;} }
+.church-photo { width: 100%; border-radius: var(--r); border: 2px solid var(--border); box-shadow: var(--shadow); margin-bottom: 1rem; object-fit: cover; }
+.photo-caption { font-style: italic; font-size: 0.78rem; color: var(--muted); text-align: center; margin-bottom: 1.2rem; }
+
+/* ── HISTORY TIMELINE ── */
+.timeline { position: relative; margin-top: 1.5rem; padding-left: 2rem; }
+.timeline::before { content:''; position:absolute; left:0.5rem; top:0; bottom:0; width:2px; background: linear-gradient(to bottom, var(--gold), var(--border)); }
+.tl-item { position: relative; margin-bottom: 1.6rem; }
+.tl-item::before { content:''; position:absolute; left:-1.55rem; top:0.35rem; width:10px; height:10px; background: var(--gold); border-radius: 50%; border: 2px solid var(--cream); box-shadow: 0 0 0 2px var(--gold); }
+.tl-year { font-family: var(--font-disp); font-size: 0.95rem; font-weight: 700; color: var(--gold-dk); margin-bottom: 0.2rem; }
+.tl-text { font-size: 0.91rem; color: var(--stone); line-height: 1.65; }
+
+/* ── FOOTER ── */
+.site-footer { background: var(--stone); color: rgba(201,169,110,0.55); text-align: center; padding: 2.5rem 1.5rem; border-top: 3px solid var(--gold-dk); font-size: 0.83rem; line-height: 1.8; }
+.footer-cross { display: block; font-size: 2rem; color: var(--gold); margin-bottom: 0.7rem; opacity: 0.8; }
+.site-footer a { color: var(--gold); }
+.site-footer a:hover { color: var(--gold-lt); }
+.footer-sep { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(201,169,110,0.15); font-size: 0.75rem; color: rgba(201,169,110,0.35); }
+
+/* Arabic font override */
+body.rtl .hero-title,
+body.rtl .section-title,
+body.rtl .subsection,
+body.rtl .tl-year {
+  font-family: 'Playfair Display', 'Georgia', serif;
+}
+/* ── GDPR BANNER ── */
+.gdpr-overlay {
+  position: fixed; inset: 0;
+  background: rgba(44,36,22,0.55);
+  z-index: 9998;
+  display: flex; align-items: flex-end; justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(2px);
+}
+.gdpr-overlay.hidden { display: none; }
+.gdpr-box {
+  background: var(--stone);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--r);
+  padding: 1.6rem 2rem;
+  max-width: 780px; width: 100%;
+  box-shadow: var(--shadow-lg);
+  display: flex; gap: 1.5rem; align-items: flex-start; flex-wrap: wrap;
+}
+.gdpr-box p {
+  color: rgba(232,213,168,0.85);
+  font-size: 0.88rem; line-height: 1.65;
+  flex: 1; min-width: 220px; margin: 0;
+}
+.gdpr-box a { color: var(--gold); text-decoration: underline; }
+.gdpr-btns { display: flex; gap: 0.6rem; flex-shrink: 0; align-items: center; flex-wrap: wrap; }
+.gdpr-link {
+  background: none; border: none;
+  color: rgba(201,169,110,0.5);
+  font-family: var(--font-ui); font-size: 0.75rem;
+  cursor: pointer; text-decoration: underline;
+  padding: 0; white-space: nowrap;
+}
+.gdpr-link:hover { color: var(--gold); }
+  /* ── TRANSLATION NOTICE ── */
+.translation-notice {
+  background: #EEF4FB;
+  border-left: 4px solid var(--gold);
+  color: var(--stone-mid);
+  font-size: 0.82rem;
+  font-style: italic;
+  padding: 0.55rem 1.1rem;
+  margin-bottom: 1.2rem;
+  border-radius: var(--r);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+body.rtl .translation-notice {
+  border-left: none;
+  border-right: 4px solid var(--gold);
+}
+</style>
 </head>
 <body>
-
-<!-- LANGUAGE BAR -->
-<div class="lang-bar">
-  <span class="lang-label">Taal / Langue / Language</span>
-  <button class="lang-btn active" data-lang="nl">NL</button>
-  <button class="lang-btn" data-lang="fr">FR</button>
-  <button class="lang-btn" data-lang="de">DE</button>
-  <button class="lang-btn" data-lang="en">EN</button>
-  <button class="lang-btn" data-lang="es">ES</button>
+  
+  <!-- GDPR COOKIE BANNER -->
+<div class="gdpr-overlay hidden" id="gdprOverlay">
+  <div class="gdpr-box">
+    <p id="gdprText">
+      Deze website gebruikt enkel functionele cookies om uw taalvoorkeur te bewaren.
+      Er worden geen tracking- of advertentiecookies geplaatst.
+      <a href="#" onclick="go('privacy');document.getElementById('gdprOverlay').classList.add('hidden');return false;">Meer info</a>
+    </p>
+    <div class="gdpr-btns">
+      <button class="btn" onclick="gdprAccept()">Begrepen</button>
+      <button class="gdpr-link" onclick="gdprAccept()">Sluiten</button>
+    </div>
+  </div>
 </div>
 
-<!-- MASTHEAD -->
-<header>
-  <div class="masthead-rule" id="txt-kicker">Een pelgrimage in aarde</div>
-  <div class="site-title" id="txt-site-title">De Wereld van de Goede Bijstand</div>
-  <div class="site-subtitle" id="txt-site-subtitle">Van elke plek op aarde een potje grond</div>
-</header>
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-top-bar">
+    <button class="lang-btn active" onclick="setLang('nl')" data-lang="nl">NL</button>
+    <button class="lang-btn" onclick="setLang('fr')" data-lang="fr">FR</button>
+    <button class="lang-btn" onclick="setLang('en')" data-lang="en">EN</button>
+    <button class="lang-btn" onclick="setLang('de')" data-lang="de">DE</button>
+    <button class="lang-btn" onclick="setLang('es')" data-lang="es">ES</button>
+    <button class="lang-btn" onclick="setLang('ar')" data-lang="ar">عر</button>
+  </div>
+  <div class="hero-content">
+    <div class="hero-ornament">
+      <span></span>
+      <em data-i18n="hero_label">1664 · Brussel</em>
+      <span></span>
+   </div>
+  <h1 class="hero-title" data-i18n="hero_title">Onze-Lieve-Vrouw<br>van Goede Bijstand</h1>
+  <p class="hero-sub" data-i18n="hero_sub">
+    Nederlandstalige parochie in Brussel-centrum
+  </p>
+  <p class="hero-link">
+    <a href="https://www.paulusgemeenschappen.be" target="_blank">paulusgemeenschappen.be →</a>
+  </p>
+  <p class="hero-date" data-i18n="hero_date">Kolenmarkt 91 · 1000 Brussel</p>
+</div>
+  <div class="hero-scroll" onclick="document.getElementById('nav').scrollIntoView({behavior:'smooth'})">
+    <span data-i18n="hero_scroll">Ontdekken</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
 
 <!-- NAV -->
-<nav>
-  <a href="#kaart" id="nav-map">De Kaart</a>
-  <a href="#verhaal" id="nav-story">Het Verhaal</a>
-  <a href="#locaties" id="nav-locations">Alle Locaties</a>
+<nav class="site-nav" id="nav">
+  <a onclick="go('agenda')"       data-page="agenda"       data-i18n="nav_agenda">Agenda</a>
+  <a onclick="go('geschiedenis')" data-page="geschiedenis" data-i18n="nav_gesch">Geschiedenis</a>
+  <a onclick="go('samenwerking')" data-page="samenwerking" data-i18n="nav_samen">Samenwerking</a>
+  <a onclick="go('voorbij')"      data-page="voorbij"      data-i18n="nav_voorbij">Voorbije activiteiten</a>
+  <a onclick="go('huren')"        data-page="huren"        data-i18n="nav_huren">Huren</a>
+  <a onclick="go('steunen')"      data-page="steunen"      data-i18n="nav_steunen">Steunen</a>
+  <a onclick="go('contact')"      data-page="contact"      data-i18n="nav_contact">Contact</a>
 </nav>
 
-<!-- INTRO -->
-<div class="intro">
-  <div class="intro-kicker" id="txt-intro-kicker">Een Levenslange Missie</div>
-  <h2 id="txt-intro-title">Van elke uithoek van de wereld<br/>een handvol aarde verzameld</h2>
-  <p id="txt-intro-body">De gemeenschap van de Goede Bijstand reist de wereld rond met één bijzondere opdracht: van elke plek waar ze komt, brengt ze een potje grond mee naar huis. Een stille getuigenis van verbondenheid over grenzen en culturen heen.</p>
-  <hr class="intro-divider" />
-</div>
-
-<!-- STATS -->
-<div class="stats-strip">
-  <div class="stat"><span class="stat-number">155</span><span class="stat-label" id="stat-locations">Locaties</span></div>
-  <div class="stat"><span class="stat-number">6</span><span class="stat-label" id="stat-continents">Continenten</span></div>
-  <div class="stat"><span class="stat-number">40+</span><span class="stat-label" id="stat-countries">Landen</span></div>
-  <div class="stat"><span class="stat-number">∞</span><span class="stat-label" id="stat-stories">Verhalen</span></div>
-</div>
-
-<!-- MAP -->
-<section id="kaart" class="map-section">
-  <div class="section-label" id="txt-map-label">Wereldkaart der Bestemmingen</div>
-
-  <!-- Layer toggle -->
-  <div class="layer-toggle">
-    <button class="layer-btn active" id="btn-layer-aarde" onclick="setLayer('aarde')">
-      🪨 <span id="layer-aarde-label">Grondbibliotheek</span>
-    </button>
-    <button class="layer-btn" id="btn-layer-schelp" onclick="setLayer('schelp')">
-      🐚 <span id="layer-schelp-label">Schelpen van Brussel</span>
-    </button>
-  </div>
-
-  <div id="map"></div>
-  <div class="map-legend" id="legend"></div>
-  <div class="map-count" id="map-count"></div>
-  <div class="map-caption" id="txt-map-caption">Klik op een punt om de naam van de locatie te zien — zoom met het scrollwiel of de knoppen links</div>
-</section>
-
-<!-- SCHELP FORM PANEL (shown only in schelp layer) -->
-<div class="schelp-panel" id="schelp-panel">
-  <div class="schelp-form-wrap">
-    <div class="schelp-form-title" id="schelp-form-title">📍 Pin uw schelp op de kaart</div>
-    <div class="schelp-form-intro" id="schelp-form-intro">Hebt u een schelp meegenomen uit de Bijstandskerk als geschenk? Laat zien waar ze terechtgekomen is.</div>
-    <div class="schelp-form-row">
-      <div class="schelp-field">
-        <label class="schelp-label" for="sf-city"><span id="lbl-city">Stad of land</span> <span class="schelp-req">*</span></label>
-        <input id="sf-city" type="text" class="schelp-input" placeholder="bijv. Tokyo, Japan" autocomplete="off">
-      </div>
-      <div class="schelp-field">
-        <label class="schelp-label" for="sf-name" id="lbl-name">Uw naam (optioneel)</label>
-        <input id="sf-name" type="text" class="schelp-input" placeholder="bijv. Marie">
-      </div>
-    </div>
-    <div class="schelp-field" style="margin-top:10px;">
-      <label class="schelp-label" for="sf-msg" id="lbl-msg">Berichtje (optioneel)</label>
-      <textarea id="sf-msg" class="schelp-input schelp-textarea" rows="2" placeholder="bijv. Cadeau voor mijn zus"></textarea>
-    </div>
-    <div style="display:flex;align-items:center;flex-wrap:wrap;">
-      <button class="btn-schelp" id="sf-submit" onclick="schelpSubmit()">🐚 <span id="btn-pin-label">Zet pin op de kaart</span></button>
-      <span class="schelp-status" id="sf-status"></span>
-    </div>
+<!-- MAIN -->
+<div class="page-wrap">
+  <div class="two-col">
+    <main id="main"></main>
+    <aside id="sidebar"></aside>
   </div>
 </div>
-
-<!-- SCHELP LIST -->
-<div class="schelp-list-wrap" id="schelp-list-wrap" style="display:none;">
-  <div class="schelp-list-title" id="schelp-list-title">Alle schelpen</div>
-  <ul class="schelp-list" id="schelp-list"></ul>
-</div>
-
-<!-- ARTICLE -->
-<section id="verhaal" class="article-section">
-  <div class="article-inner">
-    <h2 class="article-headline" id="txt-art-headline">De droom van pastoor Johnny: van elke plek op aarde een potje grond</h2>
-    <p class="article-deck" id="txt-art-deck">Een wereldwijde pelgrimage in aarde.</p>
-    <hr class="article-rule" />
-    <div class="article-body">
-      <p id="txt-art-p1">De gemeenschap van de Goede Bijstand verzamelt al jaren aarde van over de hele wereld. Iedere reisbestemming — of het nu een afgelegen dorpje in Congo is, een strand in de Seychellen of een bergpas in de Dolomieten — levert een klein potje grond op. Samen vormen die potjes een stille, tastbare atlas voor iedereen.</p>
-      <p id="txt-art-p2">De collectie telt inmiddels meer dan 155 unieke locaties, verspreid over 6 continenten en tientallen landen. Elk potje draagt een etiket met de naam van de plek en de datum van bezoek — een archief van herinneringen, ontmoetingen en gebed.</p>
-    </div>
-  </div>
-</section>
-
-<!-- LOCATIONS LINK -->
-<section id="locaties" class="list-section">
-  <h3 id="txt-list-title">Alle 155 Locaties</h3>
-  <p id="txt-list-body">Bekijk de volledige lijst van alle bezochte plekken, gerangschikt per continent.</p>
-  <button class="btn-list" id="btn-toggle-list" onclick="toggleList()">Bekijk de volledige lijst</button>
-  <div id="inline-list" style="display:none; margin-top:32px; text-align:left;"></div>
-</section>
 
 <!-- FOOTER -->
-<footer>
-  <p id="txt-footer">Een project van de Goede Bijstand &nbsp;·&nbsp; Te raadplegen in de pastorie <a href="https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z">Bijstandsstraat 5</a>, 1000 Brussel</p>
+<footer class="site-footer">
+  <span class="footer-cross">✦</span>
+  <p data-i18n="footer_line1">Onze-Lieve-Vrouw van Goede Bijstand</p>
+  <p>Kolenmarkt 91, 1000 Brussel</p>
+  <p><a href="mailto:kerkfabriek@goedebijstand.brussels">kerkfabriek@goedebijstand.brussels</a></p>
+  <p style="margin-top:0.8rem;">
+  <a href="#" onclick="go('privacy');return false;" style="font-size:0.8rem;color:var(--gold);opacity:0.7;">
+    Cookie- & privacybeleid
+  </a>
+  &nbsp;·&nbsp;
+  <a href="#" onclick="showGdpr();return false;" style="font-size:0.8rem;color:var(--gold);opacity:0.7;">
+    Cookie-instellingen
+  </a>
+</p>
+  <div class="footer-sep">
+    <p>Kerkfabriek Onze-Lieve-Vrouw van Goede Bijstand · 0211.215.223 – RPR Brussel</p>
+  </div>
 </footer>
 
 <script>
-/* ══════════════════════════════════════════
-   TRANSLATIONS
-══════════════════════════════════════════ */
-const TX = {
-  nl: {
-    kicker:"Een pelgrimage in aarde", siteTitle:"De Wereld van de Goede Bijstand", siteSubtitle:"Van elke plek op aarde een potje grond",
-    navMap:"De Kaart", navStory:"Het Verhaal", navLocations:"Alle Locaties", 
-    introKicker:"Een Levenslange Missie", introTitle:"Van elke uithoek van de wereld<br/>een handvol aarde verzameld",
-    introBody:"De gemeenschap van de Goede Bijstand reist de wereld rond met één bijzondere opdracht: van elke plek waar ze komt, brengt ze een potje grond mee naar huis. Een stille getuigenis van verbondenheid over grenzen en culturen heen.",
-    statLocations:"Locaties", statContinents:"Continenten", statCountries:"Landen", statStories:"Verhalen",
-    mapLabel:"Wereldkaart der Bestemmingen",
-    mapCaption:"Klik op een punt om de naam van de locatie te zien — zoom met het scrollwiel of de knoppen links",
-    layerAarde:"Grondbibliotheek", layerSchelp:"Schelpen van Brussel",
-    continentLabels:{"Afrika":"Afrika","Azië & M-O":"Azië & M-O","Europa":"Europa","Amerika":"Amerika"},
-    schelpFormTitle:"📍 Pin uw schelp op de kaart",
-    schelpFormIntro:"Hebt u een schelp meegenomen uit de Bijstandskerk als geschenk? Laat zien waar ze terechtgekomen is.",
-    lblCity:"Stad of land", lblName:"Uw naam (optioneel)", lblMsg:"Berichtje (optioneel)",
-    cityPh:"bijv. Tokyo, Japan", namePh:"bijv. Marie", msgPh:"bijv. Cadeau voor mijn zus",
-    btnPin:"Zet pin op de kaart",
-    errCity:"Vul een stad of land in.", searching:"Locatie zoeken…",
-    errNotFound:"Locatie niet gevonden. Probeer een andere schrijfwijze.",
-    errGeo:"Kon locatie niet opzoeken. Controleer uw internetverbinding.",
-    errSave:"Kon pin niet opslaan. Probeer opnieuw.",
-    success:"✓ Schelp geplaatst in {city}!",
-    countSchelp0:"Nog geen schelpen gepind — wees de eerste!",
-    countSchelp1:"1 schelp vond haar weg de wereld in.",
-    countSchelpN:"{n} schelpen vonden hun weg de wereld in.",
-    listSchelpTitle:"Alle schelpen",
-    artHeadline:"De droom van pastoor Johnny: van elke plek op aarde een potje grond",
-    artDeck:"Een wereldwijde pelgrimage in aarde.",
-    artP1:"De gemeenschap van de Goede Bijstand verzamelt al jaren aarde van over de hele wereld. Iedere reisbestemming — of het nu een afgelegen dorpje in Congo is, een strand in de Seychellen of een bergpas in de Dolomieten — levert een klein potje grond op. Samen vormen die potjes een stille, tastbare atlas voor iedereen.",
-    artP2:"De collectie telt inmiddels meer dan 155 unieke locaties, verspreid over 6 continenten en tientallen landen. Elk potje draagt een etiket met de naam van de plek en de datum van bezoek — een archief van herinneringen, ontmoetingen en gebed.",
-    listTitle:"Alle 155 Locaties", listBody:"Bekijk de volledige lijst van alle bezochte plekken, gerangschikt per continent.", listBtn:"Bekijk de volledige lijst",
-    footer:"Een project van de Goede Bijstand \u00a0·\u00a0 Te raadplegen in de pastorie <a href=\"https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z\" style=\"color:var(--rule)\">Bijstandsstraat 5</a>, 1000 Brussel",
-    locationNames:{"Benin":"Benin","Ouagadougou, Burkina Faso":"Ouagadougou, Burkina Faso","Gran Canaria, Spanje":"Gran Canaria, Spanje","Katako-Kindu, Congo":"Katako-Kindu, Congo","Wamba, Congo":"Wamba, Congo","Zuid-Kivu, Congo":"Zuid-Kivu, Congo","Congo":"Congo","Egypte":"Egypte","Praia, Kaapverdië":"Praia, Kaapverdië","Nador, Marokko":"Nador, Marokko","Marrakesh, Marokko":"Marrakesh, Marokko","Ouarzazate, Marokko":"Ouarzazate, Marokko","Driouch, Marokko":"Driouch, Marokko","Oeganda":"Oeganda","Kigali, Rwanda":"Kigali, Rwanda","Seychellen":"Seychellen","Togo":"Togo","Witsand, Zuid-Afrika":"Witsand, Zuid-Afrika","Willowmore, Zuid-Afrika":"Willowmore, Zuid-Afrika","Myanmar":"Myanmar","Nanning, China":"Nanning, China","Troodos, Cyprus":"Troodos, Cyprus","Delhi, India":"Delhi, India","Madhya Pradesh, India":"Madhya Pradesh, India","Prayagraj, India":"Prayagraj, India","Teheran, Iran":"Teheran, Iran","Jeruzalem, Israël":"Jeruzalem, Israël","Dode Zee, Jordanië":"Dode Zee, Jordanië","Libanon":"Libanon","Nepal":"Nepal","Palestina":"Palestina","Colombo, Sri Lanka":"Colombo, Sri Lanka","Thailand":"Thailand","Vietnam":"Vietnam","Istanbul, Turkije":"Istanbul, Turkije","Bozjom, Georgië":"Bozjom, Georgië","Oostende, België":"Oostende, België","Postel, België":"Postel, België","Kopenhagen, Denemarken":"Kopenhagen, Denemarken","Ribe, Denemarken":"Ribe, Denemarken","Lindet Skov, Denemarken":"Lindet Skov, Denemarken","Keulen, Duitsland":"Keulen, Duitsland","Freiburg, Duitsland":"Freiburg, Duitsland","Colchester, Engeland":"Colchester, Engeland","Londen, Engeland":"Londen, Engeland","Derwent Water, Engeland":"Derwent Water, Engeland","Kallislaki, Finland":"Kallislaki, Finland","Roquetaillade, Frankrijk":"Roquetaillade, Frankrijk","Corsica, Frankrijk":"Corsica, Frankrijk","Colmar, Frankrijk":"Colmar, Frankrijk","Dijon, Frankrijk":"Dijon, Frankrijk","Fontenay, Frankrijk":"Fontenay, Frankrijk","Grenoble, Frankrijk":"Grenoble, Frankrijk","Lyon, Frankrijk":"Lyon, Frankrijk","Nice, Frankrijk":"Nice, Frankrijk","Puy de Dôme, Frankrijk":"Puy de Dôme, Frankrijk","Mulhouse, Frankrijk":"Mulhouse, Frankrijk","Thessaloniki, Griekenland":"Thessaloniki, Griekenland","Vergina, Griekenland":"Vergina, Griekenland","Keszthely, Hongarije":"Keszthely, Hongarije","Dublin, Ierland":"Dublin, Ierland","Rosslare, Ierland":"Rosslare, Ierland","Diamond Beach, IJsland":"Diamond Beach, IJsland","Dolomieten, Italië":"Dolomieten, Italië","Etna, Italië":"Etna, Italië","San Remo, Italië":"San Remo, Italië","Rome, Italië":"Rome, Italië","Stelvio, Italië":"Stelvio, Italië","Trapani, Italië":"Trapani, Italië","Venetië, Italië":"Venetië, Italië","Vesuvius, Italië":"Vesuvius, Italië","Zuid-Tirol, Italië":"Zuid-Tirol, Italië","Gardameer, Italië":"Gardameer, Italië","Assisi, Italië":"Assisi, Italië","Dubrovnik, Kroatië":"Dubrovnik, Kroatië","Varaždin, Kroatië":"Varaždin, Kroatië","Dalmatia, Kroatië":"Dalmatia, Kroatië","Poreč, Kroatië":"Poreč, Kroatië","Malta":"Malta","Monaco":"Monaco","Rotterdam, Nederland":"Rotterdam, Nederland","Gardnos, Noorwegen":"Gardnos, Noorwegen","Ifnefoss, Noorwegen":"Ifnefoss, Noorwegen","Lillehammer, Noorwegen":"Lillehammer, Noorwegen","Norefjell, Noorwegen":"Norefjell, Noorwegen","Oslo, Noorwegen":"Oslo, Noorwegen","Steindalfoss, Noorwegen":"Steindalfoss, Noorwegen","Wenen, Oostenrijk":"Wenen, Oostenrijk","Krakau, Polen":"Krakau, Polen","Zgorzelec, Polen":"Zgorzelec, Polen","Madeira, Portugal":"Madeira, Portugal","Santiago do Cacém, Portugal":"Santiago do Cacém, Portugal","Braga, Portugal":"Braga, Portugal","Ponte de Lima, Portugal":"Ponte de Lima, Portugal","Boekarest, Roemenië":"Boekarest, Roemenië","Sint-Petersburg, Rusland":"Sint-Petersburg, Rusland","Ben Nevis, Schotland":"Ben Nevis, Schotland","Isle of Skye, Schotland":"Isle of Skye, Schotland","Loch Ness, Schotland":"Loch Ness, Schotland","Lockerbie, Schotland":"Lockerbie, Schotland","Port Achan, Schotland":"Port Achan, Schotland","Tighnabruaich, Schotland":"Tighnabruaich, Schotland","Barcelona, Spanje":"Barcelona, Spanje","Gerona, Spanje":"Gerona, Spanje","Granada, Spanje":"Granada, Spanje","Valga, Spanje":"Valga, Spanje","Zaragoza, Spanje":"Zaragoza, Spanje","La Rioja, Spanje":"La Rioja, Spanje","Praag, Tsjechië":"Praag, Tsjechië","Karlsbad, Tsjechië":"Karlsbad, Tsjechië","Brechfa, Wales":"Brechfa, Wales","Brecon Beacons, Wales":"Brecon Beacons, Wales","Veberöd, Zweden":"Veberöd, Zweden","Bayou la Batre, Alabama":"Bayou la Batre, Alabama","Robertsdale, Alabama":"Robertsdale, Alabama","Lockesburg, Arkansas":"Lockesburg, Arkansas","Texarkana, Arkansas":"Texarkana, Arkansas","Montréal, Canada":"Montréal, Canada","Niagara Falls, Canada":"Niagara Falls, Canada","Cayman Eilanden":"Cayman Eilanden","Cuba":"Cuba","Curaçao":"Curaçao","Klein Curaçao":"Klein Curaçao","Dominicaanse Republiek":"Dominicaanse Republiek","Lee, Florida":"Lee, Florida","Alto, Georgia":"Alto, Georgia","Montego Bay, Jamaica":"Montego Bay, Jamaica","Ferryday, Louisiana":"Ferryday, Louisiana","Gilliam, Louisiana":"Gilliam, Louisiana","Biloxi, Mississippi":"Biloxi, Mississippi","Natchez, Mississippi":"Natchez, Mississippi","Akumal, Mexico":"Akumal, Mexico","Albuquerque, New Mexico":"Albuquerque, New Mexico","Santa Fe, New Mexico":"Santa Fe, New Mexico","New York City":"New York City","Smoky Mountains, North Carolina":"Smoky Mountains, North Carolina","Waynesville, North Carolina":"Waynesville, North Carolina","Elk City, Oklahoma":"Elk City, Oklahoma","Oklahoma City, Oklahoma":"Oklahoma City, Oklahoma","Panama City":"Panama City","Charleston, South Carolina":"Charleston, South Carolina","Holly Hill, South Carolina":"Holly Hill, South Carolina","Gatlinburg, Tennessee":"Gatlinburg, Tennessee","Kellerville, Texas":"Kellerville, Texas","Wildorado, Texas":"Wildorado, Texas","Brazilië":"Brazilië","Cusco, Peru":"Cusco, Peru","Arequipa, Peru":"Arequipa, Peru"},
-    listBtnClose: '▲ Verberg de lijst',
-  },
-  fr: {
-    kicker:"Un pèlerinage sur terre", siteTitle:"Le Monde de la Bonne Assistance", siteSubtitle:"De chaque endroit sur terre, un pot de terre",
-    navMap:"La Carte", navStory:"L'Histoire", navLocations:"Tous les Sites", 
-    introKicker:"Une Mission de Toute une Vie", introTitle:"De chaque coin du monde,<br/>une poignée de terre récoltée",
-    introBody:"La communauté de la Bonne Assistance parcourt le monde avec une mission particulière : de chaque endroit visité, elle rapporte un petit pot de terre. Un témoignage silencieux de solidarité par-delà les frontières et les cultures.",
-    statLocations:"Sites", statContinents:"Continents", statCountries:"Pays", statStories:"Histoires",
-    mapLabel:"Carte du Monde des Destinations",
-    mapCaption:"Cliquez sur un point pour voir le nom du lieu — zoomez avec la molette ou les boutons à gauche",
-    layerAarde:"Bibliothèque de terres", layerSchelp:"Coquillages de Bruxelles",
-    continentLabels:{"Afrika":"Afrique","Azië & M-O":"Asie & M-O","Europa":"Europe","Amerika":"Amérique"},
-    schelpFormTitle:"📍 Épinglez votre coquillage",
-    schelpFormIntro:"Avez-vous emporté un coquillage de l'église comme cadeau ? Montrez où il est arrivé.",
-    lblCity:"Ville ou pays", lblName:"Votre nom (optionnel)", lblMsg:"Un petit message (optionnel)",
-    cityPh:"ex. Tokyo, Japon", namePh:"ex. Marie", msgPh:"ex. Cadeau pour ma sœur",
-    btnPin:"Épingler sur la carte",
-    errCity:"Veuillez entrer une ville ou un pays.", searching:"Recherche de la localisation…",
-    errNotFound:"Localisation introuvable. Essayez une autre orthographe.",
-    errGeo:"Impossible de localiser. Vérifiez votre connexion.", errSave:"Impossible d'enregistrer. Réessayez.",
-    success:"✓ Coquillage placé à {city} !",
-    countSchelp0:"Aucun coquillage encore épinglé — soyez le premier !",
-    countSchelp1:"1 coquillage a trouvé son chemin dans le monde.",
-    countSchelpN:"{n} coquillages ont trouvé leur chemin dans le monde.",
-    listSchelpTitle:"Tous les coquillages",
-    artHeadline:"Le rêve du curé Johnny : un pot de terre de chaque endroit sur terre",
-    artDeck:"Une collection remarquable.",
-    artP1:"La communauté de la Bonne Assistance collecte depuis des années de la terre aux quatre coins du monde.",
-    artP2:"La collection compte désormais plus de 155 sites uniques, répartis sur 6 continents.",
-    listTitle:"Les 155 Sites", listBody:"Consultez la liste complète de tous les lieux visités.", listBtn:"Voir la liste complète",
-    footer:"Un projet de la Bonne Assistance \u00a0·\u00a0 Consultable au presbytère <a href=\"https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z\" style=\"color:var(--rule)\">Rue de l'Assistance 5</a>, 1000 Bruxelles",
-    locationNames:{"Benin":"Bénin","Ouagadougou, Burkina Faso":"Ouagadougou, Burkina Faso","Gran Canaria, Spanje":"Grande Canarie, Espagne","Katako-Kindu, Congo":"Katako-Kindu, Congo","Wamba, Congo":"Wamba, Congo","Zuid-Kivu, Congo":"Sud-Kivu, Congo","Congo":"Congo","Egypte":"Égypte","Praia, Kaapverdië":"Praia, Cap-Vert","Nador, Marokko":"Nador, Maroc","Marrakesh, Marokko":"Marrakech, Maroc","Ouarzazate, Marokko":"Ouarzazate, Maroc","Driouch, Marokko":"Driouch, Maroc","Oeganda":"Ouganda","Kigali, Rwanda":"Kigali, Rwanda","Seychellen":"Seychelles","Togo":"Togo","Witsand, Zuid-Afrika":"Witsand, Afrique du Sud","Willowmore, Zuid-Afrika":"Willowmore, Afrique du Sud","Myanmar":"Myanmar","Nanning, China":"Nanning, Chine","Troodos, Cyprus":"Troodos, Chypre","Delhi, India":"Delhi, Inde","Madhya Pradesh, India":"Madhya Pradesh, Inde","Prayagraj, India":"Prayagraj, Inde","Teheran, Iran":"Téhéran, Iran","Jeruzalem, Israël":"Jérusalem, Israël","Dode Zee, Jordanië":"Mer Morte, Jordanie","Libanon":"Liban","Nepal":"Népal","Palestina":"Palestine","Colombo, Sri Lanka":"Colombo, Sri Lanka","Thailand":"Thaïlande","Vietnam":"Viêt Nam","Istanbul, Turkije":"Istanbul, Turquie","Bozjom, Georgië":"Bozjoumi, Géorgie","Oostende, België":"Ostende, Belgique","Postel, België":"Postel, Belgique","Kopenhagen, Denemarken":"Copenhague, Danemark","Ribe, Denemarken":"Ribe, Danemark","Lindet Skov, Denemarken":"Lindet Skov, Danemark","Keulen, Duitsland":"Cologne, Allemagne","Freiburg, Duitsland":"Fribourg-en-Brisgau, Allemagne","Colchester, Engeland":"Colchester, Angleterre","Londen, Engeland":"Londres, Angleterre","Derwent Water, Engeland":"Derwent Water, Angleterre","Kallislaki, Finland":"Kallislaki, Finlande","Roquetaillade, Frankrijk":"Roquetaillade, France","Corsica, Frankrijk":"Corse, France","Colmar, Frankrijk":"Colmar, France","Dijon, Frankrijk":"Dijon, France","Fontenay, Frankrijk":"Fontenay, France","Grenoble, Frankrijk":"Grenoble, France","Lyon, Frankrijk":"Lyon, France","Nice, Frankrijk":"Nice, France","Puy de Dôme, Frankrijk":"Puy de Dôme, France","Mulhouse, Frankrijk":"Mulhouse, France","Thessaloniki, Griekenland":"Thessalonique, Grèce","Vergina, Griekenland":"Vergina, Grèce","Keszthely, Hongarije":"Keszthely, Hongrie","Dublin, Ierland":"Dublin, Irlande","Rosslare, Ierland":"Rosslare, Irlande","Diamond Beach, IJsland":"Diamond Beach, Islande","Dolomieten, Italië":"Dolomites, Italie","Etna, Italië":"Etna, Italie","San Remo, Italië":"San Remo, Italie","Rome, Italië":"Rome, Italie","Stelvio, Italië":"Stelvio, Italie","Trapani, Italië":"Trapani, Italie","Venetië, Italië":"Venise, Italie","Vesuvius, Italië":"Vésuve, Italie","Zuid-Tirol, Italië":"Tyrol du Sud, Italie","Gardameer, Italië":"Lac de Garde, Italie","Assisi, Italië":"Assise, Italie","Dubrovnik, Kroatië":"Dubrovnik, Croatie","Varaždin, Kroatië":"Varaždin, Croatie","Dalmatia, Kroatië":"Dalmatie, Croatie","Poreč, Kroatië":"Poreč, Croatie","Malta":"Malte","Monaco":"Monaco","Rotterdam, Nederland":"Rotterdam, Pays-Bas","Gardnos, Noorwegen":"Gardnos, Norvège","Ifnefoss, Noorwegen":"Ifnefoss, Norvège","Lillehammer, Noorwegen":"Lillehammer, Norvège","Norefjell, Noorwegen":"Norefjell, Norvège","Oslo, Noorwegen":"Oslo, Norvège","Steindalfoss, Noorwegen":"Steindalfoss, Norvège","Wenen, Oostenrijk":"Vienne, Autriche","Krakau, Polen":"Cracovie, Pologne","Zgorzelec, Polen":"Zgorzelec, Pologne","Madeira, Portugal":"Madère, Portugal","Santiago do Cacém, Portugal":"Santiago do Cacém, Portugal","Braga, Portugal":"Braga, Portugal","Ponte de Lima, Portugal":"Ponte de Lima, Portugal","Boekarest, Roemenië":"Bucarest, Roumanie","Sint-Petersburg, Rusland":"Saint-Pétersbourg, Russie","Ben Nevis, Schotland":"Ben Nevis, Écosse","Isle of Skye, Schotland":"Isle of Skye, Écosse","Loch Ness, Schotland":"Loch Ness, Écosse","Lockerbie, Schotland":"Lockerbie, Écosse","Port Achan, Schotland":"Port Achan, Écosse","Tighnabruaich, Schotland":"Tighnabruaich, Écosse","Barcelona, Spanje":"Barcelone, Espagne","Gerona, Spanje":"Gérone, Espagne","Granada, Spanje":"Grenade, Espagne","Valga, Spanje":"Valga, Espagne","Zaragoza, Spanje":"Saragosse, Espagne","La Rioja, Spanje":"La Rioja, Espagne","Praag, Tsjechië":"Prague, République tchèque","Karlsbad, Tsjechië":"Karlovy Vary, République tchèque","Brechfa, Wales":"Brechfa, Pays de Galles","Brecon Beacons, Wales":"Brecon Beacons, Pays de Galles","Veberöd, Zweden":"Veberöd, Suède","Bayou la Batre, Alabama":"Bayou la Batre, Alabama","Robertsdale, Alabama":"Robertsdale, Alabama","Lockesburg, Arkansas":"Lockesburg, Arkansas","Texarkana, Arkansas":"Texarkana, Arkansas","Montréal, Canada":"Montréal, Canada","Niagara Falls, Canada":"Niagara Falls, Canada","Cayman Eilanden":"Îles Caïmans","Cuba":"Cuba","Curaçao":"Curaçao","Klein Curaçao":"Klein Curaçao","Dominicaanse Republiek":"République dominicaine","Lee, Florida":"Lee, Floride","Alto, Georgia":"Alto, Géorgie","Montego Bay, Jamaica":"Montego Bay, Jamaïque","Ferryday, Louisiana":"Ferryday, Louisiane","Gilliam, Louisiana":"Gilliam, Louisiane","Biloxi, Mississippi":"Biloxi, Mississippi","Natchez, Mississippi":"Natchez, Mississippi","Akumal, Mexico":"Akumal, Mexique","Albuquerque, New Mexico":"Albuquerque, Nouveau-Mexique","Santa Fe, New Mexico":"Santa Fe, Nouveau-Mexique","New York City":"New York City","Smoky Mountains, North Carolina":"Smoky Mountains, Caroline du Nord","Waynesville, North Carolina":"Waynesville, Caroline du Nord","Elk City, Oklahoma":"Elk City, Oklahoma","Oklahoma City, Oklahoma":"Oklahoma City, Oklahoma","Panama City":"Panama City","Charleston, South Carolina":"Charleston, Caroline du Sud","Holly Hill, South Carolina":"Holly Hill, Caroline du Sud","Gatlinburg, Tennessee":"Gatlinburg, Tennessee","Kellerville, Texas":"Kellerville, Texas","Wildorado, Texas":"Wildorado, Texas","Brazilië":"Brésil","Cusco, Peru":"Cusco, Pérou","Arequipa, Peru":"Arequipa, Pérou"},
-    listBtnClose: '▲ Masquer la liste',
+'use strict';
+
+/* ─── TRANSLATIONS ─── */
+const LANGS = {
+
+/* ═══════════════════════════ NEDERLANDS ═══════════════════════════ */
+nl: {
+  hero_label:"1664 · Brussel",
+  hero_title:"Onze-Lieve-Vrouw\nvan Goede Bijstand",
+  hero_sub:" Nederlandstalige parochie in Brussel-centrum ",
+  hero_date:"Kolenmarkt 91 · 1000 Brussel",
+  hero_scroll:"Ontdekken",
+  nav_agenda:"Agenda",
+  nav_gesch:"Geschiedenis",
+  nav_samen:"Samenwerking",
+  nav_voorbij:"Voorbije activiteiten",
+  nav_huren:"Gebruik van de kerk",
+  nav_steunen:"Steunen",
+  nav_contact:"Contact",
+  footer_line1:"Onze-Lieve-Vrouw van Goede Bijstand",
+  ag_title:"Agenda",
+  ag_intro:"Overzicht van de komende vieringen en activiteiten in en rond de kerk.",
+  ag_today:"Vandaag",
+  ag_empty:"Geen activiteiten gepland in de komende weken.",
+  ag_leg_viering:"Viering",
+  ag_leg_taize:"Taizé",
+  ag_leg_night:"Bijstand by Night",
+  ag_leg_act:"Activiteit",
+  ev_sun_eucharistie:"Mis met eucharistie",
+  ev_sun_woord:"Woorddienst met eucharistie",
+  ev_voorganger:"Voorganger",
+  
+  ev_taize:"Gebed in de geest van Taizé",
+  ev_night:"Bijstand by Night (18–22 u)",
+  ev_lgbtq: 'Oecumenische viering van de LGBTQ+-gemeenschap',
+  ev_palm:"Palmzondag – Viering",
+  ev_holy_thu:"Witte Donderdag – Sedermaaltijd",
+  ev_good_fri:"Goede Vrijdag – Kruishulde",
+  ev_vigil:"Paaswake",
+  ev_easter:"Paasviering",
+  ev_drempel:"Onze-Lieve-Heer Hemelvaart met Drempelviering",
+  ev_pinksterwake:"Pinksterwake (uitzonderlijk geen viering LGBTQ+)",
+  ev_pinkster:"Pinksteren - Woorddienst met eucharistie",
+  ev_14juni: "Geen viering (wegens tv-mis in Evere: iedereen welkom - <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/tv-mis'>meer info</a>)",
+  ev_concert_juni:"Barokconcert klavecimbel en baroktrombone",
+  gesch_title:"Geschiedenis van het gebouw",
+  gesch_intro:"De Onze-Lieve-Vrouw van Goede Bijstandskerk is een van de markantste barokke kerkgebouwen in het hart van Brussel.",
+  tl1_year:"1664",
+  tl1_text:"Het huidige barokke gebouw wordt voltooid. De kerk is gewijd aan Onze-Lieve-Vrouw van Goede Bijstand en staat aan de Kolenmarkt, in het hart van de Brusselse benedenstad.",
+  tl2_year:"17e–18e eeuw",
+  tl2_text:"Rijke decoratie van het interieur. Het imposante hoofdaltaar, ontworpen door Jan Pieter van Baurscheit de Oude, wordt geplaatst. De kerk wordt een belangrijk bedevaartsoord.",
+  tl3_year:"19e eeuw",
+  tl3_text:"Restauratiewerken en aanpassingen aan het neogotische tijdgeest. De kerk behoudt haar barokke ziel ondanks de veranderende modes.",
+  tl4_year:"20e–21e eeuw",
+  tl4_text:"Opname in het project 'Vlaamse Meesters in Situ': de kerk wordt erkend als drager van een unieke collectie barokke schilderijen en sculpturen. Vandaag een levendige plek voor cultuur en gemeenschap.",
+  gesch_arch_title:"Architectuur & Kunst",
+  gesch_arch:"Het interieur van de kerk is een ware schatkamer van barokke kunst. Het hoofdaltaar van Jan Pieter van Baurscheit de Oude springt onmiddellijk in het oog door zijn meesterlijk gebruik van marmer en verguldsel. De kerk herbergt ook opmerkelijke 17e-eeuwse schilderijen en houtsnijwerk.",
+  gesch_visit_title:"Bezoek",
+  gesch_open:"Elke dag: 9.00 – 17.00 u\nZondag: 10.00 – 17.00 u",
+  gesch_free:"Toegang is gratis.",
+  gesch_masters:"Ontdek de Vlaamse Meesters in Situ →",
+  gesch_maps:"Bekijk op Google Maps →",
+  samen_title:"Samenwerking",
+  samen_intro:"De kerk is een ontmoetingsplek voor diverse gemeenschappen en culturele initiatieven.",
+  p_parochie:"Parochie Goede Bijstand",
+  p_parochie_desc:"De Nederlandstalige parochiegemeenschap die de kerk beheert en er wekelijks vieringen organiseert.",
+  p_kerkfabriek:"Kerkfabriek",
+  p_kerkfabriek_desc:"De grondwet (artikelen 19 tot 21) garandeert de vrijheid van alle erediensten en verbiedt de burgerlijke overheid tussen te komen bij de benoeming van bedienaren van de eredienst en de werking ervan. Erediensten zijn in 2002 een gewestbevoegdheid geworden inzake de <strong>erkenning van plaatselijke gemeenschappen</strong> (parochies en de tegenhangers daarvan uit de andere erediensten), de <strong>organisatie en financiering van de instellingen</strong> belast met het beheer van de temporaliën van de erediensten en de <strong>huisvestingstoelagen</strong> voor de bedienaren van de erediensten, alsook het toezicht op de instellingen die de temporaliën van de eredienst beheren. Op 23 december 2021 werd de <a href='https://plaatselijke-besturen.brussels/10-december-2021-ordonnantie-betreffende-het-beheer-van-de-materiele-belangen-van-de-erkende' target='_blank'>organieke ordonnantie</a> betreffende het beheer van de materiële belangen van de erkende plaatselijke levensbeschouwelijke gemeenschappen gepubliceerd in het Belgisch Staatsblad. Zo hervormt het Brussels Hoofdstedelijk Gewest de wettelijke basis voor levensbeschouwelijke instellingen.<br><br>Meer info: <a href='https://plaatselijke-besturen.brussels/levensbeschouwelijke-instellingen' target='_blank'>Brussel Plaatselijke Besturen</a><br><br>De raad van bestuur is samengesteld uit minstens vijf leden, van wie hoogstens twee derde van hetzelfde geslacht mag zijn.<br><br><strong>Samenstelling van het huidige bestuur:</strong><br>Evelien Leys - voorzitter, Lieven Baert - secretaris, Lode Vanderbeken - penningmeester, Laura Lievevrouw, Freddy Gerard.<br><br>Zij vergaderen maandelijks om 9 uur op de eerste zondag van de maand.",
+  p_parochieploeg:"Parochieploeg",
+  p_parochieploeg_desc:"De parochieploeg bestaat uit zes leden: de bedienaar, drie pastores en twee leken. Ze vergadert elke eerste woensdagvoormiddag van de maand.<br><br><strong>Samenstelling</strong><br>Johnny De Mot, Magda De Cock, Goedele Miseur, Lieven Baert, Ellen Keersmaekers, Katia Vanhemelryck",
+  p_wereldwijd: "Wereldwijd",
+  p_sacramenten:"Sacramenten",
+  p_paulus:"Paulusgemeenschappen",
+  p_paulus_desc:"Samenwerkingsverband van Nederlandstalige geloofsgemeenschappen in Brussel. De Goede Bijstand is een van de ankerpunten.",
+  p_taize:"Taizé",
+  p_taize_desc:"Elke derde zaterdag van de maand: een gebedsavond in de geest van Taizé, open voor iedereen — indien er die dag geen christelijke viering van de Paulusgemeenschappen plaatsvindt. Zie <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> voor alle info. Contact: bep.saintandre@gmail.com ",
+  p_lgbtq:"Gemeenschap LGBTQ+",
+  p_lgbtq_desc:"De kerk verwelkomt de LGBTQ+-gemeenschap en streeft naar een open en inclusieve ruimte voor iedereen. Elke vierde zaterdag van de maand: een oeucumenische dienst van en voor de LGBTQ-gemeenschap — indien er die dag geen christelijke viering van de Paulusgemeenschappen plaatsvindt. Zie <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> voor alle info.",
+  p_klank:"Week van de Klank",
+  p_klank_desc:"Jaarlijks muzikaal festival dat de kerk als akoestische parel inzet voor hedendaagse en klassieke muziekproducties.",
+  p_klank_link:"lasemaineduson.be →",
+  p_meesters:"Vlaamse Meesters in Situ",
+  p_meesters_desc:"De kerk maakt deel uit van dit prestigieuze project dat barokke kunstwerken in hun originele context ontsluit voor het publiek.",
+  p_meesters_link:"flemishmastersinsitu.com →",
+  voorbij_title:"Voorbije activiteiten",
+  voorbij_muziek_title:"Muziek",
+  voorbij_muziek_intro:"Concerten en muzikale evenementen die plaatsvonden in de Bijstandskerk.",
+  voorbij_film_title:"Films Sint-Lucas",
+  voorbij_film_intro:"Filmopnames in samenwerking met Sint-Lucas.",
+  voorbij_klank_2026:"Week van de Klank 2026 — Hoarses",
+voorbij_klank_2025:"Week van de Klank 2025 — Rothko Chapel",
+voorbij_opnames_title:"Muziekopnames in de kerk",
+voorbij_opnames_intro:"Opnames gemaakt in de Bijstandskerk.",
+voorbij_trois_fb:"Les Trois Cordes (Facebook)",
+voorbij_trois_yt:"Les Trois Cordes (YouTube)",
+  huren_title:"Gebruik van de kerk",
+  huren_intro:"De Onze-Lieve-Vrouw van Goede Bijstandskerk biedt een unieke, historische setting voor uw evenement. De uitzonderlijke barokke architectuur en de centrale ligging in Brussel maken deze plek onvergetelijk.",
+  huren_cap_title:"Capaciteit & Ruimte",
+  huren_cap:"De kerk biedt ruimte voor grote evenementen. De akoestiek is uitzonderlijk geschikt voor concerten, recitals en muzikale producties.",
+  huren_gesch_title:"Geschikt voor",
+  huren_gesch:"Concerten · Recitals · Tentoonstellingen · Filmopnames · Ceremoniële evenementen",
+  huren_loc_title:"Ligging",
+  huren_loc:"Centraal gelegen in Brussel, vlakbij de Grote Markt en openbaar vervoer.",
+  huren_contact_title:"Aanvraag",
+  huren_contact:"Voor aanvragen en informatie over tarieven, neem contact op:",
+  huren_note:"De kerk is een actief religieus gebouw. Aanvragen worden individueel beoordeeld.",
+  steunen_title:"Het gebouw steunen",
+  steunen_intro:"Met uw steun draagt u bij aan het behoud en onderhoud van dit unieke barokke erfgoed in het hart van Brussel. Elke bijdrage, groot of klein, is waardevol.",
+  steunen_bank:"Geef via overschrijving",
+  steunen_qr:"Of scan een QR-code",
+  steunen_terminal:"Of tik uw bankkaart op het betaalterminal in de kerk.",
+  steunen_q:"Voor vragen: kerkfabriek@goedebijstand.brussels",
+  contact_title:"Contact",
+  contact_gebouw:"Gebouwbeheer",
+  contact_secretariaat:"Secretariaat",
+  contact_addr:"Bijstandsstraat 5, 1000 Brussel",
+  contact_email_label:"E-mail:",
+  contact_msg:"Stuur een e-mail →",
+  contact_maps:"Bekijk op Google Maps →",
+  contact_open_title:"Openingsuren kerk",
+  contact_open:"Elke dag: 9.00–17.00 u\nZondag: 10.00–17.00 u",
+  sb_open:"Openingsuren",
+  sb_open_body:"Elke dag: 9–17 u\nZondag: 10–17 u",
+  sb_addr:"Adres",
+  sb_trans:"Openbaar vervoer",
+  sb_trans_body:"Metro Beurs (lijnen 1 & 5) · Tram 4 & 10",
+  sb_free:"Gratis toegang",
+  sb_masters:"Vlaamse Meesters in Situ",
+  sb_masters_link:"Meer info →",
+  rtl: false,
 },
-  de: {
-    kicker:"Eine Pilgerreise auf Erden", siteTitle:"Die Welt der Guten Beistandschaft", siteSubtitle:"Von jedem Ort der Erde ein Töpfchen Erde",
-    navMap:"Die Karte", navStory:"Die Geschichte", navLocations:"Alle Standorte", 
-    introKicker:"Eine Lebenslange Mission", introTitle:"Aus jedem Winkel der Welt<br/>eine Handvoll Erde gesammelt",
-    introBody:"Die Gemeinschaft der Guten Beistandschaft bereist die Welt mit einem besonderen Auftrag: Von jedem Ort, den sie besucht, bringt sie ein Töpfchen Erde mit nach Hause.",
-    statLocations:"Standorte", statContinents:"Kontinente", statCountries:"Länder", statStories:"Geschichten",
-    mapLabel:"Weltkarte der Reiseziele",
-    mapCaption:"Klicken Sie auf einen Punkt, um den Namen des Ortes zu sehen — zoomen Sie mit dem Mausrad oder den Schaltflächen links",
-    layerAarde:"Erdbibliothek", layerSchelp:"Muscheln aus Brüssel",
-    continentLabels:{"Afrika":"Afrika","Azië & M-O":"Asien & N-O","Europa":"Europa","Amerika":"Amerika"},
-    schelpFormTitle:"📍 Ihre Muschel auf der Karte markieren",
-    schelpFormIntro:"Haben Sie eine Muschel aus der Kirche als Geschenk mitgenommen? Zeigen Sie, wo sie gelandet ist.",
-    lblCity:"Stadt oder Land", lblName:"Ihr Name (optional)", lblMsg:"Eine kurze Nachricht (optional)",
-    cityPh:"z.B. Tokio, Japan", namePh:"z.B. Marie", msgPh:"z.B. Geschenk für meine Schwester",
-    btnPin:"Auf der Karte platzieren",
-    errCity:"Bitte geben Sie eine Stadt oder ein Land ein.", searching:"Standort wird gesucht…",
-    errNotFound:"Standort nicht gefunden. Versuchen Sie eine andere Schreibweise.",
-    errGeo:"Standort konnte nicht ermittelt werden.", errSave:"Speichern nicht möglich. Bitte erneut versuchen.",
-    success:"✓ Muschel in {city} platziert!",
-    countSchelp0:"Noch keine Muscheln markiert — seien Sie der Erste!",
-    countSchelp1:"1 Muschel hat ihren Weg in die Welt gefunden.",
-    countSchelpN:"{n} Muscheln haben ihren Weg in die Welt gefunden.",
-    listSchelpTitle:"Alle Muscheln",
-    artHeadline:"Der Traum von Pfarrer Johnny: von jedem Ort der Erde ein Töpfchen Erde",
-    artDeck:"Die Geschichte hinter dieser besonderen Sammlung.",
-    artP1:"Die Gemeinschaft der Guten Beistandschaft sammelt seit Jahren Erde aus aller Welt.",
-    artP2:"Die Sammlung umfasst mittlerweile mehr als 155 einzigartige Standorte.",
-    listTitle:"Alle 155 Standorte", listBody:"Sehen Sie die vollständige Liste aller besuchten Orte.", listBtn:"Vollständige Liste ansehen",
-    footer:"Ein Projekt der Guten Beistandschaft \u00a0·\u00a0 Einsehbar im Pfarrhaus <a href=\"https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z\" style=\"color:var(--rule)\">Beistandsstraat 5</a>, 1000 Brüssel",
-    locationNames:{"Benin":"Benin","Ouagadougou, Burkina Faso":"Ouagadougou, Burkina Faso","Gran Canaria, Spanje":"Gran Canaria, Spanien","Katako-Kindu, Congo":"Katako-Kindu, Kongo","Wamba, Congo":"Wamba, Kongo","Zuid-Kivu, Congo":"Süd-Kivu, Kongo","Congo":"Kongo","Egypte":"Ägypten","Praia, Kaapverdië":"Praia, Kap Verde","Nador, Marokko":"Nador, Marokko","Marrakesh, Marokko":"Marrakesch, Marokko","Ouarzazate, Marokko":"Ouarzazate, Marokko","Driouch, Marokko":"Driouch, Marokko","Oeganda":"Uganda","Kigali, Rwanda":"Kigali, Ruanda","Seychellen":"Seychellen","Togo":"Togo","Witsand, Zuid-Afrika":"Witsand, Südafrika","Willowmore, Zuid-Afrika":"Willowmore, Südafrika","Myanmar":"Myanmar","Nanning, China":"Nanning, China","Troodos, Cyprus":"Troodos, Zypern","Delhi, India":"Delhi, Indien","Madhya Pradesh, India":"Madhya Pradesh, Indien","Prayagraj, India":"Prayagraj, Indien","Teheran, Iran":"Teheran, Iran","Jeruzalem, Israël":"Jerusalem, Israel","Dode Zee, Jordanië":"Totes Meer, Jordanien","Libanon":"Libanon","Nepal":"Nepal","Palestina":"Palästina","Colombo, Sri Lanka":"Colombo, Sri Lanka","Thailand":"Thailand","Vietnam":"Vietnam","Istanbul, Turkije":"Istanbul, Türkei","Bozjom, Georgië":"Bozjomi, Georgien","Oostende, België":"Ostende, Belgien","Postel, België":"Postel, Belgien","Kopenhagen, Denemarken":"Kopenhagen, Dänemark","Ribe, Denemarken":"Ribe, Dänemark","Lindet Skov, Denemarken":"Lindet Skov, Dänemark","Keulen, Duitsland":"Köln, Deutschland","Freiburg, Duitsland":"Freiburg, Deutschland","Colchester, Engeland":"Colchester, England","Londen, Engeland":"London, England","Derwent Water, Engeland":"Derwent Water, England","Kallislaki, Finland":"Kallislaki, Finnland","Roquetaillade, Frankrijk":"Roquetaillade, Frankreich","Corsica, Frankrijk":"Korsika, Frankreich","Colmar, Frankrijk":"Colmar, Frankreich","Dijon, Frankrijk":"Dijon, Frankreich","Fontenay, Frankrijk":"Fontenay, Frankreich","Grenoble, Frankrijk":"Grenoble, Frankreich","Lyon, Frankrijk":"Lyon, Frankreich","Nice, Frankrijk":"Nizza, Frankreich","Puy de Dôme, Frankrijk":"Puy de Dôme, Frankreich","Mulhouse, Frankrijk":"Mülhausen, Frankreich","Thessaloniki, Griekenland":"Thessaloniki, Griechenland","Vergina, Griekenland":"Vergina, Griechenland","Keszthely, Hongarije":"Keszthely, Ungarn","Dublin, Ierland":"Dublin, Irland","Rosslare, Ierland":"Rosslare, Irland","Diamond Beach, IJsland":"Diamond Beach, Island","Dolomieten, Italië":"Dolomiten, Italien","Etna, Italië":"Ätna, Italien","San Remo, Italië":"San Remo, Italien","Rome, Italië":"Rom, Italien","Stelvio, Italië":"Stelvio, Italien","Trapani, Italië":"Trapani, Italien","Venetië, Italië":"Venedig, Italien","Vesuvius, Italië":"Vesuv, Italien","Zuid-Tirol, Italië":"Südtirol, Italien","Gardameer, Italië":"Gardasee, Italien","Assisi, Italië":"Assisi, Italien","Dubrovnik, Kroatië":"Dubrovnik, Kroatien","Varaždin, Kroatië":"Varaždin, Kroatien","Dalmatia, Kroatië":"Dalmatien, Kroatien","Poreč, Kroatië":"Poreč, Kroatien","Malta":"Malta","Monaco":"Monaco","Rotterdam, Nederland":"Rotterdam, Niederlande","Gardnos, Noorwegen":"Gardnos, Norwegen","Ifnefoss, Noorwegen":"Ifnefoss, Norwegen","Lillehammer, Noorwegen":"Lillehammer, Norwegen","Norefjell, Noorwegen":"Norefjell, Norwegen","Oslo, Noorwegen":"Oslo, Norwegen","Steindalfoss, Noorwegen":"Steindalfoss, Norwegen","Wenen, Oostenrijk":"Wien, Österreich","Krakau, Polen":"Krakau, Polen","Zgorzelec, Polen":"Zgorzelec, Polen","Madeira, Portugal":"Madeira, Portugal","Santiago do Cacém, Portugal":"Santiago do Cacém, Portugal","Braga, Portugal":"Braga, Portugal","Ponte de Lima, Portugal":"Ponte de Lima, Portugal","Boekarest, Roemenië":"Bukarest, Rumänien","Sint-Petersburg, Rusland":"Sankt Petersburg, Russland","Ben Nevis, Schotland":"Ben Nevis, Schottland","Isle of Skye, Schotland":"Isle of Skye, Schottland","Loch Ness, Schotland":"Loch Ness, Schottland","Lockerbie, Schotland":"Lockerbie, Schottland","Port Achan, Schotland":"Port Achan, Schottland","Tighnabruaich, Schotland":"Tighnabruaich, Schottland","Barcelona, Spanje":"Barcelona, Spanien","Gerona, Spanje":"Girona, Spanien","Granada, Spanje":"Granada, Spanien","Valga, Spanje":"Valga, Spanien","Zaragoza, Spanje":"Saragossa, Spanien","La Rioja, Spanje":"La Rioja, Spanien","Praag, Tsjechië":"Prag, Tschechien","Karlsbad, Tsjechië":"Karlsbad, Tschechien","Brechfa, Wales":"Brechfa, Wales","Brecon Beacons, Wales":"Brecon Beacons, Wales","Veberöd, Zweden":"Veberöd, Schweden","Bayou la Batre, Alabama":"Bayou la Batre, Alabama","Robertsdale, Alabama":"Robertsdale, Alabama","Lockesburg, Arkansas":"Lockesburg, Arkansas","Texarkana, Arkansas":"Texarkana, Arkansas","Montréal, Canada":"Montréal, Kanada","Niagara Falls, Canada":"Niagara Falls, Kanada","Cayman Eilanden":"Kaimaninseln","Cuba":"Kuba","Curaçao":"Curaçao","Klein Curaçao":"Klein Curaçao","Dominicaanse Republiek":"Dominikanische Republik","Lee, Florida":"Lee, Florida","Alto, Georgia":"Alto, Georgia","Montego Bay, Jamaica":"Montego Bay, Jamaika","Ferryday, Louisiana":"Ferryday, Louisiana","Gilliam, Louisiana":"Gilliam, Louisiana","Biloxi, Mississippi":"Biloxi, Mississippi","Natchez, Mississippi":"Natchez, Mississippi","Akumal, Mexico":"Akumal, Mexiko","Albuquerque, New Mexico":"Albuquerque, New Mexico","Santa Fe, New Mexico":"Santa Fe, New Mexico","New York City":"New York City","Smoky Mountains, North Carolina":"Smoky Mountains, North Carolina","Waynesville, North Carolina":"Waynesville, North Carolina","Elk City, Oklahoma":"Elk City, Oklahoma","Oklahoma City, Oklahoma":"Oklahoma City, Oklahoma","Panama City":"Panama City","Charleston, South Carolina":"Charleston, South Carolina","Holly Hill, South Carolina":"Holly Hill, South Carolina","Gatlinburg, Tennessee":"Gatlinburg, Tennessee","Kellerville, Texas":"Kellerville, Texas","Wildorado, Texas":"Wildorado, Texas","Brazilië":"Brasilien","Cusco, Peru":"Cusco, Peru","Arequipa, Peru":"Arequipa, Peru"},
-    listBtnClose: '▲ Liste verbergen',
- },
-  en: {
-    kicker:"A pilgrimage on earth", siteTitle:"The World of the Good Assistance", siteSubtitle:"A jar of soil from every place on earth",
-    navMap:"The Map", navStory:"The Story", navLocations:"All Locations", 
-    introKicker:"A Lifelong Mission", introTitle:"From every corner of the world,<br/>a handful of earth collected",
-    introBody:"The community of the Good Assistance travels the world with one special mission: from every place they visit, they bring home a small jar of soil.",
-    statLocations:"Locations", statContinents:"Continents", statCountries:"Countries", statStories:"Stories",
-    mapLabel:"World Map of Destinations",
-    mapCaption:"Click on a dot to see the name of the location — zoom with the scroll wheel or the buttons on the left",
-    layerAarde:"Soil Library", layerSchelp:"Shells from Brussels",
-    continentLabels:{"Afrika":"Africa","Azië & M-O":"Asia & M-E","Europa":"Europe","Amerika":"Americas"},
-    schelpFormTitle:"📍 Pin your shell on the map",
-    schelpFormIntro:"Did you take a shell from the church as a gift? Show where it ended up.",
-    lblCity:"City or country", lblName:"Your name (optional)", lblMsg:"A short message (optional)",
-    cityPh:"e.g. Tokyo, Japan", namePh:"e.g. Marie", msgPh:"e.g. A gift for my sister",
-    btnPin:"Place on the map",
-    errCity:"Please enter a city or country.", searching:"Looking up location…",
-    errNotFound:"Location not found. Try a different spelling.",
-    errGeo:"Could not look up location. Check your internet connection.", errSave:"Could not save. Please try again.",
-    success:"✓ Shell placed in {city}!",
-    countSchelp0:"No shells pinned yet — be the first!",
-    countSchelp1:"1 shell has found its way into the world.",
-    countSchelpN:"{n} shells have found their way into the world.",
-    listSchelpTitle:"All shells",
-    artHeadline:"Father Johnny's dream: a jar of soil from every place on earth",
-    artDeck:"A remarkable collection.",
-    artP1:"The community of the Good Assistance has been collecting soil from around the world for years.",
-    artP2:"The collection now counts more than 155 unique locations, spread across 6 continents.",
-    listTitle:"All 155 Locations", listBody:"View the complete list of all visited places.", listBtn:"View the full list",
-    footer:"A project of the Good Assistance \u00a0·\u00a0 On display at the rectory <a href=\"https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z\" style=\"color:var(--rule)\">Bijstandsstraat 5</a>, 1000 Brussels",
-    locationNames:{"Benin":"Benin","Ouagadougou, Burkina Faso":"Ouagadougou, Burkina Faso","Gran Canaria, Spanje":"Gran Canaria, Spain","Katako-Kindu, Congo":"Katako-Kindu, Congo","Wamba, Congo":"Wamba, Congo","Zuid-Kivu, Congo":"South Kivu, Congo","Congo":"Congo","Egypte":"Egypt","Praia, Kaapverdië":"Praia, Cape Verde","Nador, Marokko":"Nador, Morocco","Marrakesh, Marokko":"Marrakesh, Morocco","Ouarzazate, Marokko":"Ouarzazate, Morocco","Driouch, Marokko":"Driouch, Morocco","Oeganda":"Uganda","Kigali, Rwanda":"Kigali, Rwanda","Seychellen":"Seychelles","Togo":"Togo","Witsand, Zuid-Afrika":"Witsand, South Africa","Willowmore, Zuid-Afrika":"Willowmore, South Africa","Myanmar":"Myanmar","Nanning, China":"Nanning, China","Troodos, Cyprus":"Troodos, Cyprus","Delhi, India":"Delhi, India","Madhya Pradesh, India":"Madhya Pradesh, India","Prayagraj, India":"Prayagraj, India","Teheran, Iran":"Tehran, Iran","Jeruzalem, Israël":"Jerusalem, Israel","Dode Zee, Jordanië":"Dead Sea, Jordan","Libanon":"Lebanon","Nepal":"Nepal","Palestina":"Palestine","Colombo, Sri Lanka":"Colombo, Sri Lanka","Thailand":"Thailand","Vietnam":"Vietnam","Istanbul, Turkije":"Istanbul, Turkey","Bozjom, Georgië":"Borjomi, Georgia","Oostende, België":"Ostend, Belgium","Postel, België":"Postel, Belgium","Kopenhagen, Denemarken":"Copenhagen, Denmark","Ribe, Denemarken":"Ribe, Denmark","Lindet Skov, Denemarken":"Lindet Skov, Denmark","Keulen, Duitsland":"Cologne, Germany","Freiburg, Duitsland":"Freiburg, Germany","Colchester, Engeland":"Colchester, England","Londen, Engeland":"London, England","Derwent Water, Engeland":"Derwent Water, England","Kallislaki, Finland":"Kallislaki, Finland","Roquetaillade, Frankrijk":"Roquetaillade, France","Corsica, Frankrijk":"Corsica, France","Colmar, Frankrijk":"Colmar, France","Dijon, Frankrijk":"Dijon, France","Fontenay, Frankrijk":"Fontenay, France","Grenoble, Frankrijk":"Grenoble, France","Lyon, Frankrijk":"Lyon, France","Nice, Frankrijk":"Nice, France","Puy de Dôme, Frankrijk":"Puy de Dôme, France","Mulhouse, Frankrijk":"Mulhouse, France","Thessaloniki, Griekenland":"Thessaloniki, Greece","Vergina, Griekenland":"Vergina, Greece","Keszthely, Hongarije":"Keszthely, Hungary","Dublin, Ierland":"Dublin, Ireland","Rosslare, Ierland":"Rosslare, Ireland","Diamond Beach, IJsland":"Diamond Beach, Iceland","Dolomieten, Italië":"Dolomites, Italy","Etna, Italië":"Etna, Italy","San Remo, Italië":"San Remo, Italy","Rome, Italië":"Rome, Italy","Stelvio, Italië":"Stelvio, Italy","Trapani, Italië":"Trapani, Italy","Venetië, Italië":"Venice, Italy","Vesuvius, Italië":"Vesuvius, Italy","Zuid-Tirol, Italië":"South Tyrol, Italy","Gardameer, Italië":"Lake Garda, Italy","Assisi, Italië":"Assisi, Italy","Dubrovnik, Kroatië":"Dubrovnik, Croatia","Varaždin, Kroatië":"Varaždin, Croatia","Dalmatia, Kroatië":"Dalmatia, Croatia","Poreč, Kroatië":"Poreč, Croatia","Malta":"Malta","Monaco":"Monaco","Rotterdam, Nederland":"Rotterdam, Netherlands","Gardnos, Noorwegen":"Gardnos, Norway","Ifnefoss, Noorwegen":"Ifnefoss, Norway","Lillehammer, Noorwegen":"Lillehammer, Norway","Norefjell, Noorwegen":"Norefjell, Norway","Oslo, Noorwegen":"Oslo, Norway","Steindalfoss, Noorwegen":"Steindalfoss, Norway","Wenen, Oostenrijk":"Vienna, Austria","Krakau, Polen":"Kraków, Poland","Zgorzelec, Polen":"Zgorzelec, Poland","Madeira, Portugal":"Madeira, Portugal","Santiago do Cacém, Portugal":"Santiago do Cacém, Portugal","Braga, Portugal":"Braga, Portugal","Ponte de Lima, Portugal":"Ponte de Lima, Portugal","Boekarest, Roemenië":"Bucharest, Romania","Sint-Petersburg, Rusland":"Saint Petersburg, Russia","Ben Nevis, Schotland":"Ben Nevis, Scotland","Isle of Skye, Schotland":"Isle of Skye, Scotland","Loch Ness, Schotland":"Loch Ness, Scotland","Lockerbie, Schotland":"Lockerbie, Scotland","Port Achan, Schotland":"Port Achan, Scotland","Tighnabruaich, Schotland":"Tighnabruaich, Scotland","Barcelona, Spanje":"Barcelona, Spain","Gerona, Spanje":"Girona, Spain","Granada, Spanje":"Granada, Spain","Valga, Spanje":"Valga, Spain","Zaragoza, Spanje":"Zaragoza, Spain","La Rioja, Spanje":"La Rioja, Spain","Praag, Tsjechië":"Prague, Czech Republic","Karlsbad, Tsjechië":"Karlsbad, Czech Republic","Brechfa, Wales":"Brechfa, Wales","Brecon Beacons, Wales":"Brecon Beacons, Wales","Veberöd, Zweden":"Veberöd, Sweden","Bayou la Batre, Alabama":"Bayou la Batre, Alabama","Robertsdale, Alabama":"Robertsdale, Alabama","Lockesburg, Arkansas":"Lockesburg, Arkansas","Texarkana, Arkansas":"Texarkana, Arkansas","Montréal, Canada":"Montréal, Canada","Niagara Falls, Canada":"Niagara Falls, Canada","Cayman Eilanden":"Cayman Islands","Cuba":"Cuba","Curaçao":"Curaçao","Klein Curaçao":"Klein Curaçao","Dominicaanse Republiek":"Dominican Republic","Lee, Florida":"Lee, Florida","Alto, Georgia":"Alto, Georgia","Montego Bay, Jamaica":"Montego Bay, Jamaica","Ferryday, Louisiana":"Ferryday, Louisiana","Gilliam, Louisiana":"Gilliam, Louisiana","Biloxi, Mississippi":"Biloxi, Mississippi","Natchez, Mississippi":"Natchez, Mississippi","Akumal, Mexico":"Akumal, Mexico","Albuquerque, New Mexico":"Albuquerque, New Mexico","Santa Fe, New Mexico":"Santa Fe, New Mexico","New York City":"New York City","Smoky Mountains, North Carolina":"Smoky Mountains, North Carolina","Waynesville, North Carolina":"Waynesville, North Carolina","Elk City, Oklahoma":"Elk City, Oklahoma","Oklahoma City, Oklahoma":"Oklahoma City, Oklahoma","Panama City":"Panama City","Charleston, South Carolina":"Charleston, South Carolina","Holly Hill, South Carolina":"Holly Hill, South Carolina","Gatlinburg, Tennessee":"Gatlinburg, Tennessee","Kellerville, Texas":"Kellerville, Texas","Wildorado, Texas":"Wildorado, Texas","Brazilië":"Brazil","Cusco, Peru":"Cusco, Peru","Arequipa, Peru":"Arequipa, Peru"},
-    listBtnClose: '▲ Hide the list',
-  },
-  es: {
-    kicker:"Una peregrinación en la tierra", siteTitle:"El Mundo de la Buena Asistencia", siteSubtitle:"De cada lugar de la tierra, un tarro de suelo",
-    navMap:"El Mapa", navStory:"La Historia", navLocations:"Todos los Lugares", 
-    introKicker:"Una Misión de Toda la Vida", introTitle:"De cada rincón del mundo,<br/>un puñado de tierra recogido",
-    introBody:"La comunidad de la Buena Asistencia recorre el mundo con una misión especial: de cada lugar que visita, trae consigo un pequeño tarro de tierra.",
-    statLocations:"Lugares", statContinents:"Continentes", statCountries:"Países", statStories:"Historias",
-    mapLabel:"Mapa Mundial de Destinos",
-    mapCaption:"Haga clic en un punto para ver el nombre del lugar — amplíe con la rueda del ratón o los botones de la izquierda",
-    layerAarde:"Biblioteca de tierras", layerSchelp:"Conchas de Bruselas",
-    continentLabels:{"Afrika":"África","Azië & M-O":"Asia y O-M","Europa":"Europa","Amerika":"América"},
-    schelpFormTitle:"📍 Marca tu concha en el mapa",
-    schelpFormIntro:"¿Te llevaste una concha de la iglesia como regalo? Muestra dónde ha llegado.",
-    lblCity:"Ciudad o país", lblName:"Su nombre (opcional)", lblMsg:"Un pequeño mensaje (opcional)",
-    cityPh:"p.ej. Tokio, Japón", namePh:"p.ej. Marie", msgPh:"p.ej. Regalo para mi hermana",
-    btnPin:"Colocar en el mapa",
-    errCity:"Por favor, introduzca una ciudad o un país.", searching:"Buscando ubicación…",
-    errNotFound:"Ubicación no encontrada. Pruebe con otra ortografía.",
-    errGeo:"No se pudo encontrar la ubicación.", errSave:"No se pudo guardar. Inténtelo de nuevo.",
-    success:"✓ ¡Concha colocada en {city}!",
-    countSchelp0:"Todavía no hay conchas marcadas — ¡sea el primero!",
-    countSchelp1:"1 concha ha encontrado su camino en el mundo.",
-    countSchelpN:"{n} conchas han encontrado su camino en el mundo.",
-    listSchelpTitle:"Todas las conchas",
-    artHeadline:"El sueño del párroco Johnny: un tarro de tierra de cada lugar del mundo",
-    artDeck:"La historia detrás de esta notable colección.",
-    artP1:"La comunidad de la Buena Asistencia lleva años recolectando tierra de todo el mundo.",
-    artP2:"La colección cuenta ahora con más de 155 ubicaciones únicas, repartidas en 6 continentes.",
-    listTitle:"Los 155 Lugares", listBody:"Consulte la lista completa de todos los lugares visitados.", listBtn:"Ver la lista completa",
-    footer:"Un proyecto de la Buena Asistencia \u00a0·\u00a0 Visible en la rectoría <a href=\"https://www.google.com/maps/place/Rue+de+Bon+Secours+5,+1000+Bruxelles/@50.8459531,4.3451545,16z\" style=\"color:var(--rule)\">Bijstandsstraat 5</a>, 1000 Bruselas",
-    locationNames:{"Benin":"Benín","Ouagadougou, Burkina Faso":"Ouagadougou, Burkina Faso","Gran Canaria, Spanje":"Gran Canaria, España","Katako-Kindu, Congo":"Katako-Kindu, Congo","Wamba, Congo":"Wamba, Congo","Zuid-Kivu, Congo":"Kivu del Sur, Congo","Congo":"Congo","Egypte":"Egipto","Praia, Kaapverdië":"Praia, Cabo Verde","Nador, Marokko":"Nador, Marruecos","Marrakesh, Marokko":"Marrakech, Marruecos","Ouarzazate, Marokko":"Ouarzazate, Marruecos","Driouch, Marokko":"Driouch, Marruecos","Oeganda":"Uganda","Kigali, Rwanda":"Kigali, Ruanda","Seychellen":"Seychelles","Togo":"Togo","Witsand, Zuid-Afrika":"Witsand, Sudáfrica","Willowmore, Zuid-Afrika":"Willowmore, Sudáfrica","Myanmar":"Myanmar","Nanning, China":"Nanning, China","Troodos, Cyprus":"Troodos, Chipre","Delhi, India":"Delhi, India","Madhya Pradesh, India":"Madhya Pradesh, India","Prayagraj, India":"Prayagraj, India","Teheran, Iran":"Teherán, Irán","Jeruzalem, Israël":"Jerusalén, Israel","Dode Zee, Jordanië":"Mar Muerto, Jordania","Libanon":"Líbano","Nepal":"Nepal","Palestina":"Palestina","Colombo, Sri Lanka":"Colombo, Sri Lanka","Thailand":"Tailandia","Vietnam":"Vietnam","Istanbul, Turkije":"Estambul, Turquía","Bozjom, Georgië":"Borjomi, Georgia","Oostende, België":"Ostende, Bélgica","Postel, België":"Postel, Bélgica","Kopenhagen, Denemarken":"Copenhague, Dinamarca","Ribe, Denemarken":"Ribe, Dinamarca","Lindet Skov, Denemarken":"Lindet Skov, Dinamarca","Keulen, Duitsland":"Colonia, Alemania","Freiburg, Duitsland":"Friburgo, Alemania","Colchester, Engeland":"Colchester, Inglaterra","Londen, Engeland":"Londres, Inglaterra","Derwent Water, Engeland":"Derwent Water, Inglaterra","Kallislaki, Finland":"Kallislaki, Finlandia","Roquetaillade, Frankrijk":"Roquetaillade, Francia","Corsica, Frankrijk":"Córcega, Francia","Colmar, Frankrijk":"Colmar, Francia","Dijon, Frankrijk":"Dijon, Francia","Fontenay, Frankrijk":"Fontenay, Francia","Grenoble, Frankrijk":"Grenoble, Francia","Lyon, Frankrijk":"Lyon, Francia","Nice, Frankrijk":"Niza, Francia","Puy de Dôme, Frankrijk":"Puy de Dôme, Francia","Mulhouse, Frankrijk":"Mulhouse, Francia","Thessaloniki, Griekenland":"Tesalónica, Grecia","Vergina, Griekenland":"Vergina, Grecia","Keszthely, Hongarije":"Keszthely, Hungría","Dublin, Ierland":"Dublín, Irlanda","Rosslare, Ierland":"Rosslare, Irlanda","Diamond Beach, IJsland":"Diamond Beach, Islandia","Dolomieten, Italië":"Dolomitas, Italia","Etna, Italië":"Etna, Italia","San Remo, Italië":"San Remo, Italia","Rome, Italië":"Roma, Italia","Stelvio, Italië":"Stelvio, Italia","Trapani, Italië":"Trápani, Italia","Venetië, Italië":"Venecia, Italia","Vesuvius, Italië":"Vesubio, Italia","Zuid-Tirol, Italië":"Tirol del Sur, Italia","Gardameer, Italië":"Lago de Garda, Italia","Assisi, Italië":"Asís, Italia","Dubrovnik, Kroatië":"Dubrovnik, Croacia","Varaždin, Kroatië":"Varaždin, Croacia","Dalmatia, Kroatië":"Dalmacia, Croacia","Poreč, Kroatië":"Poreč, Croacia","Malta":"Malta","Monaco":"Mónaco","Rotterdam, Nederland":"Róterdam, Países Bajos","Gardnos, Noorwegen":"Gardnos, Noruega","Ifnefoss, Noorwegen":"Ifnefoss, Noruega","Lillehammer, Noorwegen":"Lillehammer, Noruega","Norefjell, Noorwegen":"Norefjell, Noruega","Oslo, Noorwegen":"Oslo, Noruega","Steindalfoss, Noorwegen":"Steindalfoss, Noruega","Wenen, Oostenrijk":"Viena, Austria","Krakau, Polen":"Cracovia, Polonia","Zgorzelec, Polen":"Zgorzelec, Polonia","Madeira, Portugal":"Madeira, Portugal","Santiago do Cacém, Portugal":"Santiago do Cacém, Portugal","Braga, Portugal":"Braga, Portugal","Ponte de Lima, Portugal":"Ponte de Lima, Portugal","Boekarest, Roemenië":"Bucarest, Rumanía","Sint-Petersburg, Rusland":"San Petersburgo, Rusia","Ben Nevis, Schotland":"Ben Nevis, Escocia","Isle of Skye, Schotland":"Isle of Skye, Escocia","Loch Ness, Schotland":"Loch Ness, Escocia","Lockerbie, Schotland":"Lockerbie, Escocia","Port Achan, Schotland":"Port Achan, Escocia","Tighnabruaich, Schotland":"Tighnabruaich, Escocia","Barcelona, Spanje":"Barcelona, España","Gerona, Spanje":"Girona, España","Granada, Spanje":"Granada, España","Valga, Spanje":"Valga, España","Zaragoza, Spanje":"Zaragoza, España","La Rioja, Spanje":"La Rioja, España","Praag, Tsjechië":"Praga, República Checa","Karlsbad, Tsjechië":"Karlsbad, República Checa","Brechfa, Wales":"Brechfa, Gales","Brecon Beacons, Wales":"Brecon Beacons, Gales","Veberöd, Zweden":"Veberöd, Suecia","Bayou la Batre, Alabama":"Bayou la Batre, Alabama","Robertsdale, Alabama":"Robertsdale, Alabama","Lockesburg, Arkansas":"Lockesburg, Arkansas","Texarkana, Arkansas":"Texarkana, Arkansas","Montréal, Canada":"Montréal, Canadá","Niagara Falls, Canada":"Cataratas del Niágara, Canadá","Cayman Eilanden":"Islas Caimán","Cuba":"Cuba","Curaçao":"Curaçao","Klein Curaçao":"Klein Curaçao","Dominicaanse Republiek":"República Dominicana","Lee, Florida":"Lee, Florida","Alto, Georgia":"Alto, Georgia","Montego Bay, Jamaica":"Montego Bay, Jamaica","Ferryday, Louisiana":"Ferryday, Luisiana","Gilliam, Louisiana":"Gilliam, Luisiana","Biloxi, Mississippi":"Biloxi, Misisipi","Natchez, Mississippi":"Natchez, Misisipi","Akumal, Mexico":"Akumal, México","Albuquerque, New Mexico":"Albuquerque, Nuevo México","Santa Fe, New Mexico":"Santa Fe, Nuevo México","New York City":"Nueva York","Smoky Mountains, North Carolina":"Smoky Mountains, Carolina del Norte","Waynesville, North Carolina":"Waynesville, Carolina del Norte","Elk City, Oklahoma":"Elk City, Oklahoma","Oklahoma City, Oklahoma":"Oklahoma City, Oklahoma","Panama City":"Ciudad de Panamá","Charleston, South Carolina":"Charleston, Carolina del Sur","Holly Hill, South Carolina":"Holly Hill, Carolina del Sur","Gatlinburg, Tennessee":"Gatlinburg, Tennessee","Kellerville, Texas":"Kellerville, Texas","Wildorado, Texas":"Wildorado, Texas","Brazilië":"Brasil","Cusco, Peru":"Cusco, Perú","Arequipa, Peru":"Arequipa, Perú"},
-    listBtnClose: '▲ Ocultar la lista',
-  }
-};
 
-/* ══════════════════════════════════════════
-   LOCATION DATA
-══════════════════════════════════════════ */
-const continentColors = { "Afrika":"#1565c0","Azië & M-O":"#0288d1","Europa":"#0097a7","Amerika":"#1976d2" };
-const locations = [
-  {name:"Benin",continent:"Afrika",lat:9.3077,lng:2.3158},{name:"Ouagadougou, Burkina Faso",continent:"Afrika",lat:12.3647,lng:-1.5332},{name:"Gran Canaria, Spanje",continent:"Afrika",lat:27.9202,lng:-15.5474},{name:"Katako-Kindu, Congo",continent:"Afrika",lat:-3.4086,lng:26.3280},{name:"Wamba, Congo",continent:"Afrika",lat:2.1480,lng:27.9900},{name:"Zuid-Kivu, Congo",continent:"Afrika",lat:-2.9453,lng:28.8658},{name:"Congo",continent:"Afrika",lat:-4.0383,lng:21.7587},{name:"Egypte",continent:"Afrika",lat:26.8206,lng:30.8025},{name:"Praia, Kaapverdië",continent:"Afrika",lat:14.9305,lng:-23.5133},{name:"Nador, Marokko",continent:"Afrika",lat:35.1688,lng:-2.9286},{name:"Marrakesh, Marokko",continent:"Afrika",lat:31.6295,lng:-7.9811},{name:"Ouarzazate, Marokko",continent:"Afrika",lat:30.9189,lng:-6.8934},{name:"Driouch, Marokko",continent:"Afrika",lat:34.9820,lng:-3.3887},{name:"Oeganda",continent:"Afrika",lat:1.3733,lng:32.2903},{name:"Kigali, Rwanda",continent:"Afrika",lat:-1.9441,lng:30.0619},{name:"Seychellen",continent:"Afrika",lat:-4.6796,lng:55.4920},{name:"Togo",continent:"Afrika",lat:8.6195,lng:0.8248},{name:"Witsand, Zuid-Afrika",continent:"Afrika",lat:-34.3977,lng:20.8593},{name:"Willowmore, Zuid-Afrika",continent:"Afrika",lat:-33.2906,lng:23.4881},
-  {name:"Myanmar",continent:"Azië & M-O",lat:19.7633,lng:96.0785},{name:"Nanning, China",continent:"Azië & M-O",lat:22.8170,lng:108.3665},{name:"Troodos, Cyprus",continent:"Azië & M-O",lat:34.9227,lng:32.8794},{name:"Delhi, India",continent:"Azië & M-O",lat:28.7041,lng:77.1025},{name:"Madhya Pradesh, India",continent:"Azië & M-O",lat:23.4736,lng:77.9470},{name:"Prayagraj, India",continent:"Azië & M-O",lat:25.4358,lng:81.8463},{name:"Teheran, Iran",continent:"Azië & M-O",lat:35.6892,lng:51.3890},{name:"Jeruzalem, Israël",continent:"Azië & M-O",lat:31.7683,lng:35.2137},{name:"Dode Zee, Jordanië",continent:"Azië & M-O",lat:31.5590,lng:35.4732},{name:"Libanon",continent:"Azië & M-O",lat:33.8547,lng:35.8623},{name:"Nepal",continent:"Azië & M-O",lat:28.3949,lng:84.1240},{name:"Palestina",continent:"Azië & M-O",lat:31.9522,lng:35.2332},{name:"Colombo, Sri Lanka",continent:"Azië & M-O",lat:6.9271,lng:79.8612},{name:"Thailand",continent:"Azië & M-O",lat:15.8700,lng:100.9925},{name:"Vietnam",continent:"Azië & M-O",lat:14.0583,lng:108.2772},{name:"Istanbul, Turkije",continent:"Azië & M-O",lat:41.0082,lng:28.9784},{name:"Bozjom, Georgië",continent:"Azië & M-O",lat:42.3154,lng:43.3569},
-  {name:"Oostende, België",continent:"Europa",lat:51.2293,lng:2.9164},{name:"Postel, België",continent:"Europa",lat:51.2780,lng:5.0830},{name:"Kopenhagen, Denemarken",continent:"Europa",lat:55.6761,lng:12.5683},{name:"Ribe, Denemarken",continent:"Europa",lat:55.3246,lng:8.7583},{name:"Lindet Skov, Denemarken",continent:"Europa",lat:55.2360,lng:9.1690},{name:"Keulen, Duitsland",continent:"Europa",lat:50.9333,lng:6.9500},{name:"Freiburg, Duitsland",continent:"Europa",lat:47.9990,lng:7.8421},{name:"Colchester, Engeland",continent:"Europa",lat:51.8959,lng:0.8919},{name:"Londen, Engeland",continent:"Europa",lat:51.5074,lng:-0.1278},{name:"Derwent Water, Engeland",continent:"Europa",lat:54.5725,lng:-3.1340},{name:"Kallislaki, Finland",continent:"Europa",lat:61.0,lng:25.5},{name:"Roquetaillade, Frankrijk",continent:"Europa",lat:44.6500,lng:0.0400},{name:"Corsica, Frankrijk",continent:"Europa",lat:42.0396,lng:9.0129},{name:"Colmar, Frankrijk",continent:"Europa",lat:48.0793,lng:7.3586},{name:"Dijon, Frankrijk",continent:"Europa",lat:47.3220,lng:5.0415},{name:"Fontenay, Frankrijk",continent:"Europa",lat:47.6220,lng:4.0470},{name:"Grenoble, Frankrijk",continent:"Europa",lat:45.1885,lng:5.7245},{name:"Lyon, Frankrijk",continent:"Europa",lat:45.7640,lng:4.8357},{name:"Nice, Frankrijk",continent:"Europa",lat:43.7102,lng:7.2620},{name:"Puy de Dôme, Frankrijk",continent:"Europa",lat:45.7724,lng:2.9653},{name:"Mulhouse, Frankrijk",continent:"Europa",lat:47.7508,lng:7.3359},{name:"Thessaloniki, Griekenland",continent:"Europa",lat:40.6401,lng:22.9444},{name:"Vergina, Griekenland",continent:"Europa",lat:40.4874,lng:22.3213},{name:"Keszthely, Hongarije",continent:"Europa",lat:46.7660,lng:17.2447},{name:"Dublin, Ierland",continent:"Europa",lat:53.3498,lng:-6.2603},{name:"Rosslare, Ierland",continent:"Europa",lat:52.2540,lng:-6.3380},{name:"Diamond Beach, IJsland",continent:"Europa",lat:63.8317,lng:-16.3796},{name:"Dolomieten, Italië",continent:"Europa",lat:46.4102,lng:11.8440},{name:"Etna, Italië",continent:"Europa",lat:37.7510,lng:14.9934},{name:"San Remo, Italië",continent:"Europa",lat:43.8159,lng:7.7760},{name:"Rome, Italië",continent:"Europa",lat:41.9028,lng:12.4964},{name:"Stelvio, Italië",continent:"Europa",lat:46.5289,lng:10.4544},{name:"Trapani, Italië",continent:"Europa",lat:38.0177,lng:12.5365},{name:"Venetië, Italië",continent:"Europa",lat:45.4408,lng:12.3155},{name:"Vesuvius, Italië",continent:"Europa",lat:40.8210,lng:14.4260},{name:"Zuid-Tirol, Italië",continent:"Europa",lat:46.7,lng:11.3},{name:"Gardameer, Italië",continent:"Europa",lat:45.5819,lng:10.6652},{name:"Assisi, Italië",continent:"Europa",lat:43.0707,lng:12.6196},{name:"Dubrovnik, Kroatië",continent:"Europa",lat:42.6507,lng:18.0944},{name:"Varaždin, Kroatië",continent:"Europa",lat:46.3044,lng:16.3369},{name:"Dalmatia, Kroatië",continent:"Europa",lat:43.5,lng:16.5},{name:"Poreč, Kroatië",continent:"Europa",lat:45.2268,lng:13.5960},{name:"Malta",continent:"Europa",lat:35.9375,lng:14.3754},{name:"Monaco",continent:"Europa",lat:43.7333,lng:7.4167},{name:"Rotterdam, Nederland",continent:"Europa",lat:51.9244,lng:4.4777},{name:"Gardnos, Noorwegen",continent:"Europa",lat:60.4070,lng:9.0900},{name:"Ifnefoss, Noorwegen",continent:"Europa",lat:60.2,lng:8.9},{name:"Lillehammer, Noorwegen",continent:"Europa",lat:61.1153,lng:10.4662},{name:"Norefjell, Noorwegen",continent:"Europa",lat:60.3880,lng:9.6540},{name:"Oslo, Noorwegen",continent:"Europa",lat:59.9139,lng:10.7522},{name:"Steindalfoss, Noorwegen",continent:"Europa",lat:62.1,lng:7.2},{name:"Wenen, Oostenrijk",continent:"Europa",lat:48.2082,lng:16.3738},{name:"Krakau, Polen",continent:"Europa",lat:50.0647,lng:19.9450},{name:"Zgorzelec, Polen",continent:"Europa",lat:51.1517,lng:15.0093},{name:"Madeira, Portugal",continent:"Europa",lat:32.7607,lng:-16.9595},{name:"Santiago do Cacém, Portugal",continent:"Europa",lat:38.0168,lng:-8.6968},{name:"Braga, Portugal",continent:"Europa",lat:41.5454,lng:-8.4265},{name:"Ponte de Lima, Portugal",continent:"Europa",lat:41.7674,lng:-8.5836},{name:"Boekarest, Roemenië",continent:"Europa",lat:44.4268,lng:26.1025},{name:"Sint-Petersburg, Rusland",continent:"Europa",lat:59.9343,lng:30.3351},{name:"Ben Nevis, Schotland",continent:"Europa",lat:56.7969,lng:-5.0035},{name:"Isle of Skye, Schotland",continent:"Europa",lat:57.2736,lng:-6.2149},{name:"Loch Ness, Schotland",continent:"Europa",lat:57.3229,lng:-4.4244},{name:"Lockerbie, Schotland",continent:"Europa",lat:55.1225,lng:-3.3555},{name:"Port Achan, Schotland",continent:"Europa",lat:56.7980,lng:-5.1300},{name:"Tighnabruaich, Schotland",continent:"Europa",lat:55.9240,lng:-5.2280},{name:"Barcelona, Spanje",continent:"Europa",lat:41.3851,lng:2.1734},{name:"Gerona, Spanje",continent:"Europa",lat:41.9794,lng:2.8214},{name:"Granada, Spanje",continent:"Europa",lat:37.1773,lng:-3.5986},{name:"Valga, Spanje",continent:"Europa",lat:42.0030,lng:-8.4080},{name:"Zaragoza, Spanje",continent:"Europa",lat:41.6488,lng:-0.8891},{name:"La Rioja, Spanje",continent:"Europa",lat:42.2871,lng:-2.5396},{name:"Praag, Tsjechië",continent:"Europa",lat:50.0755,lng:14.4378},{name:"Karlsbad, Tsjechië",continent:"Europa",lat:50.2319,lng:12.8716},{name:"Brechfa, Wales",continent:"Europa",lat:51.9260,lng:-4.1340},{name:"Brecon Beacons, Wales",continent:"Europa",lat:51.8836,lng:-3.4370},{name:"Veberöd, Zweden",continent:"Europa",lat:55.5860,lng:13.4980},
-  {name:"Bayou la Batre, Alabama",continent:"Amerika",lat:30.4035,lng:-88.2487},{name:"Robertsdale, Alabama",continent:"Amerika",lat:30.5560,lng:-87.7114},{name:"Lockesburg, Arkansas",continent:"Amerika",lat:33.9707,lng:-94.1716},{name:"Texarkana, Arkansas",continent:"Amerika",lat:33.4418,lng:-94.0477},{name:"Montréal, Canada",continent:"Amerika",lat:45.5017,lng:-73.5673},{name:"Niagara Falls, Canada",continent:"Amerika",lat:43.0896,lng:-79.0849},{name:"Cayman Eilanden",continent:"Amerika",lat:19.3133,lng:-81.2546},{name:"Cuba",continent:"Amerika",lat:21.5218,lng:-77.7812},{name:"Curaçao",continent:"Amerika",lat:12.1696,lng:-68.9900},{name:"Klein Curaçao",continent:"Amerika",lat:11.9830,lng:-68.6500},{name:"Dominicaanse Republiek",continent:"Amerika",lat:18.7357,lng:-70.1627},{name:"Lee, Florida",continent:"Amerika",lat:30.4201,lng:-83.2921},{name:"Alto, Georgia",continent:"Amerika",lat:34.4618,lng:-83.5705},{name:"Montego Bay, Jamaica",continent:"Amerika",lat:18.4762,lng:-77.8939},{name:"Ferryday, Louisiana",continent:"Amerika",lat:31.6285,lng:-91.5565},{name:"Gilliam, Louisiana",continent:"Amerika",lat:32.8243,lng:-93.8185},{name:"Biloxi, Mississippi",continent:"Amerika",lat:30.3960,lng:-88.8853},{name:"Natchez, Mississippi",continent:"Amerika",lat:31.5604,lng:-91.4032},{name:"Akumal, Mexico",continent:"Amerika",lat:20.3955,lng:-87.3139},{name:"Albuquerque, New Mexico",continent:"Amerika",lat:35.0844,lng:-106.6504},{name:"Santa Fe, New Mexico",continent:"Amerika",lat:35.6870,lng:-105.9378},{name:"New York City",continent:"Amerika",lat:40.7128,lng:-74.0060},{name:"Smoky Mountains, North Carolina",continent:"Amerika",lat:35.6532,lng:-83.5070},{name:"Waynesville, North Carolina",continent:"Amerika",lat:35.4885,lng:-82.9874},{name:"Elk City, Oklahoma",continent:"Amerika",lat:35.4118,lng:-99.4040},{name:"Oklahoma City, Oklahoma",continent:"Amerika",lat:35.4676,lng:-97.5164},{name:"Panama City",continent:"Amerika",lat:8.9936,lng:-79.5197},{name:"Charleston, South Carolina",continent:"Amerika",lat:32.7765,lng:-79.9311},{name:"Holly Hill, South Carolina",continent:"Amerika",lat:33.3254,lng:-80.4076},{name:"Gatlinburg, Tennessee",continent:"Amerika",lat:35.7143,lng:-83.5129},{name:"Kellerville, Texas",continent:"Amerika",lat:35.3534,lng:-100.3482},{name:"Wildorado, Texas",continent:"Amerika",lat:35.1793,lng:-102.1780},{name:"Brazilië",continent:"Amerika",lat:-14.2350,lng:-51.9253},{name:"Cusco, Peru",continent:"Amerika",lat:-13.5319,lng:-71.9675},{name:"Arequipa, Peru",continent:"Amerika",lat:-16.4090,lng:-71.5375}
+/* ═══════════════════════════ FRANÇAIS ═══════════════════════════ */
+fr: {
+  translation_notice:"Ceci est une traduction automatique. Merci de signaler toute erreur à la fabrique d'église.",
+  hero_label:"1664 · Bruxelles",
+  hero_title:"Notre-Dame\ndu Bon Secours",
+  hero_sub:"Paroisse néerlandophone dans le centre de Bruxelles",
+  hero_date:"Rue du Marché au Charbon 91 · 1000 Bruxelles",
+  hero_scroll:"Découvrir",
+  nav_agenda:"Agenda",
+  nav_gesch:"Histoire",
+  nav_samen:"Partenariats",
+  nav_voorbij:"Activités passées",
+  nav_huren:"Utilisation de l'église",
+  nav_steunen:"Soutenir",
+  nav_contact:"Contact",
+  footer_line1:"Notre-Dame du Bon Secours",
+  ag_title:"Agenda",
+  ag_intro:"Aperçu des prochaines célébrations et activités.",
+  ag_today:"Aujourd'hui",
+  ag_empty:"Aucune activité prévue dans les prochaines semaines.",
+  ag_leg_viering:"Célébration",
+  ag_leg_taize:"Taizé",
+  ag_leg_night:"Bon Secours by Night",
+  ag_leg_act:"Activité",
+  ev_sun_eucharistie:"Messe avec eucharistie",
+  ev_sun_woord:"Célébration de la Parole avec eucharistie",
+  ev_voorganger:"Célébrant",
+  ev_taize:"Prière dans l'esprit de Taizé",
+  ev_night:"Bon Secours by Night (18h–22h)",
+  ev_lgbtq: 'Célébration œcuménique de la communauté LGBTQ+',
+  ev_palm:"Dimanche des Rameaux",
+  ev_holy_thu:"Jeudi Saint – Repas de la Cène",
+  ev_good_fri:"Vendredi Saint – Vénération",
+  ev_vigil:"Veillée pascale",
+  ev_easter:"Célébration de Pâques",
+  ev_drempel:"L'Ascension de Notre Seigneur avec Célébration du Seuil",
+  ev_pinksterwake:"Veillée de Pentecôte (exceptionnellement pas de célébration LGBTQ+)",
+  ev_pinkster:"La Pentecôte - Célébration de la Parole avec eucharistie",
+  ev_14juni: "Pas de célébration (en raison de la messe télévisée à Evere : tout le monde est bienvenu - <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/tv-mis'>plus d’infos</a>)",
+  ev_concert_juni:"Concert baroque clavecin et saqueboute",
+  gesch_title:"Histoire du bâtiment",
+  gesch_intro:"L'église Notre-Dame du Bon Secours est l'un des édifices baroques les plus remarquables au cœur de Bruxelles.",
+  tl1_year:"1664",
+  tl1_text:"L'édifice baroque actuel est achevé, dédié à Notre-Dame du Bon Secours, situé Rue du Marché au Charbon, au cœur de la basse-ville bruxelloise.",
+  tl2_year:"XVIIe–XVIIIe siècle",
+  tl2_text:"Riche décoration intérieure. Le maître-autel impressionnant, conçu par Jan Pieter van Baurscheit l'Ancien, est installé. L'église devient un important lieu de pèlerinage.",
+  tl3_year:"XIXe siècle",
+  tl3_text:"Travaux de restauration et adaptations à l'esprit néogothique. L'église conserve son âme baroque.",
+  tl4_year:"XXe–XXIe siècle",
+  tl4_text:"Inclusion dans le projet 'Maîtres Flamands in Situ'. Aujourd'hui un lieu vivant pour la culture et la communauté.",
+  gesch_arch_title:"Architecture & Art",
+  gesch_arch:"L'intérieur est un véritable trésor d'art baroque. Le maître-autel de Jan Pieter van Baurscheit l'Ancien se distingue par son usage magistral du marbre et des dorures.",
+  gesch_visit_title:"Visite",
+  gesch_open:"Chaque jour : 9h00 – 17h00\nDimanche : 10h00 – 17h00",
+  gesch_free:"Entrée libre.",
+  gesch_masters:"Découvrir les Maîtres Flamands in Situ →",
+  gesch_maps:"Voir sur Google Maps →",
+  samen_title:"Partenariats",
+  samen_intro:"L'église est un lieu de rencontre pour diverses communautés et initiatives culturelles.",
+  p_parochie:"Paroisse Bon Secours",
+  p_parochie_desc:"La communauté paroissiale néerlandophone qui gère l'église.",
+  p_wereldwijd: "Dans le monde",
+  p_paulus:"Communautés Paulus",
+  p_paulus_desc:"Réseau de communautés de foi néerlandophones à Bruxelles.",
+  p_taize:"Taizé",
+  p_taize_desc:"Chaque troisième samedi du mois : soirée de prière ouverte à tous — sauf si une célébration chrétienne des Communautés Paulus a lieu ce jour-là. Voir l'<a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> pour toutes les infos. Contact : bep.saintandre@gmail.com",  
+  p_lgbtq:"Communauté LGBTQ+",
+  p_lgbtq_desc:"L'église accueille la communauté LGBTQ+ dans un esprit d'ouverture et d'inclusion. Chaque quatrième samedi du mois : un office œcuménique organisé par et pour la communauté LGBTQ — sauf si une célébration chrétienne des Communautés Paulus a lieu ce jour-là. Voir l'<a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> pour toutes les infos.",
+  p_klank:"La Semaine du Son",
+  p_klank_desc:"Festival musical annuel utilisant l'église comme joyau acoustique pour des productions musicales contemporaines et classiques.",
+  p_klank_link:"lasemaineduson.be →",
+  p_meesters:"Maîtres Flamands in Situ",
+  p_meesters_desc:"L'église fait partie de ce projet prestigieux qui met en valeur les œuvres baroques dans leur contexte original.",
+  p_meesters_link:"flemishmastersinsitu.com →",
+  voorbij_title:"Activités passées",
+  voorbij_muziek_title:"Musique",
+  voorbij_muziek_intro:"Concerts et événements musicaux ayant eu lieu dans l'église.",
+  voorbij_film_title:"Tournages",
+  voorbij_film_intro:"Tournages de films ayant eu lieu dans l'église.",
+  voorbij_klank_2026:"La Semaine du Son 2026 — Hoarses",
+voorbij_klank_2025:"La Semaine du Son 2025 — Rothko Chapel",
+voorbij_opnames_title:"Enregistrements musicaux dans l'église",
+voorbij_opnames_intro:"Enregistrements réalisés dans l'église.",
+voorbij_trois_fb:"Les Trois Cordes (Facebook)",
+voorbij_trois_yt:"Les Trois Cordes (YouTube)",
+  huren_title:"Utilisation de l'église",
+  huren_intro:"L'église Notre-Dame du Bon Secours offre un cadre historique unique pour votre événement. L'exceptionnelle architecture baroque et la situation centrale à Bruxelles rendent ce lieu inoubliable.",
+  huren_cap_title:"Capacité & Espace",
+  huren_cap:"L'église offre un espace pour les grands événements. L'acoustique est exceptionnelle pour les concerts et productions musicales.",
+  huren_gesch_title:"Convient pour",
+  huren_gesch:"Concerts · Récitals · Expositions · Tournages · Cérémonies · Événements d'entreprise",
+  huren_loc_title:"Localisation",
+  huren_loc:"Situé au centre de Bruxelles, près de la Grand-Place et des transports publics.",
+  huren_contact_title:"Demande",
+  huren_contact:"Pour les demandes et informations tarifaires, contactez-nous :",
+  huren_note:"L'église est un lieu de culte actif. Les demandes sont évaluées individuellement.",
+  steunen_title:"Soutenir le bâtiment",
+  steunen_intro:"Votre soutien contribue à la préservation de ce patrimoine baroque unique au cœur de Bruxelles. Chaque contribution, grande ou petite, est précieuse.",
+  steunen_bank:"Don par virement bancaire",
+  steunen_qr:"Ou scannez un code QR",
+  steunen_terminal:"Ou tapez votre carte bancaire sur le terminal de paiement dans l'église.",
+  steunen_q:"Pour questions : kerkfabriek@goedebijstand.brussels",
+  contact_title:"Contact",
+  contact_gebouw:"Gestion du bâtiment",
+  contact_secretariaat:"Secrétariat",
+  contact_addr:"Bijstandsstraat 5, 1000 Bruxelles",
+  contact_email_label:"E-mail :",
+  contact_msg:"Envoyer un e-mail →",
+  contact_maps:"Voir sur Google Maps →",
+  contact_open_title:"Heures d'ouverture",
+  contact_open:"Chaque jour : 9h00–17h00\nDimanche : 10h00–17h00",
+  sb_open:"Heures d'ouverture",
+  sb_open_body:"Chaque jour : 9h–17h\nDimanche : 10h–17h",
+  sb_addr:"Adresse",
+  sb_trans:"Transports en commun",
+  sb_trans_body:"Métro Beurs (lignes 1 & 5) · Tram 4 & 10",
+  sb_free:"Entrée libre",
+  sb_masters:"Maîtres Flamands in Situ",
+  sb_masters_link:"Plus d'info →",
+  rtl: false,
+},
+
+/* ═══════════════════════════ ENGLISH ═══════════════════════════ */
+en: {
+  translation_notice:"This is an auto-generated translation. Please notify the church board if you spot any errors.",
+  hero_label:"1664 · Brussels",
+  hero_title:"Our Lady\nof Good Help",
+  hero_sub:"Dutch-speaking parish in central Brussels",
+  hero_date:"Kolenmarkt 91 · 1000 Brussels",
+  hero_scroll:"Discover",
+  nav_agenda:"Agenda",
+  nav_gesch:"History",
+  nav_samen:"Partners",
+  nav_voorbij:"Past activities",
+  nav_huren:"Use of the church",
+  nav_steunen:"Support",
+  nav_contact:"Contact",
+  footer_line1:"Our Lady of Good Help",
+  ag_title:"Agenda",
+  ag_intro:"Overview of upcoming services and activities.",
+  ag_today:"Today",
+  ag_empty:"No activities planned in the coming weeks.",
+  ag_leg_viering:"Service",
+  ag_leg_taize:"Taizé",
+  ag_leg_night:"Good Help by Night",
+  ag_leg_act:"Activity",
+  ev_sun_eucharistie:"Mass with Eucharist",
+  ev_sun_woord:"Liturgy of the Word with Eucharist",
+  ev_voorganger:"Celebrant",
+  ev_taize:"Prayer in the spirit of Taizé",
+  ev_night:"Good Help by Night (6–10 PM)",
+  ev_lgbtq: 'Ecumenical celebration of the LGBTQ+ community',
+  ev_palm:"Palm Sunday – Service",
+  ev_holy_thu:"Holy Thursday – Seder meal",
+  ev_good_fri:"Good Friday – Veneration",
+  ev_vigil:"Easter Vigil",
+  ev_easter:"Easter service",
+  ev_drempel:"Our Lord's Ascension with Threshold Celebration",
+  ev_pinksterwake:"Pentecost Vigil (exceptionally no LGBTQ+ celebration)",
+  ev_pinkster:"Pentecost - Liturgy of the Word with Eucharist",
+  ev_14juni: "No celebration (due to the televised Mass in Evere: everyone is welcome - <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/tv-mis'>more info</a>)",
+  ev_concert_juni:"Baroque concert harpsichord and sackbut",
+  gesch_title:"History of the building",
+  gesch_intro:"The Church of Our Lady of Good Help is one of the most striking baroque churches in the heart of Brussels.",
+  tl1_year:"1664",
+  tl1_text:"The current baroque building is completed, dedicated to Our Lady of Good Help, located on the Kolenmarkt in the heart of Brussels' lower city.",
+  tl2_year:"17th–18th century",
+  tl2_text:"Rich interior decoration. The impressive high altar, designed by Jan Pieter van Baurscheit the Elder, is installed. The church becomes an important place of pilgrimage.",
+  tl3_year:"19th century",
+  tl3_text:"Restoration works and adaptations. The church retains its baroque soul despite changing fashions.",
+  tl4_year:"20th–21st century",
+  tl4_text:"Inclusion in the 'Flemish Masters in Situ' project. Today a vibrant place for culture and community.",
+  gesch_arch_title:"Architecture & Art",
+  gesch_arch:"The interior is a true treasury of baroque art. The high altar by Jan Pieter van Baurscheit the Elder stands out for its masterful use of marble and gilding.",
+  gesch_visit_title:"Visiting",
+  gesch_open:"Every day: 9:00 AM – 5:00 PM\nSunday: 10:00 AM – 5:00 PM",
+  gesch_free:"Free admission.",
+  gesch_masters:"Discover the Flemish Masters in Situ →",
+  gesch_maps:"View on Google Maps →",
+  samen_title:"Partners",
+  samen_intro:"The church is a meeting place for diverse communities and cultural initiatives.",
+  p_parochie:"Parish of Good Help",
+  p_parochie_desc:"The Dutch-speaking parish community that manages the church and organises weekly services.",
+  p_kerkfabriek:"Church Board",
+p_kerkfabriek_desc:"The church board manages the building's administration, finances and heritage.",
+p_parochieploeg:"Parish Team",
+p_parochieploeg_desc:"The parish team consists of volunteers who support the parish's activities, from organising services to welcoming visitors.",
+p_wereldwijd: "Worldwide",
+  p_sacramenten:"Sacraments",
+  p_paulus:"Paulus Communities",
+  p_paulus_desc:"Network of Dutch-speaking faith communities in Brussels. Good Help is one of the anchor points.",
+  p_taize:"Taizé",
+  p_taize_desc:"Every third Saturday of the month: an evening of prayer open to everyone — provided no Christian service of the Paulus Communities takes place that day. See the <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> for full details. Contact: bep.saintandre@gmail.com",
+  p_lgbtq:"LGBTQ+ Community",
+  p_lgbtq_desc:"The church welcomes the LGBTQ+ community and strives to be an open and inclusive space for everyone. Every fourth Saturday of the month: an ecumenical service by and for the LGBTQ community — provided no Christian service of the Paulus Communities takes place that day. See the <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> for full details.",  p_klank:"Week of Sound",
+  p_klank_desc:"Annual music festival using the church as an acoustic gem for contemporary and classical music productions.",
+  p_klank_link:"lasemaineduson.be →",
+  p_meesters:"Flemish Masters in Situ",
+  p_meesters_desc:"The church is part of this prestigious project opening baroque artworks in their original context to the public.",
+  p_meesters_link:"flemishmastersinsitu.com →",
+  voorbij_title:"Past activities",
+  voorbij_muziek_title:"Music",
+  voorbij_muziek_intro:"Concerts and musical events that took place in the church.",
+  voorbij_film_title:"Film shoots",
+  voorbij_film_intro:"Film shoots that took place in the church.",
+  voorbij_klank_2026:"Week of Sound 2026 — Hoarses",
+voorbij_klank_2025:"Week of Sound 2025 — Rothko Chapel",
+voorbij_opnames_title:"Music recordings in the church",
+voorbij_opnames_intro:"Recordings made in the church.",
+voorbij_trois_fb:"Les Trois Cordes (Facebook)",
+voorbij_trois_yt:"Les Trois Cordes (YouTube)",
+  huren_title:"Use of the church",
+  huren_intro:"The Church of Our Lady of Good Help offers a unique historic setting for your event. The exceptional baroque architecture and central Brussels location make this an unforgettable venue.",
+  huren_cap_title:"Capacity & Space",
+  huren_cap:"The church offers space for large events. The acoustics are exceptionally suited to concerts, recitals and musical productions.",
+  huren_gesch_title:"Suitable for",
+  huren_gesch:"Concerts · Recitals · Exhibitions · Film shoots · Ceremonial events · Corporate events",
+  huren_loc_title:"Location",
+  huren_loc:"Centrally located in Brussels, near the Grand Place and public transport.",
+  huren_contact_title:"Enquiry",
+  huren_contact:"For enquiries and information on rates, please get in touch:",
+  huren_note:"The church is an active place of worship. Requests are evaluated individually.",
+  steunen_title:"Support the building",
+  steunen_intro:"Your support contributes to the preservation of this unique baroque heritage in the heart of Brussels. Every contribution, large or small, is valued.",
+  steunen_bank:"Donate by bank transfer",
+  steunen_qr:"Or scan a QR code",
+  steunen_terminal:"Or tap your bank card on the payment terminal in the church.",
+  steunen_q:"For questions: kerkfabriek@goedebijstand.brussels",
+  contact_title:"Contact",
+  contact_gebouw:"Building management",
+  contact_secretariaat:"Secretariat",
+  contact_addr:"Bijstandsstraat 5, 1000 Brussels",
+  contact_email_label:"Email:",
+  contact_msg:"Send an email →",
+  contact_maps:"View on Google Maps →",
+  contact_open_title:"Church opening hours",
+  contact_open:"Every day: 9:00 AM–5:00 PM\nSunday: 10:00 AM–5:00 PM",
+  sb_open:"Opening hours",
+  sb_open_body:"Every day: 9 AM–5 PM\nSunday: 10 AM–5 PM",
+  sb_addr:"Address",
+  sb_trans:"Public transport",
+  sb_trans_body:"Metro Beurs (lines 1 & 5) · Tram 4 & 10",
+  sb_free:"Free admission",
+  sb_masters:"Flemish Masters in Situ",
+  sb_masters_link:"More info →",
+  rtl: false,
+},
+
+/* ═══════════════════════════ DEUTSCH ═══════════════════════════ */
+de: {
+  translation_notice:"Dies ist eine automatische Übersetzung. Bitte teilen Sie der Kirchenfabrik Fehler mit.",
+  hero_label:"1664 · Brüssel",
+  hero_title:"Unsere Liebe Frau\nvom Guten Beistand",
+  hero_sub:"Niederländischsprachige Pfarrei im Zentrum von Brüssel",
+  hero_date:"Kolenmarkt 91 · 1000 Brüssel",
+  hero_scroll:"Entdecken",
+  nav_agenda:"Programm",
+  nav_gesch:"Geschichte",
+  nav_samen:"Kooperationen",
+  nav_voorbij:"Vergangene Aktivitäten",
+  nav_huren:"Nutzung der Kirche",
+  nav_steunen:"Unterstützen",
+  nav_contact:"Kontakt",
+  footer_line1:"Unsere Liebe Frau vom Guten Beistand",
+  ag_title:"Programm",
+  ag_intro:"Übersicht der kommenden Gottesdienste und Veranstaltungen.",
+  ag_today:"Heute",
+  ag_empty:"Keine Veranstaltungen in den kommenden Wochen geplant.",
+  ag_leg_viering:"Gottesdienst",
+  ag_leg_taize:"Taizé",
+  ag_leg_night:"Guter Beistand by Night",
+  ag_leg_act:"Veranstaltung",
+  ev_sun_eucharistie:"Messe mit Eucharistie",
+  ev_sun_woord:"Wortgottesdienst mit Eucharistie",
+  ev_voorganger:"Zelebrant",
+  ev_taize:"Gebet im Geist von Taizé",
+  ev_night:"Guter Beistand by Night (18–22 Uhr)",
+  ev_lgbtq: 'Ökumenischer Gottesdienst der LGBTQ+-Gemeinschaft',
+  ev_palm:"Palmsonntag – Gottesdienst",
+  ev_holy_thu:"Gründonnerstag – Sedermahlzeit",
+  ev_good_fri:"Karfreitag – Kreuzverehrung",
+  ev_vigil:"Osternacht",
+  ev_easter:"Ostergottesdienst",
+  ev_drempel:"Die Himmelfahrt unseres Herrn mit Schwellenfeier",
+  ev_pinksterwake:"Pfingstnacht (ausnahmsweise keine LGBTQ+-Feier)",
+  ev_pinkster:"Pfingsten - Wortgottesdienst mit Eucharistie",
+  ev_14juni: "Keine Feier (wegen der Fernsehmesse in Evere: alle sind willkommen – <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/tv-mis'>mehr Infos</a>)",
+  ev_concert_juni:"Barockkonzert Cembalo und Posaune",
+  gesch_title:"Geschichte des Gebäudes",
+  gesch_intro:"Die Kirche Unsere Liebe Frau vom Guten Beistand ist eines der markantesten Barockkirchen im Herzen von Brüssel.",
+  tl1_year:"1664",
+  tl1_text:"Das heutige Barockgebäude wird fertiggestellt und ist Unserer Lieben Frau vom Guten Beistand geweiht. Es liegt am Kolenmarkt im Herzen der Brüsseler Unterstadt.",
+  tl2_year:"17.–18. Jahrhundert",
+  tl2_text:"Reiche Innenausstattung. Der imposante Hochaltar, entworfen von Jan Pieter van Baurscheit dem Älteren, wird aufgestellt. Die Kirche wird ein bedeutender Wallfahrtsort.",
+  tl3_year:"19. Jahrhundert",
+  tl3_text:"Restaurierungsarbeiten und Anpassungen an den neugotischen Zeitgeist. Die Kirche bewahrt ihre barocke Seele trotz wechselnder Moden.",
+  tl4_year:"20.–21. Jahrhundert",
+  tl4_text:"Aufnahme in das Projekt 'Flämische Meister in Situ'. Heute ein lebendiger Ort für Kultur und Gemeinschaft.",
+  gesch_arch_title:"Architektur & Kunst",
+  gesch_arch:"Das Innere der Kirche ist eine wahre Schatzkammer barocker Kunst. Der Hochaltar von Jan Pieter van Baurscheit dem Älteren besticht durch seinen meisterhaften Einsatz von Marmor und Vergoldung.",
+  gesch_visit_title:"Besuch",
+  gesch_open:"Täglich: 9:00 – 17:00 Uhr\nSonntag: 10:00 – 17:00 Uhr",
+  gesch_free:"Eintritt frei.",
+  gesch_masters:"Die Flämischen Meister in Situ entdecken →",
+  gesch_maps:"Auf Google Maps ansehen →",
+  samen_title:"Kooperationen",
+  samen_intro:"Die Kirche ist ein Begegnungsort für verschiedene Gemeinschaften und kulturelle Initiativen.",
+  p_parochie:"Pfarrgemeinde Guter Beistand",
+  p_parochie_desc:"Die niederländischsprachige Pfarrgemeinde, die die Kirche verwaltet und wöchentliche Gottesdienste organisiert.",
+  p_wereldwijd: "Weltweit",
+  p_paulus:"Paulus-Gemeinschaften",
+  p_paulus_desc:"Netzwerk niederländischsprachiger Glaubensgemeinschaften in Brüssel. Der Gute Beistand ist einer der Ankerpunkte.",
+  p_taize:"Taizé",
+  p_taize_desc:"Jeden dritten Samstag im Monat: ein Gebetsabend im Geist von Taizé, offen für alle — sofern an diesem Tag kein christlicher Gottesdienst der Paulus-Gemeinschaften stattfindet. Siehe <a href='#' onclick='go(\"agenda\");return false;'>Programm</a> für alle Infos. Kontakt: bep.saintandre@gmail.com ",
+  p_lgbtq:"LGBTQ+-Gemeinschaft",
+  p_lgbtq_desc:"Die Kirche heißt die LGBTQ+-Gemeinschaft willkommen und strebt nach einem offenen und inklusiven Raum für alle. Jeden vierten Samstag im Monat: ein ökumenischer Gottesdienst von und für die LGBTQ-Gemeinschaft — sofern an diesem Tag kein christlicher Gottesdienst der Paulus-Gemeinschaften stattfindet. Siehe <a href='#' onclick='go(\"agenda\");return false;'>Programm</a> für alle Infos.",
+  p_klank:"Woche des Klangs",
+  p_klank_desc:"Jährliches Musikfestival, das die Kirche als akustisches Juwel für zeitgenössische und klassische Musikproduktionen nutzt.",
+  p_klank_link:"lasemaineduson.be →",
+  p_meesters:"Flämische Meister in Situ",
+  p_meesters_desc:"Die Kirche ist Teil dieses renommierten Projekts, das barocke Kunstwerke in ihrem ursprünglichen Kontext der Öffentlichkeit zugänglich macht.",
+  p_meesters_link:"flemishmastersinsitu.com →",
+  voorbij_title:"Vergangene Aktivitäten",
+  voorbij_muziek_title:"Musik",
+  voorbij_muziek_intro:"Konzerte und Musikveranstaltungen in der Kirche.",
+  voorbij_film_title:"Filmaufnahmen",
+  voorbij_film_intro:"Filmaufnahmen in der Kirche.",
+  voorbij_klank_2026:"Woche des Klangs 2026 — Hoarses",
+voorbij_klank_2025:"Woche des Klangs 2025 — Rothko Chapel",
+voorbij_opnames_title:"Musikaufnahmen in der Kirche",
+voorbij_opnames_intro:"Aufnahmen in der Kirche.",
+voorbij_trois_fb:"Les Trois Cordes (Facebook)",
+voorbij_trois_yt:"Les Trois Cordes (YouTube)",
+  huren_title:"Die Nutzung der Kirche",
+  huren_intro:"Die Kirche Unsere Liebe Frau vom Guten Beistand bietet einen einzigartigen historischen Rahmen für Ihre Veranstaltung. Die außergewöhnliche Barockarchitektur und die zentrale Lage in Brüssel machen diesen Ort unvergesslich.",
+  huren_cap_title:"Kapazität & Raum",
+  huren_cap:"Die Kirche bietet Platz für große Veranstaltungen. Die Akustik eignet sich hervorragend für Konzerte, Rezitale und Musikproduktionen.",
+  huren_gesch_title:"Geeignet für",
+  huren_gesch:"Konzerte · Rezitale · Ausstellungen · Filmaufnahmen · Zeremonielle Veranstaltungen · Firmenevents",
+  huren_loc_title:"Lage",
+  huren_loc:"Zentral in Brüssel gelegen, nahe dem Großen Markt und öffentlichen Verkehrsmitteln.",
+  huren_contact_title:"Anfrage",
+  huren_contact:"Für Anfragen und Informationen zu Tarifen wenden Sie sich bitte an:",
+  huren_note:"Die Kirche ist ein aktiver Sakralbau. Anfragen werden individuell beurteilt.",
+  steunen_title:"Das Gebäude unterstützen",
+  steunen_intro:"Mit Ihrer Unterstützung tragen Sie zur Erhaltung dieses einzigartigen Barockdenkmals im Herzen von Brüssel bei. Jeder Beitrag, groß oder klein, ist wertvoll.",
+  steunen_bank:"Spenden per Überweisung",
+  steunen_qr:"Oder scannen Sie einen QR-Code",
+  steunen_terminal:"Oder tippen Sie Ihre Bankkarte auf das Zahlungsterminal in der Kirche.",
+  steunen_q:"Bei Fragen: kerkfabriek@goedebijstand.brussels",
+  contact_title:"Kontakt",
+  contact_gebouw:"Gebäudeverwaltung",
+  contact_secretariaat:"Sekretariat",
+  contact_addr:"Bijstandsstraat 5, 1000 Brüssel",
+  contact_email_label:"E-Mail:",
+  contact_msg:"E-Mail senden →",
+  contact_maps:"Auf Google Maps ansehen →",
+  contact_open_title:"Öffnungszeiten der Kirche",
+  contact_open:"Täglich: 9:00–17:00 Uhr\nSonntag: 10:00–17:00 Uhr",
+  sb_open:"Öffnungszeiten",
+  sb_open_body:"Täglich: 9–17 Uhr\nSonntag: 10–17 Uhr",
+  sb_addr:"Adresse",
+  sb_trans:"Öffentliche Verkehrsmittel",
+  sb_trans_body:"Metro Beurs (Linien 1 & 5) · Tram 4 & 10",
+  sb_free:"Eintritt frei",
+  sb_masters:"Flämische Meister in Situ",
+  sb_masters_link:"Mehr Infos →",
+  rtl: false,
+},
+
+/* ═══════════════════════════ ESPAÑOL ═══════════════════════════ */
+es: {
+  translation_notice:"Esta es una traducción automática. Le rogamos que comunique cualquier error a la junta parroquial.",
+  hero_label:"1664 · Bruselas",
+  hero_title:"Nuestra Señora\ndel Buen Socorro",
+  hero_sub:"Parroquia neerlandófona en el centro de Bruselas",
+  hero_date:"Kolenmarkt 91 · 1000 Bruselas",
+  hero_scroll:"Descubrir",
+  nav_agenda:"Agenda",
+  nav_gesch:"Historia",
+  nav_samen:"Colaboraciones",
+  nav_voorbij:"Actividades pasadas",
+  nav_huren:"Uso de la iglesia",
+  nav_steunen:"Apoyar",
+  nav_contact:"Contacto",
+  footer_line1:"Nuestra Señora del Buen Socorro",
+  ag_title:"Agenda",
+  ag_intro:"Resumen de las próximas celebraciones y actividades.",
+  ag_today:"Hoy",
+  ag_empty:"No hay actividades previstas en las próximas semanas.",
+  ag_leg_viering:"Celebración",
+  ag_leg_taize:"Taizé",
+  ag_leg_night:"Buen Socorro by Night",
+  ag_leg_act:"Actividad",
+  ev_sun_eucharistie:"Misa con eucaristía",
+  ev_sun_woord:"Liturgia de la Palabra con eucaristía",
+  ev_voorganger:"Celebrante",
+  ev_taize:"Oración en el espíritu de Taizé",
+  ev_night:"Buen Socorro by Night (18h–22h)",
+  ev_lgbtq: 'Celebración ecuménica de la comunidad LGBTQ+',
+  ev_palm:"Domingo de Ramos – Celebración",
+  ev_holy_thu:"Jueves Santo – Cena pascual",
+  ev_good_fri:"Viernes Santo – Veneración",
+  ev_vigil:"Vigilia pascual",
+  ev_easter:"Celebración de Pascua",
+  ev_drempel:"La Ascensión de Nuestro Señor con Celebración del Umbral",
+  ev_pinksterwake:"Vigilia de Pentecostés (excepcionalmente sin celebración LGBTQ+)",
+  ev_pinkster:"Pentecostés - Liturgia de la Palabra con eucaristía ",
+  ev_14juni: "No habrá celebración (debido a la misa televisada en Evere: todos son bienvenidos - <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/tv-mis'>más información</a>)",
+  ev_concert_juni:"Concierto barroco clavicémbalo y sacabuche",
+  gesch_title:"Historia del edificio",
+  gesch_intro:"La iglesia de Nuestra Señora del Buen Socorro es uno de los edificios barrocos más destacados en el corazón de Bruselas.",
+  tl1_year:"1664",
+  tl1_text:"Se termina el actual edificio barroco, dedicado a Nuestra Señora del Buen Socorro, ubicado en el Kolenmarkt, en el corazón de la ciudad baja de Bruselas.",
+  tl2_year:"Siglos XVII–XVIII",
+  tl2_text:"Rica decoración interior. Se instala el imponente altar mayor, diseñado por Jan Pieter van Baurscheit el Viejo. La iglesia se convierte en un importante lugar de peregrinación.",
+  tl3_year:"Siglo XIX",
+  tl3_text:"Trabajos de restauración y adaptaciones al espíritu neogótico. La iglesia conserva su alma barroca pese a las modas cambiantes.",
+  tl4_year:"Siglos XX–XXI",
+  tl4_text:"Incorporación al proyecto 'Maestros Flamencos in Situ'. Hoy es un lugar vivo de cultura y comunidad.",
+  gesch_arch_title:"Arquitectura & Arte",
+  gesch_arch:"El interior es un auténtico tesoro de arte barroco. El altar mayor de Jan Pieter van Baurscheit el Viejo destaca por su magistral uso del mármol y el dorado.",
+  gesch_visit_title:"Visita",
+  gesch_open:"Cada día: 9:00 – 17:00 h\nDomingo: 10:00 – 17:00 h",
+  gesch_free:"Entrada gratuita.",
+  gesch_masters:"Descubrir los Maestros Flamencos in Situ →",
+  gesch_maps:"Ver en Google Maps →",
+  samen_title:"Colaboraciones",
+  samen_intro:"La iglesia es un lugar de encuentro para diversas comunidades e iniciativas culturales.",
+  p_parochie:"Parroquia Buen Socorro",
+  p_parochie_desc:"La comunidad parroquial neerlandófona que gestiona la iglesia y organiza celebraciones semanales.",
+  p_wereldwijd: "Mundial",
+  p_paulus:"Comunidades Paulus",
+  p_paulus_desc:"Red de comunidades de fe neerlandófonas en Bruselas. Buen Socorro es uno de los puntos de referencia.",
+  p_taize:"Taizé",
+  p_taize_desc:"Cada tercer sábado del mes: una velada de oración abierta a todos — siempre que ese día no tenga lugar una celebración cristiana de las Comunidades Paulus. Consulte la <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> para más información. Contacto: bep.saintandre@gmail.com",
+  p_lgbtq:"Comunidad LGBTQ+",
+  p_lgbtq_desc:"La iglesia acoge a la comunidad LGBTQ+ y aspira a ser un espacio abierto e inclusivo para todos. Cada cuarto sábado del mes: un servicio ecuménico organizado por y para la comunidad LGBTQ+ — siempre que ese día no tenga lugar una celebración cristiana de las Comunidades Paulus. Consulte la <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> para más información.",
+  p_klank:"Semana del Sonido",
+  p_klank_desc:"Festival musical anual que utiliza la iglesia como joya acústica para producciones musicales contemporáneas y clásicas.",
+  p_klank_link:"lasemaineduson.be →",
+  p_meesters:"Maestros Flamencos in Situ",
+  p_meesters_desc:"La iglesia forma parte de este prestigioso proyecto que abre al público las obras barrocas en su contexto original.",
+  p_meesters_link:"flemishmastersinsitu.com →",
+  voorbij_title:"Actividades pasadas",
+  voorbij_muziek_title:"Música",
+  voorbij_muziek_intro:"Conciertos y eventos musicales celebrados en la iglesia.",
+  voorbij_film_title:"Rodajes",
+  voorbij_film_intro:"Rodajes de películas realizados en la iglesia.",
+  voorbij_klank_2026:"Semana del Sonido 2026 — Hoarses",
+voorbij_klank_2025:"Semana del Sonido 2025 — Rothko Chapel",
+voorbij_opnames_title:"Grabaciones musicales en la iglesia",
+voorbij_opnames_intro:"Grabaciones realizadas en la iglesia.",
+voorbij_trois_fb:"Les Trois Cordes (Facebook)",
+voorbij_trois_yt:"Les Trois Cordes (YouTube)",
+  huren_title:"El uso de la iglesia",
+  huren_intro:"La iglesia de Nuestra Señora del Buen Socorro ofrece un marco histórico único para su evento. La excepcional arquitectura barroca y la ubicación central en Bruselas hacen de este lugar un espacio inolvidable.",
+  huren_cap_title:"Capacidad & Espacio",
+  huren_cap:"La iglesia ofrece espacio para grandes eventos. La acústica es excepcionalmente adecuada para conciertos, recitales y producciones musicales.",
+  huren_gesch_title:"Adecuado para",
+  huren_gesch:"Conciertos · Recitales · Exposiciones · Rodajes · Eventos ceremoniales · Eventos corporativos",
+  huren_loc_title:"Ubicación",
+  huren_loc:"Situado en el centro de Bruselas, cerca de la Grand Place y el transporte público.",
+  huren_contact_title:"Solicitud",
+  huren_contact:"Para consultas e información sobre tarifas, póngase en contacto:",
+  huren_note:"La iglesia es un lugar de culto activo. Las solicitudes se evalúan individualmente.",
+  steunen_title:"Apoyar el edificio",
+  steunen_intro:"Su apoyo contribuye a la preservación de este patrimonio barroco único en el corazón de Bruselas. Cada contribución, grande o pequeña, es valiosa.",
+  steunen_bank:"Donar mediante transferencia bancaria",
+  steunen_qr:"O escanee un código QR",
+  steunen_terminal:"O utilice su tarjeta bancaria en el terminal de pago de la iglesia.",
+  steunen_q:"Para preguntas: kerkfabriek@goedebijstand.brussels",
+  contact_title:"Contacto",
+  contact_gebouw:"Gestión del edificio",
+  contact_secretariaat:"Secretaría",
+  contact_addr:"Bijstandsstraat 5, 1000 Bruselas",
+  contact_email_label:"Correo electrónico:",
+  contact_msg:"Enviar un correo →",
+  contact_maps:"Ver en Google Maps →",
+  contact_open_title:"Horario de apertura",
+  contact_open:"Cada día: 9:00–17:00 h\nDomingo: 10:00–17:00 h",
+  sb_open:"Horario de apertura",
+  sb_open_body:"Cada día: 9–17 h\nDomingo: 10–17 h",
+  sb_addr:"Dirección",
+  sb_trans:"Transporte público",
+  sb_trans_body:"Metro Beurs (líneas 1 & 5) · Tranvía 4 & 10",
+  sb_free:"Entrada gratuita",
+  sb_masters:"Maestros Flamencos in Situ",
+  sb_masters_link:"Más información →",
+  rtl: false,
+},
+
+/* ═══════════════════════════ العربية ═══════════════════════════ */
+ar: {
+  translation_notice:"هذه ترجمة آلية. يُرجى إبلاغ مجلس الكنيسة عن أي أخطاء تلاحظها.",
+  hero_label:"١٦٦٤ · بروكسل",
+  hero_title:"سيدتنا العذراء\nذات المعونة الصالحة",
+  hero_sub:"رعية ناطقة بالهولندية في وسط بروكسل",
+  hero_date:"كولنمارخت ٩١ · بروكسل ١٠٠٠",
+  hero_scroll:"اكتشف",
+  nav_agenda:"جدول الأنشطة",
+  nav_gesch:"التاريخ",
+  nav_samen:"الشراكات",
+  nav_voorbij:"أنشطة سابقة",
+  nav_huren:"استخدام الكنيسة",
+  nav_steunen:"الدعم",
+  nav_contact:"التواصل",
+  footer_line1:"سيدتنا العذراء ذات المعونة الصالحة",
+  ag_title:"جدول الأنشطة",
+  ag_intro:"نظرة عامة على القداسات والأنشطة القادمة.",
+  ag_today:"اليوم",
+  ag_empty:"لا توجد أنشطة مخططة في الأسابيع القادمة.",
+  ag_leg_viering:"قداس",
+  ag_leg_taize:"تيزيه",
+  ag_leg_night:"الكنيسة ليلاً",
+  ag_leg_act:"نشاط",
+  ev_sun_eucharistie:"قداس مع الإفخارستيا",
+  ev_sun_woord:"خدمة الكلمة مع الإفخارستيا",
+  ev_voorganger:"المحتفل",
+  ev_sat:"قداس – فينيس تيريه",
+  ev_taize:"صلاة على روح تيزيه",
+  ev_night:"الكنيسة ليلاً (١٨–٢٢)",
+  ev_lgbtq: 'احتفال مسكوني لمجتمع LGBTQ+',
+  ev_palm:"أحد الشعانين",
+  ev_holy_thu:"خميس الأسرار – عشاء الفصح",
+  ev_good_fri:"الجمعة العظيمة – تبجيل الصليب",
+  ev_vigil:"سهرة القيامة",
+  ev_easter:"قداس القيامة",
+  ev_drempel:"عيد صعود ربنا يسوع المسيح مع احتفالات العتبة",
+  ev_pinksterwake:"سهرة العنصرة (استثنائياً بدون احتفال LGBTQ+)",
+  ev_pinkster:"قداس العنصرة",
+  ev_14juni: "لن يكون هناك احتفال (بسبب القداس المتلفز في إيفير: الجميع مرحب بهم - <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/tv-mis'>مزيد من المعلومات</a>)",
+  ev_concert_juni:"حفل باروكي — هاربسيكورد وساكبوت",
+  gesch_title:"تاريخ المبنى",
+  gesch_intro:"كنيسة سيدتنا العذراء ذات المعونة الصالحة من أبرز الكنائس الباروكية في قلب بروكسل.",
+  tl1_year:"١٦٦٤",
+  tl1_text:"اكتمل بناء المبنى الباروكي الحالي، المكرَّس لسيدتنا العذراء ذات المعونة الصالحة، في كولنمارخت بقلب المدينة السفلى في بروكسل.",
+  tl2_year:"القرنان ١٧–١٨",
+  tl2_text:"زُيِّن الداخل بديكور باذخ. نُصب المذبح الرئيسي الرائع من تصميم يان بيتر فان بورشايت الأكبر. أصبحت الكنيسة مزاراً دينياً مهماً.",
+  tl3_year:"القرن ١٩",
+  tl3_text:"أعمال ترميم وتكيّف مع الروح القوطية الجديدة. احتفظت الكنيسة بروحها الباروكية رغم تغيّر الأذواق.",
+  tl4_year:"القرنان ٢٠–٢١",
+  tl4_text:"الانضمام إلى مشروع 'الأساتذة الفلاماندييون في الموقع'. اليوم مكان حيوي للثقافة والمجتمع.",
+  gesch_arch_title:"العمارة والفن",
+  gesch_arch:"داخل الكنيسة كنز حقيقي من الفن الباروكي. يتميز المذبح الرئيسي ليان بيتر فان بورشايت الأكبر باستخدامه الماهر للرخام والتذهيب.",
+  gesch_visit_title:"الزيارة",
+  gesch_open:"يومياً: ٩:٠٠ – ١٧:٠٠\nالأحد: ١٠:٠٠ – ١٧:٠٠",
+  gesch_free:"الدخول مجاني.",
+  gesch_masters:"اكتشف الأساتذة الفلاماندييون في الموقع ←",
+  gesch_maps:"عرض على خرائط غوغل ←",
+  samen_title:"الشراكات",
+  samen_intro:"الكنيسة مكان لقاء لمجتمعات متنوعة ومبادرات ثقافية.",
+  p_parochie:"رعية المعونة الصالحة",
+  p_parochie_desc:"المجتمع الرعوي الناطق بالهولندية الذي يدير الكنيسة وينظم قداسات أسبوعية.",
+  p_wereldwijd: "في العالم",
+  p_paulus:"مجتمعات بولس",
+  p_paulus_desc:"شبكة مجتمعات إيمانية ناطقة بالهولندية في بروكسل.",
+  p_taize:"تيزيه",
+  p_taize_desc:"كل ثالث سبت من الشهر: أمسية صلاة بروح تايزي، مفتوحة للجميع — ما لم تُقم في ذلك اليوم احتفالية مسيحية لجماعات بولس. راجع <a href='#' onclick='go(\"agenda\");return false;'>البرنامج</a> للحصول على جميع المعلومات. للتواصل: bep.saintandre@gmail.com ",
+  p_lgbtq:"مجتمع LGBTQ+",
+p_lgbtq_desc:"ترحّب الكنيسة بمجتمع LGBTQ+ وتسعى لأن تكون فضاءً مفتوحاً وشاملاً للجميع. كل سبت رابع من الشهر: احتفال مسكوني من مجتمع LGBTQ+ ولأجله — ما لم تُقَم في ذلك اليوم احتفالية مسيحية لمجتمعات بولس. راجع <a href='#' onclick='go(\"agenda\");return false;'>جدول الأنشطة</a> للمزيد من المعلومات.",
+  p_klank:"أسبوع الصوت",
+  p_klank_desc:"مهرجان موسيقي سنوي يستخدم الكنيسة كجوهرة صوتية للإنتاجات الموسيقية المعاصرة والكلاسيكية.",
+  p_klank_link:"lasemaineduson.be ←",
+  p_meesters:"الأساتذة الفلاماندييون في الموقع",
+  p_meesters_desc:"الكنيسة جزء من هذا المشروع المرموق الذي يتيح للجمهور الاطلاع على الأعمال الباروكية في سياقها الأصلي.",
+  p_meesters_link:"flemishmastersinsitu.com ←",
+  voorbij_title:"أنشطة سابقة",
+  voorbij_muziek_title:"موسيقى",
+  voorbij_muziek_intro:"حفلات موسيقية وفعاليات أُقيمت في الكنيسة.",
+  voorbij_film_title:"تصوير أفلام",
+  voorbij_film_intro:"تصوير أفلام جرى في الكنيسة.",
+  voorbij_klank_2026:"أسبوع الصوت 2026 — Hoarses",
+voorbij_klank_2025:"أسبوع الصوت 2025 — Rothko Chapel",
+voorbij_opnames_title:"تسجيلات موسيقية في الكنيسة",
+voorbij_opnames_intro:"تسجيلات أُنجزت داخل الكنيسة.",
+voorbij_trois_fb:"Les Trois Cordes (فيسبوك)",
+voorbij_trois_yt:"Les Trois Cordes (يوتيوب)",
+  huren_title:"ااستخدام الكنيسة",
+  huren_intro:"توفر كنيسة سيدتنا العذراء ذات المعونة الصالحة إطاراً تاريخياً فريداً لفعالياتكم. العمارة الباروكية الاستثنائية والموقع المركزي في بروكسل يجعلان من هذا المكان حدثاً لا يُنسى.",
+  huren_cap_title:"السعة والمساحة",
+  huren_cap:"توفر الكنيسة مساحة للفعاليات الكبيرة. الصوتيات مناسبة بشكل استثنائي للحفلات والعروض الموسيقية.",
+  huren_gesch_title:"مناسب لـ",
+  huren_gesch:"الحفلات · الريسيتالات · المعارض · التصوير السينمائي · المناسبات الاحتفالية · الفعاليات المؤسسية",
+  huren_loc_title:"الموقع",
+  huren_loc:"موقع مركزي في بروكسل، بالقرب من الساحة الكبرى ووسائل النقل العام.",
+  huren_contact_title:"الطلب",
+  huren_contact:"للاستفسارات والمعلومات حول الأسعار، يُرجى التواصل:",
+  huren_note:"الكنيسة مكان عبادة نشط. يُقيَّم كل طلب بشكل فردي.",
+  steunen_title:"دعم المبنى",
+  steunen_intro:"بدعمكم تساهمون في الحفاظ على هذا الإرث الباروكي الفريد في قلب بروكسل. كل مساهمة، كبيرة أو صغيرة، ذات قيمة.",
+  steunen_bank:"تبرع بالتحويل البنكي",
+  steunen_qr:"أو امسح رمز QR",
+  steunen_terminal:"أو استخدم بطاقتك المصرفية على جهاز الدفع داخل الكنيسة.",
+  steunen_q:"kerkfabriek@goedebijstand.brussels",
+  contact_title:"التواصل",
+  contact_gebouw:"إدارة المبنى",
+  contact_secretariaat:"السكرتارية",
+  contact_addr:"بيستاندسستراات ٥، بروكسل ١٠٠٠",
+  contact_email_label:"البريد الإلكتروني:",
+  contact_msg:"أرسل بريداً إلكترونياً ←",
+  contact_maps:"عرض على خرائط غوغل ←",
+  contact_open_title:"ساعات فتح الكنيسة",
+  contact_open:"يومياً: ٩:٠٠–١٧:٠٠\nالأحد: ١٠:٠٠–١٧:٠٠",
+  sb_open:"ساعات الفتح",
+  sb_open_body:"يومياً: ٩–١٧\nالأحد: ١٠–١٧",
+  sb_addr:"العنوان",
+  sb_trans:"النقل العام",
+  sb_trans_body:"مترو بورس (خطا ١ و٥)",
+  sb_free:"دخول مجاني",
+  sb_masters:"الأساتذة الفلاماندييون في الموقع",
+  sb_masters_link:"مزيد من المعلومات ←",
+  rtl: true,
+},
+
+}; // end LANGS
+
+let LANG = localStorage.getItem('gb_lang') || 'nl';
+const t = k => LANGS[LANG]?.[k] ?? LANGS.nl[k] ?? k;
+
+function setLang(l) {
+  LANG = l; localStorage.setItem('gb_lang', l);
+  // RTL
+  const isRtl = LANGS[l]?.rtl === true;
+  document.body.classList.toggle('rtl', isRtl);
+  document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('lang', l);
+
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t(el.dataset.i18n);
+    if (v) el.innerHTML = v.replace(/\n/g,'<br>');
+  });
+  const cur = document.querySelector('nav a.active');
+  render(cur?.dataset.page ?? 'agenda');
+}
+
+/* ─── DATE HELPERS ─── */
+const DN = {
+  nl:['Zo','Ma','Di','Wo','Do','Vr','Za'],
+  fr:['Di','Lu','Ma','Me','Je','Ve','Sa'],
+  en:['Su','Mo','Tu','We','Th','Fr','Sa'],
+  de:['So','Mo','Di','Mi','Do','Fr','Sa'],
+  es:['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+  ar:['أح','إث','ثل','أر','خم','جم','سب'],
+};
+const MS = {
+  nl:['jan','feb','mrt','apr','mei','jun','jul','aug','sep','okt','nov','dec'],
+  fr:['jan','fév','mar','avr','mai','jun','jul','aoû','sep','oct','nov','déc'],
+  en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  de:['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'],
+  es:['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'],
+  ar:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
+};
+const ML = {
+  nl:['Januari','Februari','Maart','April','Mei','Juni','Juli','Augustus','September','Oktober','November','December'],
+  fr:['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+  en:['January','February','March','April','May','June','July','August','September','October','November','December'],
+  de:['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'],
+  es:['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],
+  ar:['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'],
+};
+const dkey = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+/* ─── AGENDA ENGINE ─── */
+
+  /* Voorganger per zondag: sleutel = datum 'YYYY-MM-DD' */
+ const VOORGANGERS = {
+  '2026-05-03': { naam: '', rol: '' },     //'2026-05-03': { naam: 'Johnny De Mot', rol: 'voorganger' },
+  //'2026-05-10': { naam: 'Chris Ruelens', rol: 'voorganger' },  // uitz. woord
+  '2026-05-17': { naam: '', rol: '' },        //'2026-05-17': { naam: 'Johnny De Mot', rol: 'voorganger' },
+  '2026-05-24': { naam: '', rol: '' },      //'2026-05-24': { naam: 'Katia Vanhemelryck & Nieneke Heesen', rol: 'voorgangers' },  // vierde zondag → woorddienst + Pinksteren → skip
+  '2026-05-31': { naam: '', rol: '' },
+  '2026-06-07': { naam: '', rol: '' },
+  '2026-06-14': { naam: '', rol: '' },
+  '2026-06-21': { naam: '', rol: '' },
+  '2026-06-28': { naam: '', rol: '' },  // vierde zondag → woorddienst
+  '2026-07-05': { naam: '', rol: '' },
+  '2026-07-12': { naam: '', rol: '' },
+  '2026-07-19': { naam: '', rol: '' },
+  '2026-07-26': { naam: '', rol: '' }, // vierde zondag → woorddienst
+  '2026-08-02': { naam: '', rol: '' },
+  '2026-08-09': { naam: '', rol: '' },
+  '2026-08-16': { naam: '', rol: '' },
+  '2026-08-23': { naam: '', rol: '' },
+  '2026-08-30': { naam: '', rol: '' },
+  '2026-09-06': { naam: '', rol: '' },
+  '2026-09-13': { naam: '', rol: '' },
+  '2026-09-20': { naam: '', rol: '' },
+  '2026-09-27': { naam: '', rol: '' },
+  '2026-10-04': { naam: '', rol: '' },
+  // voeg hier verder aan toe...
+};
+const FIXED = [
+  { datum:'2026-03-29', tijd:'11:00', type:'viering', tk:'ev_palm' },
+  { datum:'2026-04-02', tijd:'17:00', type:'viering', tk:'ev_holy_thu' },
+  { datum:'2026-04-03', tijd:'19:00', type:'viering', tk:'ev_good_fri' },
+  { datum:'2026-04-04', tijd:'21:00', type:'viering', tk:'ev_vigil' },
+  { datum:'2026-04-05', tijd:'11:00', type:'viering', tk:'ev_easter' },
+  { datum:'2026-05-14', tijd:'11:00', type:'viering', tk:'ev_drempel' },
+  { datum:'2026-05-23', tijd:'19:00', type:'viering', tk:'ev_pinksterwake', extra:'' },       //{ datum:'2026-05-23', tijd:'19:00', type:'viering', tk:'ev_pinksterwake', extra:'Johnny De Mot' },
+  { datum:'2026-05-24', tijd:'11:00', type:'woord', tk:'ev_pinkster', extra:'', rol:'' },        //{ datum:'2026-05-24', tijd:'11:00', type:'woord', tk:'ev_pinkster', extra:'Katia Vanhemelryck & Nieneke Heesen', rol:'voorgangers' },
+  { datum:'2026-06-14', tijd:'10:00', type:'viering', tk:'ev_14juni' },
+  { datum:'2026-06-26', tijd:'19:00', type:'viering', tk:'ev_concert_juni', extra:'Baptiste Zeronian', gratis:true },
 ];
-
-/* ══════════════════════════════════════════
-   MAP SETUP
-══════════════════════════════════════════ */
-const map = L.map('map', {
-  center:[20,10], zoom:2, minZoom:2, maxZoom:12,
-  scrollWheelZoom:true, doubleClickZoom:true, zoomControl:true,
-  worldCopyJump:false, maxBounds:[[-90,-180],[90,180]], maxBoundsViscosity:1.0,
-});
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-  attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
-  subdomains:'abcd', maxZoom:20, noWrap:true, bounds:[[-90,-180],[90,180]],
-}).addTo(map);
-
-function makeCircleIcon(color) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="5.5" fill="${color}" stroke="#fff" stroke-width="1.8" opacity="0.92"/></svg>`;
-  return L.divIcon({ html:svg, className:'', iconSize:[14,14], iconAnchor:[7,7], popupAnchor:[0,-10] });
+const ZONDAG_UITZONDERINGEN = {
+  '2026-05-10': 'woord',
+  '2026-05-24': 'skip',
+  '2026-06-14': 'skip',
+};
+  
+function genTaize() {
+  const res = [], now = new Date(); now.setHours(0,0,0,0);
+  const end = new Date(now); end.setDate(now.getDate()+42); 
+  for (let m=0;m<3;m++) {
+    const yr=now.getFullYear()+Math.floor((now.getMonth()+m)/12), mn=(now.getMonth()+m)%12;
+    let cnt=0;
+    for (let d=1;d<=31;d++) {
+      const dt=new Date(yr,mn,d);
+      if (dt.getMonth()!==mn) break;
+      if (dt.getDay()===6&&++cnt===3) {
+        if (dt>=now&&dt<=end) res.push({datum:dkey(dt),tijd:'20:00',type:'taize',tk:'ev_taize'});
+        break;
+      }
+    }
+  }
+  return res;
 }
-function makeShellIcon() {
-  return L.divIcon({
-    className:'',
-    html:'<div style="font-size:1.4rem;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.45));">🐚</div>',
-    iconSize:[26,26], iconAnchor:[13,13], popupAnchor:[0,-13]
+
+function genNight() {
+  const res=[], now=new Date(); now.setHours(0,0,0,0);
+  const end=new Date(now); end.setDate(now.getDate()+42);
+  const uitsluitingen = ['2026-06-26']; 
+  for (let d=new Date(now);d<=end;d.setDate(d.getDate()+1)) {
+    if (d.getDay()===5 && d.getMonth()>=4 && d.getMonth()<=7 && !uitsluitingen.includes(dkey(d)))
+      res.push({datum:dkey(d),tijd:'18:00',type:'nacht',tk:'ev_night'});
+  }
+  return res;
+}
+
+  function genLGBTQ() {
+  const res = [], now = new Date(); now.setHours(0,0,0,0);
+  const start = new Date(2026, 5, 27); // 27 juni 2026
+  const end = new Date(now); end.setDate(now.getDate() + 42);
+  for (let m = 0; m < 24; m++) {
+    const yr = start.getFullYear() + Math.floor((start.getMonth() + m) / 12);
+    const mn = (start.getMonth() + m) % 12;
+    let cnt = 0;
+    for (let d = 1; d <= 31; d++) {
+      const dt = new Date(yr, mn, d);
+      if (dt.getMonth() !== mn) break;
+      if (dt.getDay() === 6 && ++cnt === 4) {
+        if (dt >= now && dt <= end && dt >= start)
+          res.push({ datum: dkey(dt), tijd: '20:00', type: 'viering', tk: 'ev_lgbtq' });
+        break;
+      }
+    }
+  }
+  return res;
+}
+function buildAgenda() {
+  const map = {};
+  [...FIXED, ...genTaize(), ...genNight(), ...genLGBTQ()].forEach(ev => {
+    (map[ev.datum] = map[ev.datum] || []).push(ev);
   });
-}
-const brusselIcon = L.divIcon({
-  className:'',
-  html:'<div style="font-size:1.1rem;line-height:1;filter:drop-shadow(0 1px 3px rgba(0,0,0,0.5));">⛪</div>',
-  iconSize:[22,22], iconAnchor:[11,11], popupAnchor:[0,-11]
-});
 
-/* Aarde markers */
-const aardeMarkers = locations.map(loc => {
-  const color = continentColors[loc.continent] || '#1565c0';
-  const m = L.marker([loc.lat, loc.lng], { icon: makeCircleIcon(color) });
-  m._dutchName = loc.name;
-  m._continent = loc.continent;
-  m.bindPopup(`<strong>${loc.name}</strong><br><span style="font-size:12px;color:var(--rule);">${loc.continent}</span>`);
-  m.on('mouseover', function() { this.openPopup(); });
-  m.on('mouseout', function() { this.closePopup(); });
-  return m;
-});
+  const now = new Date(); now.setHours(0,0,0,0);
 
-/* Brussel origin marker (always visible in schelp layer) */
-const brusselMarker = L.marker([50.8503, 4.3517], { icon: brusselIcon });
-brusselMarker._isBrussel = true;
+  for (let i = 0; i < 42; i++) {
+    const d = new Date(now); d.setDate(now.getDate()+i);
+    const dw = d.getDay(), sk = dkey(d);
 
-/* Shell markers (loaded from storage) */
-let schelpMarkers = [];
-let schelpPins = [];
-
-/* ══════════════════════════════════════════
-   LAYER SWITCHING
-══════════════════════════════════════════ */
-let activeLayer = 'aarde';
-
-function setLayer(layer) {
-  activeLayer = layer;
-
-  // Toggle buttons
-  document.getElementById('btn-layer-aarde').classList.toggle('active', layer === 'aarde');
-  document.getElementById('btn-layer-schelp').classList.toggle('active', layer === 'schelp');
-
-  // Show/hide aarde markers
-  aardeMarkers.forEach(m => layer === 'aarde' ? m.addTo(map) : map.removeLayer(m));
-
-  // Show/hide schelp markers + Brussel pin
-  if (layer === 'schelp') {
-    brusselMarker.addTo(map);
-    schelpMarkers.forEach(m => m.addTo(map));
-  } else {
-    map.removeLayer(brusselMarker);
-    schelpMarkers.forEach(m => map.removeLayer(m));
+    if (dw === 0 && !['2026-04-05','2026-03-29'].includes(sk)) {
+      if (ZONDAG_UITZONDERINGEN[sk] === 'skip') {
+        // geen automatische viering, FIXED neemt over
+      } else {
+        const zondagNr = Math.ceil(d.getDate() / 7);
+        const isWoord  = zondagNr === 4 || ZONDAG_UITZONDERINGEN[sk] === 'woord';
+        const tkSun    = isWoord ? 'ev_sun_woord' : 'ev_sun_eucharistie';
+        const vg       = VOORGANGERS[sk] || { naam: '', rol: '' };
+        (map[sk] = map[sk] || []).unshift({
+          datum:     sk,
+          tijd:      '11:00',
+          type:      'viering',
+          tekst:     t(tkSun),
+          voorganger: vg.naam,
+          extra:     vg.rol,
+          rol:       vg.rol
+        });
+      }
+    }
   }
 
-  // Toggle legend vs schelp form
-  document.getElementById('legend').style.display = layer === 'aarde' ? 'flex' : 'none';
-  document.getElementById('map-count').style.display = layer === 'schelp' ? 'block' : 'none';
-  document.getElementById('schelp-panel').classList.toggle('visible', layer === 'schelp');
-  document.getElementById('schelp-list-wrap').style.display = layer === 'schelp' && schelpPins.length > 0 ? 'block' : 'none';
-
-  updateCount();
-  if (layer === 'aarde') { buildLegend(activeLang); } 
+  for (const k of Object.keys(map)) map[k].sort((a,b) => a.tijd.localeCompare(b.tijd));
+  return map;
 }
 
-/* ══════════════════════════════════════════
-   SCHELP STORAGE & RENDERING
-══════════════════════════════════════════ */
-const STORAGE_KEY = 'schelpen-pins';
+function agendaHTML() {
+  const events = buildAgenda();
+  const now = new Date(); now.setHours(0,0,0,0);
+  const dn_ = DN[LANG]||DN.nl, ms_ = MS[LANG]||MS.nl, ml_ = ML[LANG]||ML.nl;
 
-async function loadSchelpPins() {
-  try {
-    const res = await window.storage.get(STORAGE_KEY, true);
-    schelpPins = res ? JSON.parse(res.value) : [];
-  } catch(e) { schelpPins = []; }
-  renderSchelpMarkers();
-  renderSchelpList();
-  updateCount();
+  let html = '<div class="agenda-wrap">', curM = -1, count = 0;
+
+  for (let i = 0; i < 42; i++) {
+    const d = new Date(now); d.setDate(now.getDate()+i);
+    const dw = d.getDay(), mn = d.getMonth(), yr = d.getFullYear(), nr = d.getDate(), sk = dkey(d);
+
+    const seen = new Set();
+    const evs = (events[sk]||[]).map(e => ({
+      ...e,
+      tekst: e.tekst || t(e.tk),
+      voorganger: e.voorganger || e.extra || '',
+      rol: e.rol || ''
+    })).filter(e => {
+      const k = `${e.tijd}|${e.tekst}`;
+      return seen.has(k) ? false : (seen.add(k), true);
+    });
+
+    if (!evs.length) continue;
+    count++;
+
+    if (mn !== curM) {
+      curM = mn;
+      html += `<div class="agenda-month">${ml_[mn]} ${yr}</div>`;
+    }
+
+    const cls = 'agenda-row' + (dw === 0 || dw === 6 ? ' weekend' : '');
+
+    html += `<div class="${cls}">
+      <div class="date-cell">
+        <span class="dn">${i === 0 ? t('ag_today') : dn_[dw]}</span>
+        <span class="dd">${nr}</span>
+        <span class="dm">${ms_[mn]}</span>
+      </div>
+      <div class="events-cell">
+        ${evs.map(ev => `<div class="ev-row">
+          <span class="ev-time">${ev.tijd}</span>
+          <span class="ev-dot">◆</span>
+          <span>${ev.tekst}${ev.gratis
+            ? `<span style="margin-left:0.5rem;font-size:0.75rem;font-weight:600;color:var(--gold-dk);">(gratis)</span>`
+            : ''}${ev.voorganger
+            ? `<span style="margin-left:0.7rem;font-size:0.78rem;color:var(--muted);font-style:italic;">— ${ev.rol === 'voorgangers' ? 'Voorgangers' : t('ev_voorganger')}: ${ev.voorganger}</span>`
+            : ''}</span>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }
+
+  if (!count) html += `<div class="agenda-empty">${t('ag_empty')}</div>`;
+  html += '</div>';
+  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">◆ ${t('ag_leg_viering')} &nbsp;|&nbsp; ◆ ${t('ag_leg_taize')} &nbsp;|&nbsp; ◆ ${t('ag_leg_night')} &nbsp;|&nbsp; ◆ ${t('ag_leg_act')}</p>`;
+  return html;
 }
 
-function renderSchelpMarkers() {
-  schelpMarkers.forEach(m => map.removeLayer(m));
-  schelpMarkers = [];
-  const icon = makeShellIcon();
-  schelpPins.forEach(pin => {
-    const m = L.marker([pin.lat, pin.lng], { icon })
-      .bindPopup(buildSchelpPopup(pin));
-    if (activeLayer === 'schelp') m.addTo(map);
-    schelpMarkers.push(m);
-  });
-}
+/* ─── PAGES ─── */
+const IMG_EXT = 'https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Exterieur_Knop%204%201%20Icoon%20Kerkgebouw%20Goede%20Bijstand.jpg';
+const IMG_INT = 'https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Interieur_Onze-Lieve-Vrouw%20van%20Goede%20Bijstandkerk_JPR4243_%C2%A9%20visit.brussels%20-%20Jean-Paul%20Remy.jpg';
+const IMG_ALT = 'https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Extra%20%28kunstwerk%20detail%29_Altaar%20Goede%20Bijstandskerk_0.jpg';
 
-function buildSchelpPopup(pin) {
-  const name = pin.name ? `<strong>${esc(pin.name)}</strong><br>` : '';
-  const msg  = pin.msg  ? `<em>${esc(pin.msg)}</em><br>` : '';
-  return `<div style="min-width:130px;">🐚 <strong style="color:var(--rule);">${esc(pin.city)}</strong><br>${name}${msg}<small style="color:var(--rule);opacity:0.7;">${pin.date}</small></div>`;
-}
+const PAGES = {
 
-function renderSchelpList() {
-  const ul = document.getElementById('schelp-list');
-  const wrap = document.getElementById('schelp-list-wrap');
-  if (!schelpPins.length) { wrap.style.display = 'none'; return; }
-  if (activeLayer === 'schelp') wrap.style.display = 'block';
-  ul.innerHTML = [...schelpPins].reverse().map(pin => {
-    const name = pin.name ? `<strong>${esc(pin.name)}</strong> · ` : '';
-    const msg  = pin.msg  ? `<em>${esc(pin.msg)}</em>` : '';
-    return `<li><span class="schelp-list-left">🐚 <strong>${esc(pin.city)}</strong>${pin.name||pin.msg?' — ':''}${name}${msg}</span><span class="schelp-list-date">${pin.date}</span></li>`;
-  }).join('');
-}
+agenda: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('ag_title')}</h2>
+  <p style="font-style:italic;color:var(--muted);margin-bottom:1.2rem;font-size:0.93rem;">${t('ag_intro')}</p>
+  ${agendaHTML()}
+</section>`,
 
-function updateCount() {
-  const el = document.getElementById('map-count');
-  if (!el) return;
-  const tx = TX[activeLang];
-  const n = schelpPins.length;
-  if (n === 0) el.textContent = tx.countSchelp0;
-  else if (n === 1) el.textContent = tx.countSchelp1;
-  else el.textContent = tx.countSchelpN.replace('{n}', n);
-}
+geschiedenis: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('gesch_title')}</h2>
+  <img src="${IMG_EXT}" class="church-photo" style="height:280px;" alt="Exterieur">
+  <p>${t('gesch_intro')}</p>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">${t('tl1_year')}</div><div class="tl-text">${t('tl1_text')}</div></div>
+    <div class="tl-item"><div class="tl-year">${t('tl2_year')}</div><div class="tl-text">${t('tl2_text')}</div></div>
+    <div class="tl-item"><div class="tl-year">${t('tl3_year')}</div><div class="tl-text">${t('tl3_text')}</div></div>
+    <div class="tl-item"><div class="tl-year">${t('tl4_year')}</div><div class="tl-text">${t('tl4_text')}</div></div>
+  </div>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('gesch_arch_title')}</p>
+  <div class="photo-grid">
+    <img src="${IMG_INT}" alt="Interieur">
+    <img src="${IMG_ALT}" alt="Altaar">
+  </div>
+  <p>${t('gesch_arch')}</p>
+  <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('gesch_masters')}</a></p>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('gesch_visit_title')}</p>
+  <div class="huren-grid">
+    <div class="info-box">
+      <h3>🕐 ${t('gesch_visit_title')}</h3>
+      <p style="white-space:pre-line;">${t('gesch_open')}</p>
+      <p style="margin-top:0.4rem;font-style:italic;color:var(--muted);font-size:0.88rem;">${t('gesch_free')}</p>
+    </div>
+    <div class="info-box">
+      <h3>📍 ${t('sb_addr')}</h3>
+      <p>Kolenmarkt 91<br>(kant Fontainasplein)<br>1000 Brussel</p>
+      <p style="margin-top:0.5rem;"><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">${t('gesch_maps')}</a></p>
+    </div>
+  </div>
+</section>`,
 
-function esc(s) {
-  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-}
+samenwerking: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('samen_title')}</h2>
+  <p style="margin-bottom:1.4rem;">${t('samen_intro')}</p>
+  <div class="partner">
+    <strong>${t('p_parochie')}</strong>
+    <p>${t('p_parochie_desc')}</p>
+    <div style="display:flex;gap:0.6rem;flex-wrap:wrap;margin-top:0.8rem;">
+      <button onclick="toggleTab('kerkfabriek')"
+        style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+               padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
+               background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);"
+        id="btn-kerkfabriek">
+        ${t('p_kerkfabriek')}
+      </button>
+      <button onclick="toggleTab('parochieploeg')"
+        style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+               padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
+               background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);"
+        id="btn-parochieploeg">
+        ${t('p_parochieploeg')}
+      </button>
+      <button onclick="toggleTab('wereldwijd')"
+  style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+         padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
+         background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);"
+  id="btn-wereldwijd">
+  ${t('p_wereldwijd')}
+</button>
+<a href="https://www.paulusgemeenschappen.be/nl/vieringen-sacramenten" target="_blank"
+  style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+         padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
+         background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);
+         text-decoration:none;display:inline-block;">
+  ${t('p_sacramenten')} ↗
+</a>
+    </div>
+    <div id="tab-kerkfabriek" style="display:none;margin-top:0.8rem;padding:0.9rem 1.1rem;
+         background:var(--parchment);border-radius:var(--r);border:1px solid var(--border);
+         font-size:0.9rem;color:var(--stone);">
+      ${t('p_kerkfabriek_desc')}
+    </div>
+    <div id="tab-parochieploeg" style="display:none;margin-top:0.8rem;padding:0.9rem 1.1rem;
+         background:var(--parchment);border-radius:var(--r);border:1px solid var(--border);
+         font-size:0.9rem;color:var(--stone);">
+      ${t('p_parochieploeg_desc')}
+    </div>
+    <div id="tab-wereldwijd" style="display:none;margin-top:0.8rem;padding:0;
+     border-radius:var(--r);border:1px solid var(--border);overflow:hidden;">
+  <iframe 
+    src="grond.html" 
+    style="width:100%;height:75vh;min-height:500px;border:none;display:block;"
+    title="De Wereld van de Goede Bijstand"
+    loading="lazy">
+  </iframe>
+</div>
+  </div>
+  
+  <div class="partner"><strong>${t('p_paulus')}</strong><p>${t('p_paulus_desc')} <a href="https://www.paulusgemeenschappen.be/nl" target="_blank">paulusgemeenschappen.be →</a></p></div>
+  <div class="partner"><strong>${t('p_taize')}</strong><p>${t('p_taize_desc')}</p></div>
+  <div class="partner"><strong>${t('p_lgbtq')}</strong><p>${t('p_lgbtq_desc')}</p></div>
+  <div class="partner"><strong>${t('p_klank')}</strong><p>${t('p_klank_desc')} <a href="https://www.lasemaineduson.be" target="_blank">${t('p_klank_link')}</a></p></div>
+  <div class="partner"><strong>${t('p_meesters')}</strong><p>${t('p_meesters_desc')} <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('p_meesters_link')}</a></p></div>
+</section>`,
 
-/* ══════════════════════════════════════════
-   SCHELP SUBMIT
-══════════════════════════════════════════ */
-window.schelpSubmit = async function() {
-  const tx = TX[activeLang];
-  const cityEl   = document.getElementById('sf-city');
-  const nameEl   = document.getElementById('sf-name');
-  const msgEl    = document.getElementById('sf-msg');
-  const statusEl = document.getElementById('sf-status');
-  const btnEl    = document.getElementById('sf-submit');
-  const city = cityEl.value.trim();
-  if (!city) { cityEl.focus(); statusEl.textContent = tx.errCity; return; }
-  btnEl.disabled = true;
-  statusEl.textContent = tx.searching;
-  let lat, lng, displayName;
-  try {
-    const url = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=' + encodeURIComponent(city);
-    const res = await fetch(url, { headers:{ 'Accept-Language': activeLang } });
-    const data = await res.json();
-    if (!data.length) { statusEl.textContent = tx.errNotFound; btnEl.disabled = false; return; }
-    lat = parseFloat(data[0].lat);
-    lng = parseFloat(data[0].lon);
-    displayName = data[0].display_name.split(',')[0];
-  } catch(e) { statusEl.textContent = tx.errGeo; btnEl.disabled = false; return; }
-  const now = new Date();
-  const dateStr = now.toLocaleDateString('nl-BE', { day:'numeric', month:'long', year:'numeric' });
-  const pin = { id:Date.now(), city:displayName||city, name:nameEl.value.trim(), msg:msgEl.value.trim(), lat, lng, date:dateStr };
-  try {
-    await window.storage.set(STORAGE_KEY, JSON.stringify([...schelpPins, pin]), true);
-    schelpPins.push(pin);
-  } catch(e) { statusEl.textContent = tx.errSave; btnEl.disabled = false; return; }
-  cityEl.value = ''; nameEl.value = ''; msgEl.value = '';
-  statusEl.textContent = tx.success.replace('{city}', pin.city);
-  btnEl.disabled = false;
-  const icon = makeShellIcon();
-  const m = L.marker([lat, lng], { icon }).bindPopup(buildSchelpPopup(pin));
-  if (activeLayer === 'schelp') { m.addTo(map); map.flyTo([lat, lng], 6, { duration:1.4 }); setTimeout(() => m.openPopup(), 1500); }
-  schelpMarkers.push(m);
-  renderSchelpList();
-  updateCount();
-  if (activeLayer === 'schelp') document.getElementById('schelp-list-wrap').style.display = 'block';
+voorbij: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('voorbij_title')}</h2>
+
+  <p class="subsection">${t('voorbij_muziek_title')}</p>
+  <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_muziek_intro')}</p>
+  <div class="past-item">
+    <a href="https://www.lasemaineduson.be/nl/event/hoarses/" target="_blank">${t('voorbij_klank_2026')}</a>
+    <span class="past-date">2026</span>
+  </div>
+  <img src="https://www.lasemaineduson.be/wp-content/uploads/2025/11/Late-Bush_Hoarses.jpg.webp"
+       alt="Week van de Klank 2026 – Hoarses"
+       style="width:100%;max-width:480px;height:240px;object-fit:cover;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:1rem;">
+       
+  <div class="past-item">
+    <a href="https://www.lasemaineduson.be/nl/event/rothko-chapel/" target="_blank">${t('voorbij_klank_2025')}</a>
+    <span class="past-date">2025</span>
+  </div>
+  <img src="https://www.lasemaineduson.be/wp-content/uploads/2024/12/JacobHus_rothkochapel_LieveKleeven_1.jpg.webp"
+       alt="Week van de Klank 2025 – Rothko Chapel"
+       style="width:100%;max-width:480px;height:240px;object-fit:cover;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);margin-bottom:1rem;">
+
+  <div class="ornament">✦ ✦ ✦</div>
+
+  <p class="subsection">${t('voorbij_opnames_title')}</p>
+  <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_opnames_intro')}</p>
+ <div class="past-item">
+    <a href="https://www.facebook.com/watch/?v=1564561861293763" target="_blank">${t('voorbij_trois_fb')}</a>
+  </div>
+  <div style="margin-bottom:1rem;">
+    <a href="https://www.facebook.com/watch/?v=1564561861293763" target="_blank"
+       style="display:inline-block;position:relative;max-width:480px;width:100%;">
+      <img src="Screenshot_Les_Trois_Cordes_fb.png"
+           alt="Les Trois Cordes – Facebook"
+           style="width:100%;height:270px;object-fit:cover;object-position:center top;border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);display:block;">
+      <span style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+                   background:rgba(0,0,0,0.65);color:white;font-size:2.5rem;
+                   width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;">▶</span>
+    </a>
+  </div>
+  <div class="past-item">
+    <a href="https://www.youtube.com/watch?v=igPMLKkT9KA" target="_blank">${t('voorbij_trois_yt')}</a>
+  </div>
+  <div style="margin-bottom:1rem;">
+    <iframe width="100%" height="270"
+      src="https://www.youtube.com/embed/igPMLKkT9KA"
+      title="Les Trois Cordes"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="border-radius:var(--r);border:2px solid var(--border);box-shadow:var(--shadow);max-width:480px;display:block;">
+    </iframe>
+  </div>
+
+  <div class="ornament">✦ ✦ ✦</div>
+
+  <p class="subsection">${t('voorbij_film_title')}</p>
+  <p style="font-style:italic;color:var(--muted);margin-bottom:0.8rem;font-size:0.92rem;">${t('voorbij_film_intro')}</p>
+  <p style="color:var(--muted);font-size:0.9rem;font-style:italic;">— — —</p>
+</section>`,
+
+huren: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('huren_title')}</h2>
+  <img src="${IMG_INT}" class="church-photo" style="height:260px;" alt="Interieur">
+  <p style="margin-bottom:1.4rem;">${t('huren_intro')}</p>
+  <div class="huren-grid">
+    <div class="info-box">
+      <h3>🏛 ${t('huren_cap_title')}</h3>
+      <p>${t('huren_cap')}</p>
+    </div>
+    <div class="info-box">
+      <h3>📍 ${t('huren_loc_title')}</h3>
+      <p>${t('huren_loc')}</p>
+    </div>
+    <div class="info-box" style="grid-column:1/-1;">
+      <h3>✓ ${t('huren_gesch_title')}</h3>
+      <p>${t('huren_gesch')}</p>
+    </div>
+  </div>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('huren_contact_title')}</p>
+  <p>${t('huren_contact')}</p>
+  <div class="contact-box" style="margin-top:1rem;">
+    <div class="icon">✉</div>
+    <div class="txt">
+      <p><strong>kerkfabriek@goedebijstand.brussels</strong></p>
+      <p>Bijstandsstraat 5, 1000 Brussel</p>
+    </div>
+    <a class="btn" href="mailto:kerkfabriek@goedebijstand.brussels">${t('contact_msg')}</a>
+  </div>
+  <p style="margin-top:1rem;font-size:0.85rem;font-style:italic;color:var(--muted);">${t('huren_note')}</p>
+</section>`,
+
+steunen: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('steunen_title')}</h2>
+  <p>${t('steunen_intro')}</p>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('steunen_bank')}</p>
+  <div class="bank-block">
+    <p class="bank-name">KERKFABRIEK O-L VROUW GOEDE BIJSTAND BRUSSEL</p>
+    <p class="iban">BE27 0910 0107 1473</p>
+    <p class="bic">BIC: GKCCBEBBXXX</p>
+  </div>
+  <p class="subsection">${t('steunen_qr')}</p>
+  <div class="qr-row">
+    <div class="qr-item"><img src="Donate_02_qr_sumup.png" alt="QR SumUp"><span>SumUp</span></div>
+    <div class="qr-item"><img src="Donate_02_qr_wero.png" alt="QR Wero"><span>Wero</span></div>
+  </div>
+  <p style="margin-top:0.8rem;font-size:0.88rem;font-style:italic;color:var(--muted);">${t('steunen_terminal')}</p>
+  <p style="margin-top:1rem;font-size:0.88rem;color:var(--muted);">${t('steunen_q')}</p>
+</section>`,
+
+contact: ()=>`
+<section class="section">
+  <h2 class="section-title">${t('contact_title')}</h2>
+  <p class="subsection">${t('contact_gebouw')}</p>
+  <p class="subsection" style="margin-top:0;">${t('contact_secretariaat')}</p>
+  <p>${t('contact_addr')}</p>
+  <p>${t('contact_email_label')} <a href="mailto:kerkfabriek@goedebijstand.brussels">kerkfabriek@goedebijstand.brussels</a></p>
+  <div class="contact-box">
+    <div class="icon">✉</div>
+    <div class="txt">
+      <p><strong>kerkfabriek@goedebijstand.brussels</strong></p>
+      <p style="font-size:0.85rem;color:var(--muted);">Kerkfabriek Onze-Lieve-Vrouw van Goede Bijstand</p>
+    </div>
+    <a class="btn" href="mailto:kerkfabriek@goedebijstand.brussels">${t('contact_msg')}</a>
+  </div>
+  <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection">${t('contact_open_title')}</p>
+  <div class="huren-grid">
+    <div class="info-box">
+      <h3>🕐</h3>
+      <p style="white-space:pre-line;">${t('contact_open')}</p>
+    </div>
+    <div class="info-box">
+      <h3>📍 ${t('sb_addr')}</h3>
+      <p>Kolenmarkt 91<br>1000 Brussel</p>
+      <p style="margin-top:0.4rem;"><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">${t('contact_maps')}</a></p>
+    </div>
+  </div>
+</section>`,
+
+  privacy: ()=>`
+<section class="section">
+  <h2 class="section-title">Cookie- &amp; privacybeleid</h2>
+  <p>Deze website gebruikt uitsluitend <strong>functionele cookies</strong> om uw taalvoorkeur op te slaan (<code>gb_lang</code>) en uw cookiekeuze te bewaren (<code>gb_gdpr</code>). Er worden geen persoonsgegevens verzameld of gedeeld met derden. Er zijn geen tracking-, analyse- of advertentiecookies aanwezig.</p>
+  <p style="margin-top:0.8rem;">Beheerder: <strong>Kerkfabriek Onze-Lieve-Vrouw van Goede Bijstand</strong><br>
+  Kolenmarkt 91, 1000 Brussel<br>
+  <a href="mailto:kerkfabriek@goedebijstand.brussels">kerkfabriek@goedebijstand.brussels</a></p>
+</section>`,
+
 };
 
-/* ══════════════════════════════════════════
-   LANGUAGE
-══════════════════════════════════════════ */
-let activeLang = 'nl';
+function sidebarHTML() {
+  return `
+  <img src="${IMG_EXT}" alt="Goede Bijstand" class="sidebar-img">
+  <div class="sidebar-box">
+    <h3>📍 ${t('sb_addr')}</h3>
+    <p class="addr">Kolenmarkt 91<br>(kant Fontainasplein)<br>1000 Brussel</p>
+  </div>
+  <div class="sidebar-box">
+    <h3>🕐 ${t('sb_open')}</h3>
+    <p style="white-space:pre-line;">${t('sb_open_body')}</p>
+    <p style="margin-top:0.5rem;font-size:0.83rem;font-style:italic;color:var(--gold-dk);">${t('sb_free')}</p>
+  </div>
+  <div class="sidebar-box">
+    <h3>🚌 ${t('sb_trans')}</h3>
+    <p style="white-space:pre-line;">${t('sb_trans_body')}</p>
+  </div>
+  <div class="sidebar-box">
+    <h3>${t('sb_masters')}</h3>
+    <img src="${IMG_ALT}" alt="Altaar" style="width:100%;height:110px;object-fit:cover;border-radius:2px;border:1px solid var(--border);margin:0.5rem 0;">
+    <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('sb_masters_link')}</a></p>
+  </div>`;
+}
 
-function buildLegend(lang) {
-  const t = TX[lang];
-  const legend = document.getElementById('legend');
-  legend.innerHTML = '';
-  Object.entries(continentColors).forEach(([key, color]) => {
-    const label = t.continentLabels[key] || key;
-    const item = document.createElement('div');
-    item.className = 'legend-item';
-    item.innerHTML = `<span class="legend-dot" style="background:${color}"></span>${label}`;
-    legend.appendChild(item);
+/* ─── ROUTER ─── */
+function render(key) {
+  const fn = PAGES[key];
+  const noticeKey = `gb_notice_${LANG}`;
+  const noticeSeen = sessionStorage.getItem(noticeKey);
+  const notice = (LANG !== 'nl' && !noticeSeen)
+    ? `<div class="translation-notice" id="translationNotice">
+        ⚠ ${t('translation_notice')}
+        <button onclick="dismissNotice()" style="margin-left:auto;background:none;border:none;cursor:pointer;font-size:1rem;color:var(--muted);">✕</button>
+       </div>`
+    : '';
+  document.getElementById('main').innerHTML = fn
+    ? notice + fn()
+    : '<section class="section"><p>404</p></section>';
+  document.getElementById('sidebar').innerHTML = sidebarHTML();
+  document.querySelectorAll('nav a[data-page]').forEach(a => a.classList.toggle('active', a.dataset.page===key));
+  const pageKey = {agenda:'nav_agenda',geschiedenis:'nav_gesch',samenwerking:'nav_samen',voorbij:'nav_voorbij',huren:'nav_huren',steunen:'nav_steunen',contact:'nav_contact'}[key];
+  document.title = (t(pageKey)||key) + ' — ' + (t('hero_title')||'Goede Bijstand').replace('\n',' ');
+}
+
+function go(key) {
+  render(key);
+  document.getElementById('nav').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+  /* ─── TRANSLATION NOTICE ─── */
+function dismissNotice() {
+  sessionStorage.setItem(`gb_notice_${LANG}`, '1');
+  const el = document.getElementById('translationNotice');
+  if (el) el.remove();
+}
+  
+/* ─── GDPR ─── */
+function gdprAccept() {
+  localStorage.setItem('gb_gdpr', '1');
+  document.getElementById('gdprOverlay').classList.add('hidden');
+}
+function showGdpr() {
+  document.getElementById('gdprOverlay').classList.remove('hidden');
+}
+/* ─── INIT ─── */
+(function init() {
+  const isRtl = LANGS[LANG]?.rtl === true;
+  document.body.classList.toggle('rtl', isRtl);
+  document.documentElement.setAttribute('dir', isRtl ? 'rtl' : 'ltr');
+  document.documentElement.setAttribute('lang', LANG);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===LANG));
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const v = t(el.dataset.i18n);
+    if (v) el.innerHTML = v.replace(/\n/g,'<br>');
+  });
+  render('agenda');
+  if (!localStorage.getItem('gb_gdpr')) showGdpr();
+  
+})();
+
+function toggleTab(id) {
+  ['kerkfabriek','parochieploeg','wereldwijd'].forEach(name => {
+    const tab = document.getElementById('tab-' + name);
+    const btn = document.getElementById('btn-' + name);
+    if (!tab) return;
+    const isTarget = name === id;
+    const isOpen = tab.style.display === 'block';
+    tab.style.display = (isTarget && !isOpen) ? 'block' : 'none';
+    if (btn) {
+      btn.style.background = (isTarget && !isOpen) ? 'var(--stone-mid)' : 'var(--cream)';
+      btn.style.color = (isTarget && !isOpen) ? 'var(--gold-lt)' : 'var(--stone-mid)';
+    }
   });
 }
-
-function updateAardePopups(lang) {
-  const t = TX[lang];
-  aardeMarkers.forEach(m => {
-    const localName = t.locationNames[m._dutchName] || m._dutchName;
-    const localCont = t.continentLabels[m._continent] || m._continent;
-    m.bindPopup(`<strong>${localName}</strong><br><span style="font-size:12px;color:var(--rule);">${localCont}</span>`);
-  });
-}
-
-function applyLanguage(lang) {
-  activeLang = lang;
-  const t = TX[lang];
-  document.documentElement.lang = lang;
-  document.getElementById('txt-kicker').textContent        = t.kicker;
-  document.getElementById('txt-site-title').textContent    = t.siteTitle;
-  document.getElementById('txt-site-subtitle').textContent = t.siteSubtitle;
-  document.getElementById('nav-map').textContent           = t.navMap;
-  document.getElementById('nav-story').textContent         = t.navStory;
-  document.getElementById('nav-locations').textContent     = t.navLocations;
-  document.getElementById('txt-intro-kicker').textContent  = t.introKicker;
-  document.getElementById('txt-intro-title').innerHTML     = t.introTitle;
-  document.getElementById('txt-intro-body').textContent    = t.introBody;
-  document.getElementById('stat-locations').textContent    = t.statLocations;
-  document.getElementById('stat-continents').textContent   = t.statContinents;
-  document.getElementById('stat-countries').textContent    = t.statCountries;
-  document.getElementById('stat-stories').textContent      = t.statStories;
-  document.getElementById('txt-map-label').textContent     = t.mapLabel;
-  document.getElementById('txt-map-caption').textContent   = t.mapCaption;
-  document.getElementById('layer-aarde-label').textContent = t.layerAarde;
-  document.getElementById('layer-schelp-label').textContent= t.layerSchelp;
-  document.getElementById('schelp-form-title').textContent = t.schelpFormTitle;
-  document.getElementById('schelp-form-intro').textContent = t.schelpFormIntro;
-  document.getElementById('lbl-city').textContent          = t.lblCity;
-  document.getElementById('lbl-name').textContent          = t.lblName;
-  document.getElementById('lbl-msg').textContent           = t.lblMsg;
-  document.getElementById('sf-city').placeholder           = t.cityPh;
-  document.getElementById('sf-name').placeholder           = t.namePh;
-  document.getElementById('sf-msg').placeholder            = t.msgPh;
-  document.getElementById('btn-pin-label').textContent     = t.btnPin;
-  document.getElementById('schelp-list-title').textContent = t.listSchelpTitle;
-  document.getElementById('txt-art-headline').textContent  = t.artHeadline;
-  document.getElementById('txt-art-deck').textContent      = t.artDeck;
-  document.getElementById('txt-art-p1').textContent        = t.artP1;
-  document.getElementById('txt-art-p2').textContent        = t.artP2;
-  document.getElementById('txt-list-title').textContent    = t.listTitle;
-  document.getElementById('txt-list-body').textContent     = t.listBody;
-  document.getElementById('txt-list-btn').textContent      = t.listBtn;
-  document.getElementById('txt-footer').innerHTML          = t.footer;
-  updateAardePopups(lang);
-  buildLegend(lang);
-  updateCount();
-}
-
-  function toggleList() {
-  const div = document.getElementById('inline-list');
-  const btn = document.getElementById('btn-toggle-list');
-  const t = TX[activeLang];
-  if (div.style.display === 'none') {
-    div.style.display = 'block';
-    btn.textContent = t.listBtnClose || '▲ Verberg de lijst';
-    // Build list
-    const continentKeys = ["Afrika","Azië & M-O","Europa","Amerika"];
-    const locationContinents = [
-      "Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika",
-      "Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika","Afrika",
-      "Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O",
-      "Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O",
-      "Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O","Azië & M-O",
-      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
-      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
-      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
-      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
-      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
-      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
-      "Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa","Europa",
-      "Europa","Europa","Europa","Europa","Europa",
-      "Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika",
-      "Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika",
-      "Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika",
-      "Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika","Amerika"
-    ];
-    const dutchNames = [
-      "Benin","Ouagadougou, Burkina Faso","Gran Canaria, Spanje","Katako-Kindu, Congo",
-      "Wamba, Congo","Zuid-Kivu, Congo","Congo","Egypte","Praia, Kaapverdië",
-      "Nador, Marokko","Marrakesh, Marokko","Ouarzazate, Marokko","Driouch, Marokko",
-      "Oeganda","Kigali, Rwanda","Seychellen","Togo","Witsand, Zuid-Afrika",
-      "Willowmore, Zuid-Afrika","Myanmar","Nanning, China","Troodos, Cyprus",
-      "Delhi, India","Madhya Pradesh, India","Prayagraj, India","Teheran, Iran",
-      "Jeruzalem, Israël","Dode Zee, Jordanië","Libanon","Nepal","Palestina",
-      "Colombo, Sri Lanka","Thailand","Vietnam","Istanbul, Turkije","Bozjom, Georgië",
-      "Oostende, België","Postel, België","Kopenhagen, Denemarken","Ribe, Denemarken",
-      "Lindet Skov, Denemarken","Keulen, Duitsland","Freiburg, Duitsland",
-      "Colchester, Engeland","Londen, Engeland","Derwent Water, Engeland",
-      "Kallislaki, Finland","Roquetaillade, Frankrijk","Corsica, Frankrijk",
-      "Colmar, Frankrijk","Dijon, Frankrijk","Fontenay, Frankrijk","Grenoble, Frankrijk",
-      "Lyon, Frankrijk","Nice, Frankrijk","Puy de Dôme, Frankrijk","Mulhouse, Frankrijk",
-      "Thessaloniki, Griekenland","Vergina, Griekenland","Keszthely, Hongarije",
-      "Dublin, Ierland","Rosslare, Ierland","Diamond Beach, IJsland","Dolomieten, Italië",
-      "Etna, Italië","San Remo, Italië","Rome, Italië","Stelvio, Italië",
-      "Trapani, Italië","Venetië, Italië","Vesuvius, Italië","Zuid-Tirol, Italië",
-      "Gardameer, Italië","Assisi, Italië","Dubrovnik, Kroatië","Varaždin, Kroatië",
-      "Dalmatia, Kroatië","Poreč, Kroatië","Malta","Monaco","Rotterdam, Nederland",
-      "Gardnos, Noorwegen","Ifnefoss, Noorwegen","Lillehammer, Noorwegen",
-      "Norefjell, Noorwegen","Oslo, Noorwegen","Steindalfoss, Noorwegen",
-      "Wenen, Oostenrijk","Krakau, Polen","Zgorzelec, Polen","Madeira, Portugal",
-      "Santiago do Cacém, Portugal","Braga, Portugal","Ponte de Lima, Portugal",
-      "Boekarest, Roemenië","Sint-Petersburg, Rusland","Ben Nevis, Schotland",
-      "Isle of Skye, Schotland","Loch Ness, Schotland","Lockerbie, Schotland",
-      "Port Achan, Schotland","Tighnabruaich, Schotland","Barcelona, Spanje",
-      "Gerona, Spanje","Granada, Spanje","Valga, Spanje","Zaragoza, Spanje",
-      "La Rioja, Spanje","Praag, Tsjechië","Karlsbad, Tsjechië","Brechfa, Wales",
-      "Brecon Beacons, Wales","Veberöd, Zweden","Bayou la Batre, Alabama",
-      "Robertsdale, Alabama","Lockesburg, Arkansas","Texarkana, Arkansas",
-      "Montréal, Canada","Niagara Falls, Canada","Cayman Eilanden","Cuba",
-      "Curaçao","Klein Curaçao","Dominicaanse Republiek","Lee, Florida",
-      "Alto, Georgia","Montego Bay, Jamaica","Ferryday, Louisiana","Gilliam, Louisiana",
-      "Biloxi, Mississippi","Natchez, Mississippi","Akumal, Mexico",
-      "Albuquerque, New Mexico","Santa Fe, New Mexico","New York City",
-      "Smoky Mountains, North Carolina","Waynesville, North Carolina",
-      "Elk City, Oklahoma","Oklahoma City, Oklahoma","Panama City",
-      "Charleston, South Carolina","Holly Hill, South Carolina","Gatlinburg, Tennessee",
-      "Kellerville, Texas","Wildorado, Texas","Brazilië","Cusco, Peru","Arequipa, Peru"
-    ];
-    let html = '';
-    continentKeys.forEach(key => {
-      const color = continentColors[key];
-      const continentLabel = t.continentLabels[key] || key;
-      const locs = locationContinents
-        .map((c, i) => ({ continent: c, dutchKey: dutchNames[i] }))
-        .filter(l => l.continent === key)
-        .map(l => t.locationNames[l.dutchKey] || l.dutchKey);
-      html += `
-        <div style="margin-bottom:32px;">
-          <div style="display:flex;align-items:center;gap:12px;border-bottom:2px solid var(--gold);padding-bottom:8px;margin-bottom:12px;">
-            <span style="width:12px;height:12px;border-radius:50%;background:${color};display:inline-block;flex-shrink:0;"></span>
-            <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:1.3rem;font-weight:600;color:var(--ink);">${continentLabel}</span>
-            <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-left:auto;">${locs.length}</span>
-          </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));border-top:1px solid var(--rule);border-left:1px solid var(--rule);">
-            ${locs.map(name => `<div style="padding:7px 12px;border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);font-family:'EB Garamond',Georgia,serif;font-size:0.92rem;color:var(--sepia);">· ${name}</div>`).join('')}
-          </div>
-        </div>`;
-    });
-    div.innerHTML = html;
-  } else {
-    div.style.display = 'none';
-    btn.textContent = t.listBtn;
-  }
-}
-
-/* ══════════════════════════════════════════
-   INIT
-══════════════════════════════════════════ */
-// Start with aarde layer active
-aardeMarkers.forEach(m => m.addTo(map));
-applyLanguage('nl');
-setLayer('aarde');
-;
-
-document.querySelectorAll('.lang-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b === btn));
-    applyLanguage(btn.dataset.lang);
-  });
-});
-
-// Load shell pins from shared storage
-loadSchelpPins();
 </script>
 </body>
 </html>
