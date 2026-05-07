@@ -561,8 +561,11 @@ const aardeMarkers = locations.map(loc => {
   const m = L.marker([loc.lat, loc.lng], { icon: makeCircleIcon(color) });
   m._dutchName = loc.name;
   m._continent = loc.continent;
+  m.bindPopup(`<strong>${loc.name}</strong><br><span style="font-size:12px;color:var(--rule);">${loc.continent}</span>`);
   m.on('mouseover', function() { this.openPopup(); });
+  m.on('mouseout', function() { this.closePopup(); });
   return m;
+});
 });
 
 /* Brussel origin marker (always visible in schelp layer) */
