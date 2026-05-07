@@ -1557,9 +1557,19 @@ samenwerking: ()=>`
          font-size:0.9rem;color:var(--stone);">
       ${t('p_parochieploeg_desc')}
     </div>
-    <div id="tab-wereldwijd" style="display:none;margin-top:0.8rem;padding:0;
+  <div id="tab-wereldwijd" style="display:none;margin-top:0.8rem;
      border-radius:var(--r);border:1px solid var(--border);overflow:hidden;">
+  <div style="background:var(--stone);padding:0.4rem 0.8rem;display:flex;justify-content:flex-end;">
+    <button onclick="toggleFullscreen()" id="btn-fullscreen"
+      style="font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.08em;
+             padding:0.3rem 0.8rem;border-radius:var(--r);cursor:pointer;
+             background:transparent;border:1px solid rgba(201,169,110,0.4);
+             color:rgba(201,169,110,0.8);transition:all var(--t);">
+      ⛶ Volledig scherm
+    </button>
+  </div>
   <iframe 
+    id="wereldwijd-iframe"
     src="grond.html" 
     style="width:100%;height:75vh;min-height:500px;border:none;display:block;"
     title="De Wereld van de Goede Bijstand"
@@ -1823,6 +1833,38 @@ function toggleTab(id) {
     }
   });
 }
+
+  function toggleFullscreen() {
+  const iframe = document.getElementById('wereldwijd-iframe');
+  const btn = document.getElementById('btn-fullscreen');
+  if (!document.fullscreenElement) {
+    iframe.requestFullscreen().then(() => {
+      btn.textContent = '✕ Sluit volledig scherm';
+    }).catch(() => {
+      // fallback: vergroot de iframe naar viewport
+      iframe.style.position = 'fixed';
+      iframe.style.inset = '0';
+      iframe.style.width = '100vw';
+      iframe.style.height = '100vh';
+      iframe.style.zIndex = '9999';
+      iframe.style.borderRadius = '0';
+      btn.textContent = '✕ Sluit volledig scherm';
+      btn.onclick = () => {
+        iframe.style.position = '';
+        iframe.style.inset = '';
+        iframe.style.width = '100%';
+        iframe.style.height = '75vh';
+        iframe.style.zIndex = '';
+        iframe.style.borderRadius = '';
+        btn.textContent = '⛶ Volledig scherm';
+        btn.onclick = toggleFullscreen;
+      };
+    });
+  } else {
+    document.exitFullscreen();
+    btn.textContent = '⛶ Volledig scherm';
+  }
+} 
 </script>
 </body>
 </html>
