@@ -1878,6 +1878,14 @@ function toggleFullscreen() {
     btn.textContent = '⛶ Volledig scherm';
   }
 }
+  window.addEventListener('message', (e) => {
+  if (e.data === 'mapFullscreenClosed') {
+    const tab = document.getElementById('tab-wereldwijd');
+    if (tab && tab.style.display === 'block') {
+      tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+});
 </script>
 </body>
 </html>
