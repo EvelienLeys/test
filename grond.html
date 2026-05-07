@@ -804,6 +804,8 @@ document.addEventListener('fullscreenchange', () => {
     mapEl.style.height = '';
     btn.textContent = '⛶ Volledig scherm';
     setTimeout(() => map.invalidateSize(), 200);
+    // Stuur bericht naar bovenliggende pagina
+    window.parent.postMessage('mapFullscreenClosed', '*');
   }
 });
 
