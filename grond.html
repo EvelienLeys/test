@@ -753,14 +753,13 @@ function applyLanguage(lang) {
     btn.textContent = t.listBtn;
   }
 }
-  function toggleMapFullscreen() {
+function toggleMapFullscreen() {
   const mapEl = document.getElementById('map');
   const btn = document.getElementById('btn-map-fullscreen');
 
   if (!document.fullscreenElement) {
     mapEl.requestFullscreen().then(() => {
       mapEl.style.height = '100vh';
-      btn.textContent = '✕ Sluit volledig scherm';
       map.invalidateSize();
     }).catch(() => {
       // fallback
@@ -792,10 +791,21 @@ function applyLanguage(lang) {
     });
   } else {
     document.exitFullscreen();
+  }
+}
+
+document.addEventListener('fullscreenchange', () => {
+  const btn = document.getElementById('btn-map-fullscreen');
+  if (!btn) return;
+  if (document.fullscreenElement) {
+    btn.textContent = '✕ Sluit volledig scherm';
+  } else {
+    const mapEl = document.getElementById('map');
+    mapEl.style.height = '';
     btn.textContent = '⛶ Volledig scherm';
     setTimeout(() => map.invalidateSize(), 200);
   }
-}
+});
 
 /* ══════════════════════════════════════════
    INIT
