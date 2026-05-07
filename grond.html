@@ -279,7 +279,19 @@
     </button>
   </div>
 
+  <div style="position:relative;">
+  <button onclick="toggleMapFullscreen()" id="btn-map-fullscreen"
+    style="position:absolute;top:8px;right:8px;z-index:1000;
+           font-family:'Cormorant Garamond',Georgia,serif;font-size:12px;
+           font-weight:600;letter-spacing:0.15em;text-transform:uppercase;
+           padding:6px 14px;cursor:pointer;
+           background:var(--ink);color:var(--paper);
+           border:1px solid var(--gold);border-radius:2px;
+           transition:background 0.2s,color 0.2s;opacity:0.85;">
+    ⛶ Volledig scherm
+  </button>
   <div id="map"></div>
+</div>
   <div class="map-legend" id="legend"></div>
   <div class="map-count" id="map-count"></div>
   <div class="map-caption" id="txt-map-caption">Klik op een punt om de naam van de locatie te zien — zoom met het scrollwiel of de knoppen links</div>
@@ -739,6 +751,49 @@ function applyLanguage(lang) {
   } else {
     div.style.display = 'none';
     btn.textContent = t.listBtn;
+  }
+}
+  function toggleMapFullscreen() {
+  const mapEl = document.getElementById('map');
+  const btn = document.getElementById('btn-map-fullscreen');
+
+  if (!document.fullscreenElement) {
+    mapEl.requestFullscreen().then(() => {
+      mapEl.style.height = '100vh';
+      btn.textContent = '✕ Sluit volledig scherm';
+      map.invalidateSize();
+    }).catch(() => {
+      // fallback
+      mapEl.style.position = 'fixed';
+      mapEl.style.inset = '0';
+      mapEl.style.width = '100vw';
+      mapEl.style.height = '100vh';
+      mapEl.style.zIndex = '9999';
+      btn.style.position = 'fixed';
+      btn.style.top = '8px';
+      btn.style.right = '8px';
+      btn.style.zIndex = '10000';
+      btn.textContent = '✕ Sluit volledig scherm';
+      map.invalidateSize();
+      btn.onclick = () => {
+        mapEl.style.position = '';
+        mapEl.style.inset = '';
+        mapEl.style.width = '';
+        mapEl.style.height = '';
+        mapEl.style.zIndex = '';
+        btn.style.position = 'absolute';
+        btn.style.top = '8px';
+        btn.style.right = '8px';
+        btn.style.zIndex = '1000';
+        btn.textContent = '⛶ Volledig scherm';
+        btn.onclick = toggleMapFullscreen;
+        map.invalidateSize();
+      };
+    });
+  } else {
+    document.exitFullscreen();
+    btn.textContent = '⛶ Volledig scherm';
+    setTimeout(() => map.invalidateSize(), 200);
   }
 }
 
