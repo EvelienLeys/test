@@ -1561,16 +1561,23 @@ samenwerking: ()=>`
     <div id="tab-wereldwijd" style="display:none;margin-top:0.8rem;
          border-radius:var(--r);border:1px solid var(--border);overflow:hidden;">
       <div id="wereldwijd-container" style="display:flex;flex-direction:column;background:var(--stone);">
-        <div style="padding:0.4rem 0.8rem;display:flex;justify-content:flex-end;background:var(--stone);flex-shrink:0;">
-     <button onclick="toggleFullscreen()" id="btn-fullscreen"
-  style="font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.08em;
-         padding:0.3rem 0.8rem;border-radius:var(--r);cursor:pointer;
-         background:var(--stone);border:1px solid rgba(201,169,110,0.4);
-         color:rgba(201,169,110,0.8);transition:all var(--t);">
-  ✕ Sluiten
-</button>
-          </button>
-        </div>
+       <div style="padding:0.4rem 0.8rem;display:flex;justify-content:space-between;align-items:center;background:var(--stone);flex-shrink:0;">
+  <button onclick="minimaliserKaart()" id="btn-minimaliseer"
+    style="display:none;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;
+           letter-spacing:0.08em;padding:0.3rem 0.8rem;border-radius:var(--r);cursor:pointer;
+           background:var(--stone);border:1px solid rgba(201,169,110,0.4);
+           color:rgba(201,169,110,0.8);transition:all var(--t);">
+    ⊟ Naar grondbibliotheek
+  </button>
+  <div style="flex:1;"></div>
+  <button onclick="toggleFullscreen()" id="btn-fullscreen"
+    style="font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.08em;
+           padding:0.3rem 0.8rem;border-radius:var(--r);cursor:pointer;
+           background:var(--stone);border:1px solid rgba(201,169,110,0.4);
+           color:rgba(201,169,110,0.8);transition:all var(--t);">
+    ✕ Sluiten
+  </button>
+</div>
         <iframe 
   id="wereldwijd-iframe"
   src=""
@@ -1857,16 +1864,40 @@ function toggleFullscreen() {
   }
 }
 
+function minimaliserKaart() {
+  const iframe = document.getElementById('wereldwijd-iframe');
+  const btnMin = document.getElementById('btn-minimaliseer');
+  if (iframe) iframe.contentWindow.postMessage('minimaliserKaart', '*');
+  if (btnMin) btnMin.style.display = 'none';
+}
+
+window.addEventListener('message', (e) => {
+  if (e.data === 'kaartGemaximaliseerd') {
+    const btnMin = document.getElementById('btn-minimaliseer');
+    if (btnMin) btnMin.style.display = 'inline-block';
+  }
+  if (e.data === 'kaartGeminimaliseerd') {
+    const btnMin = document.getElementById('btn-minimaliseer');
+    if (btnMin) btnMin.style.display = 'none';
+  }
+  if (e.data === 'mapFullscreenClosed') {
+    const tab = document.getElementById('tab-wereldwijd');
+    if (tab && tab.style.display === 'block') {
+      tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+});
+
 document.addEventListener('fullscreenchange', () => {
   if (!document.fullscreenElement) {
-    // Gebruiker verliet fullscreen (via Esc of knop) → tab sluiten
     const tab = document.getElementById('tab-wereldwijd');
     const btn = document.getElementById('btn-wereldwijd');
+    const btnMin = document.getElementById('btn-minimaliseer');
+    const iframe = document.getElementById('wereldwijd-iframe');
     if (tab) tab.style.display = 'none';
-    if (btn) {
-      btn.style.background = 'var(--cream)';
-      btn.style.color = 'var(--stone-mid)';
-    }
+    if (btn) { btn.style.background = 'var(--cream)'; btn.style.color = 'var(--stone-mid)'; }
+    if (btnMin) btnMin.style.display = 'none';
+    if (iframe) iframe.contentWindow.postMessage('minimaliserKaart', '*');
   }
 });
 </script>
