@@ -216,28 +216,30 @@
     footer { background: var(--ink); color: var(--rule); text-align: center; padding: 28px 24px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 13px; letter-spacing: 0.12em; }
     footer a { color: var(--rule); text-decoration: none; }
     footer a:hover { color: var(--paper); }
+    
+@media (max-width: 520px) {
+  nav a { padding: 9px 14px; font-size: 11px; letter-spacing: 0.1em; }
+  .stat { min-width: 100px; }
+  .map-legend { gap: 10px; font-size: 12px; }
+  .lang-label { display: none; }
+  .lang-btn { padding: 10px 8px; font-size: 10px; }
+}
 
-    @media (max-width: 520px) {
-      nav a { padding: 9px 14px; font-size: 11px; letter-spacing: 0.1em; }
-      .stat { min-width: 100px; }
-      .map-legend { gap: 10px; font-size: 12px; }
-      .lang-label { display: none; }
-      .lang-btn { padding: 10px 8px; font-size: 10px; }
-
-      #map.iframe-maximized {
+#map.iframe-maximized {
   position: fixed;
   inset: 0;
   width: 100vw;
   height: 100vh;
   z-index: 9999;
 }
-#map.iframe-maximized + #btn-map-fullscreen,
-#map.iframe-maximized ~ * #btn-map-fullscreen {
-  position: fixed;
-  top: 8px;
-  right: 8px;
-  z-index: 10000;
+
+body:has(#map.iframe-maximized) #btn-map-fullscreen {
+  position: fixed !important;
+  top: 8px !important;
+  right: 8px !important;
+  z-index: 10000 !important;
 }
+   
       /* Kaart gemaximaliseerd in iframe */
     #map.iframe-maximized {
       position: fixed;
