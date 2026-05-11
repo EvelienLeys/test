@@ -797,18 +797,21 @@ function applyLanguage(lang) {
     btn.textContent = t.listBtn;
   }
 }
-function toggleMapFullscreen() {
+
+  function toggleMapFullscreen() {
   const mapEl = document.getElementById('map');
   const btn = document.getElementById('btn-map-fullscreen');
+  const wrapper = document.getElementById('map-wrapper');
+  const layerToggle = document.querySelector('.layer-toggle');
 
-  // Altijd berichten sturen als we in een iframe zitten
   if (window.self !== window.top) {
+    // In iframe (ingebed in hoofdsite)
     const isMax = mapEl.classList.contains('iframe-maximized');
     if (!isMax) {
-     mapEl.classList.add('iframe-maximized');
-btn.textContent = '✕ Sluit kaart';
-window.scrollTo({ top: 0, behavior: 'instant' });
-window.parent.postMessage('kaartGemaximaliseerd', '*');
+      mapEl.classList.add('iframe-maximized');
+      btn.textContent = '✕ Sluit kaart';
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      window.parent.postMessage('kaartGemaximaliseerd', '*');
     } else {
       mapEl.classList.remove('iframe-maximized');
       btn.textContent = '⛶ Volledig scherm';
@@ -818,12 +821,25 @@ window.parent.postMessage('kaartGemaximaliseerd', '*');
     return;
   }
 
-  // Standalone gebruik (niet in iframe)
-  if (!document.fullscreenElement) {
-    mapEl.requestFullscreen().catch(() => {});
+  // Standalone gebruik: uitklappen tot net onder de layer-toggle
+  const isExpanded = mapEl.classList.contains('standalone-maximized');
+  if (!isExpanded) {
+    const toggleBottom = layerToggle.getBoundingClientRect().bottom + window.scrollY;
+    const availableHeight = window.innerHeight - layerToggle.getBoundingClientRect().bottom;
+    mapEl.style.height = availableHeight + 'px';
+    mapEl.style.position = 'sticky';
+    mapEl.style.top = layerToggle.getBoundingClientRect().bottom + 'px';
+    mapEl.classList.add('standalone-maximized');
+    btn.textContent = '✕ Sluit volledig scherm';
+    wrapper.scrollIntoView({ behavior: 'smooth', block: 'start' });
   } else {
-    document.exitFullscreen();
+    mapEl.style.height = '';
+    mapEl.style.position = '';
+    mapEl.style.top = '';
+    mapEl.classList.remove('standalone-maximized');
+    btn.textContent = '⛶ Volledig scherm';
   }
+  setTimeout(() => map.invalidateSize(), 200);
 }
 
 // Luister naar berichten van de parent (minimaliseer-knop)
