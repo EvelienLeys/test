@@ -805,10 +805,10 @@ function toggleMapFullscreen() {
   if (window.self !== window.top) {
     const isMax = mapEl.classList.contains('iframe-maximized');
     if (!isMax) {
-      mapEl.classList.add('iframe-maximized');
-      btn.textContent = '✕ Sluit kaart';
-      window.scrollTo({ top: 0, behavior: 'instant' });
-      window.parent.postMessage('kaartGemaximaliseerd', '*');
+     mapEl.classList.add('iframe-maximized');
+btn.textContent = '✕ Sluit kaart';
+window.scrollTo({ top: 0, behavior: 'instant' });
+window.parent.postMessage('kaartGemaximaliseerd', '*');
     } else {
       mapEl.classList.remove('iframe-maximized');
       btn.textContent = '⛶ Volledig scherm';
