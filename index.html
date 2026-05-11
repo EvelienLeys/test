@@ -1505,7 +1505,8 @@ geschiedenis: ()=>`
     <div class="info-box">
       <h3>📍 ${t('sb_addr')}</h3>
       <p>Kolenmarkt 91<br>(kant Fontainasplein)<br>1000 Brussel</p>
-      <p style="margin-top:0.5rem;"><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">${t('gesch_maps')}</a></p>
+      <p style="margin-top:0.5rem;"><a href="https://maps.google.com/?q=Kolenmarkt+9
+      1,+1000+Brussel" target="_blank">${t('gesch_maps')}</a></p>
     </div>
   </div>
 </section>`,
@@ -1566,7 +1567,10 @@ samenwerking: ()=>`
                    padding:0.3rem 0.8rem;border-radius:var(--r);cursor:pointer;
                    background:transparent;border:1px solid rgba(201,169,110,0.4);
                    color:rgba(201,169,110,0.8);transition:all var(--t);">
-            ⛶ Volledig scherm
+            <button onclick="toggleFullscreen()" id="btn-fullscreen"
+  ...>
+  ✕ Sluiten
+</button>
           </button>
         </div>
         <iframe 
@@ -1834,55 +1838,36 @@ function toggleTab(id) {
     }
   });
 
-  // Laad iframe pas bij eerste klik
   if (id === 'wereldwijd') {
+    const tab = document.getElementById('tab-wereldwijd');
+    const isNowOpen = tab.style.display === 'block';
     const iframe = document.getElementById('wereldwijd-iframe');
-    if (iframe && !iframe.src.includes('grond.html')) {
-      iframe.src = 'grond.html';
+    if (isNowOpen) {
+      if (iframe && !iframe.src.includes('grond.html')) {
+        iframe.src = 'grond.html';
+      }
+      // Direct fullscreen aanvragen
+      const container = document.getElementById('wereldwijd-container');
+      container.requestFullscreen().catch(() => {});
     }
   }
 }
 
 function toggleFullscreen() {
-  const container = document.getElementById('wereldwijd-container');
-  const btn = document.getElementById('btn-fullscreen');
-  const iframe = document.getElementById('wereldwijd-iframe');
-
-  if (!document.fullscreenElement) {
-    container.requestFullscreen().then(() => {
-      iframe.style.height = 'calc(100vh - 38px)';
-      btn.textContent = '✕ Sluit volledig scherm';
-    }).catch(() => {
-      // fallback
-      container.style.position = 'fixed';
-      container.style.inset = '0';
-      container.style.width = '100vw';
-      container.style.height = '100vh';
-      container.style.zIndex = '9999';
-      iframe.style.height = 'calc(100vh - 38px)';
-      btn.textContent = '✕ Sluit volledig scherm';
-      btn.onclick = () => {
-        container.style.position = '';
-        container.style.inset = '';
-        container.style.width = '';
-        container.style.height = '';
-        container.style.zIndex = '';
-        iframe.style.height = '75vh';
-        btn.textContent = '⛶ Volledig scherm';
-        btn.onclick = toggleFullscreen;
-      };
-    });
-  } else {
+  if (document.fullscreenElement) {
     document.exitFullscreen();
-    iframe.style.height = '75vh';
-    btn.textContent = '⛶ Volledig scherm';
   }
 }
-  window.addEventListener('message', (e) => {
-  if (e.data === 'mapFullscreenClosed') {
+
+document.addEventListener('fullscreenchange', () => {
+  if (!document.fullscreenElement) {
+    // Gebruiker verliet fullscreen (via Esc of knop) → tab sluiten
     const tab = document.getElementById('tab-wereldwijd');
-    if (tab && tab.style.display === 'block') {
-      tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const btn = document.getElementById('btn-wereldwijd');
+    if (tab) tab.style.display = 'none';
+    if (btn) {
+      btn.style.background = 'var(--cream)';
+      btn.style.color = 'var(--stone-mid)';
     }
   }
 });
