@@ -382,6 +382,29 @@ body.rtl .translation-notice {
   border-left: none;
   border-right: 4px solid var(--gold);
 }
+
+ /* Wereldwijd tab — fullscreen overlay */
+#tab-wereldwijd.tab-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  display: flex !important;
+  flex-direction: column;
+}
+#tab-wereldwijd.tab-fullscreen #wereldwijd-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+#tab-wereldwijd.tab-fullscreen #wereldwijd-iframe {
+  flex: 1;
+  height: 0; /* laat flex het vullen */
+  min-height: unset;
+} 
 </style>
 </head>
 <body>
@@ -1567,16 +1590,15 @@ samenwerking: ()=>`
            letter-spacing:0.08em;padding:0.3rem 0.8rem;border-radius:var(--r);cursor:pointer;
            background:var(--stone);border:1px solid rgba(201,169,110,0.4);
            color:rgba(201,169,110,0.8);transition:all var(--t);">
-    ⊟ Naar grondbibliotheek
   </button>
   <div style="flex:1;"></div>
-  <button onclick="toggleFullscreen()" id="btn-fullscreen"
-    style="font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.08em;
-           padding:0.3rem 0.8rem;border-radius:var(--r);cursor:pointer;
-           background:var(--stone);border:1px solid rgba(201,169,110,0.4);
-           color:rgba(201,169,110,0.8);transition:all var(--t);">
-    ✕ Sluiten
-  </button>
+  <button onclick="sluitWerelwijd()" id="btn-fullscreen"
+  style="font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.08em;
+         padding:0.3rem 0.8rem;border-radius:var(--r);cursor:pointer;
+         background:var(--stone);border:1px solid rgba(201,169,110,0.4);
+         color:rgba(201,169,110,0.8);transition:all var(--t);">
+  ✕ Sluiten
+</button>
 </div>
         <iframe 
   id="wereldwijd-iframe"
@@ -1835,32 +1857,45 @@ function toggleTab(id) {
     const btn = document.getElementById('btn-' + name);
     if (!tab) return;
     const isTarget = name === id;
-    const isOpen = tab.style.display === 'block';
+    const isOpen   = tab.style.display === 'block';
     tab.style.display = (isTarget && !isOpen) ? 'block' : 'none';
     if (btn) {
       btn.style.background = (isTarget && !isOpen) ? 'var(--stone-mid)' : 'var(--cream)';
-      btn.style.color = (isTarget && !isOpen) ? 'var(--gold-lt)' : 'var(--stone-mid)';
+      btn.style.color       = (isTarget && !isOpen) ? 'var(--gold-lt)'   : 'var(--stone-mid)';
     }
   });
 
   if (id === 'wereldwijd') {
-    const tab = document.getElementById('tab-wereldwijd');
-    const isNowOpen = tab.style.display === 'block';
+    const tab    = document.getElementById('tab-wereldwijd');
     const iframe = document.getElementById('wereldwijd-iframe');
+    const isNowOpen = tab.style.display === 'block';
+
     if (isNowOpen) {
+      // Laad iframe als dat nog niet gedaan is
       if (iframe && !iframe.src.includes('grond.html')) {
         iframe.src = 'grond.html';
       }
-      // Direct fullscreen aanvragen
-      const container = document.getElementById('wereldwijd-container');
-      container.requestFullscreen().catch(() => {});
+      // Zet tab in fullscreen via CSS (werkt op iOS + Android)
+      tab.classList.add('tab-fullscreen');
+      document.body.style.overflow = 'hidden';
     }
   }
 }
 
 function toggleFullscreen() {
-  if (document.fullscreenElement) {
-    document.exitFullscreen();
+  // Sluit de wereldwijd tab volledig
+  sluitWerelwijd();
+}
+
+function sluitWerelwijd() {
+  const tab = document.getElementById('tab-wereldwijd');
+  const btn = document.getElementById('btn-wereldwijd');
+  tab.classList.remove('tab-fullscreen');
+  tab.style.display = 'none';
+  document.body.style.overflow = '';
+  if (btn) {
+    btn.style.background = 'var(--cream)';
+    btn.style.color = 'var(--stone-mid)';
   }
 }
 
@@ -1873,50 +1908,18 @@ function minimaliserKaart() {
 
 window.addEventListener('message', (e) => {
   if (e.data === 'kaartGemaximaliseerd') {
-    const btnMin = document.getElementById('btn-minimaliseer');
-    if (btnMin) btnMin.style.display = 'inline-block';
-    const iframe = document.getElementById('wereldwijd-iframe');
-    if (iframe) {
-      const rect = iframe.getBoundingClientRect();
-      const beschikbaar = window.innerHeight - rect.top;
-      iframe.style.height = beschikbaar + 'px';
-      iframe.scrollIntoView({ behavior: 'instant', block: 'start' });
-    }
+    // iframe meldt: kaart is max → niets nodig, tab is al fullscreen
   }
   if (e.data === 'kaartGeminimaliseerd') {
-    const btnMin = document.getElementById('btn-minimaliseer');
-    if (btnMin) btnMin.style.display = 'none';
-    const iframe = document.getElementById('wereldwijd-iframe');
-    if (iframe) {
-      iframe.style.position = '';
-      iframe.style.inset = '';
-      iframe.style.width = '';
-      iframe.style.height = '75vh';
-      iframe.style.zIndex = '';
-    }
-  }
-  if (e.data === 'mapFullscreenClosed') {
+    // iframe meldt: kaart terug naar normaal → tab blijft open maar niet fullscreen
     const tab = document.getElementById('tab-wereldwijd');
-    if (tab && tab.style.display === 'block') {
-      tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+    tab.classList.remove('tab-fullscreen');
+    document.body.style.overflow = '';
+    // Scroll naar de tab
+    setTimeout(() => tab.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
-});
-
-document.addEventListener('fullscreenchange', () => {
-  if (!document.fullscreenElement) {
-    const tab = document.getElementById('tab-wereldwijd');
-    const btn = document.getElementById('btn-wereldwijd');
-    const btnMin = document.getElementById('btn-minimaliseer');
-    const iframe = document.getElementById('wereldwijd-iframe');
-    if (iframe) {
-  iframe.style.position = '';
-  iframe.style.inset = '';
-  iframe.style.width = '';
-  iframe.style.height = '75vh';
-  iframe.style.zIndex = '';
-  iframe.contentWindow.postMessage('minimaliserKaart', '*');
-}
+  if (e.data === 'sluitWerelwijd') {
+    sluitWerelwijd();
   }
 });
 </script>
