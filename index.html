@@ -1876,6 +1876,7 @@ window.addEventListener('message', (e) => {
     const btnMin = document.getElementById('btn-minimaliseer');
     if (btnMin) btnMin.style.display = 'inline-block';
   }
+}
  if (e.data === 'kaartGeminimaliseerd') {
   const btnMin = document.getElementById('btn-minimaliseer');
   if (btnMin) btnMin.style.display = 'none';
@@ -1887,7 +1888,7 @@ window.addEventListener('message', (e) => {
     iframe.style.height = '75vh';
     iframe.style.zIndex = '';
   }
-
+ }
   if (e.data === 'mapFullscreenClosed') {
     const tab = document.getElementById('tab-wereldwijd');
     if (tab && tab.style.display === 'block') {
