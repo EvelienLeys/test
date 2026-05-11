@@ -223,7 +223,36 @@
       .map-legend { gap: 10px; font-size: 12px; }
       .lang-label { display: none; }
       .lang-btn { padding: 10px 8px; font-size: 10px; }
+
+      #map.iframe-maximized {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 9999;
+}
+#map.iframe-maximized + #btn-map-fullscreen,
+#map.iframe-maximized ~ * #btn-map-fullscreen {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  z-index: 10000;
+}
+      /* Kaart gemaximaliseerd in iframe */
+    #map.iframe-maximized {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
     }
+    body:has(#map.iframe-maximized) #btn-map-fullscreen {
+      position: fixed !important;
+      top: 8px !important;
+      right: 8px !important;
+      z-index: 10000 !important;
+    }
+      
   </style>
 </head>
 <body>
@@ -279,8 +308,8 @@
     </button>
   </div>
 
-  <div style="position:relative;">
-  <button onclick="toggleMapFullscreen()" id="btn-map-fullscreen"
+  <div style="position:relative;" id="map-wrapper">
+    <button onclick="toggleMapFullscreen()" id="btn-map-fullscreen"
     style="position:absolute;top:8px;right:8px;z-index:1000;
            font-family:'Cormorant Garamond',Georgia,serif;font-size:12px;
            font-weight:600;letter-spacing:0.15em;text-transform:uppercase;
@@ -756,13 +785,30 @@ function applyLanguage(lang) {
 function toggleMapFullscreen() {
   const mapEl = document.getElementById('map');
   const btn = document.getElementById('btn-map-fullscreen');
+  const isInIframe = window.self !== window.top;
 
+  if (isInIframe) {
+    // In iframe: stuur bericht naar parent i.p.v. eigen fullscreen
+    const isMax = mapEl.classList.contains('iframe-maximized');
+    if (!isMax) {
+      mapEl.classList.add('iframe-maximized');
+      btn.textContent = '✕ Sluit kaart';
+      window.parent.postMessage('kaartGemaximaliseerd', '*');
+    } else {
+      mapEl.classList.remove('iframe-maximized');
+      btn.textContent = '⛶ Volledig scherm';
+      window.parent.postMessage('kaartGeminimaliseerd', '*');
+    }
+    setTimeout(() => map.invalidateSize(), 200);
+    return;
+  }
+
+  // Standalone (niet in iframe): origineel gedrag
   if (!document.fullscreenElement) {
     mapEl.requestFullscreen().then(() => {
       mapEl.style.height = '100vh';
       map.invalidateSize();
     }).catch(() => {
-      // fallback
       mapEl.style.position = 'fixed';
       mapEl.style.inset = '0';
       mapEl.style.width = '100vw';
@@ -804,8 +850,20 @@ document.addEventListener('fullscreenchange', () => {
     mapEl.style.height = '';
     btn.textContent = '⛶ Volledig scherm';
     setTimeout(() => map.invalidateSize(), 200);
-    // Stuur bericht naar bovenliggende pagina
     window.parent.postMessage('mapFullscreenClosed', '*');
+  }
+});
+
+// Luister naar berichten van de parent (minimaliseer-knop)
+window.addEventListener('message', (e) => {
+  if (e.data === 'minimaliserKaart') {
+    const mapEl = document.getElementById('map');
+    const btn = document.getElementById('btn-map-fullscreen');
+    if (mapEl.classList.contains('iframe-maximized')) {
+      mapEl.classList.remove('iframe-maximized');
+      if (btn) btn.textContent = '⛶ Volledig scherm';
+      setTimeout(() => map.invalidateSize(), 200);
+    }
   }
 });
 
