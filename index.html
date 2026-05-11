@@ -1877,22 +1877,33 @@ window.addEventListener('message', (e) => {
     if (btnMin) btnMin.style.display = 'inline-block';
   }
   if (e.data === 'kaartGeminimaliseerd') {
-    const btnMin = document.getElementById('btn-minimaliseer');
-    if (btnMin) btnMin.style.display = 'none';
+  const btnMin = document.getElementById('btn-minimaliseer');
+  if (btnMin) btnMin.style.display = 'none';
+  const iframe = document.getElementById('wereldwijd-iframe');
+  if (iframe) {
+    iframe.style.position = '';
+    iframe.style.inset = '';
+    iframe.style.width = '';
+    iframe.style.height = '';
+    iframe.style.zIndex = '';
   }
   if (e.data === 'mapFullscreenClosed') {
     const tab = document.getElementById('tab-wereldwijd');
     if (tab && tab.style.display === 'block') {
       tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-    if (e.data === 'kaartGemaximaliseerd') {
+   if (e.data === 'kaartGemaximaliseerd') {
   const btnMin = document.getElementById('btn-minimaliseer');
   if (btnMin) btnMin.style.display = 'inline-block';
-  // Scroll zodat de iframe bovenaan het viewport staat
   const iframe = document.getElementById('wereldwijd-iframe');
-  if (iframe) iframe.scrollIntoView({ behavior: 'instant', block: 'start' });
-}
+  if (iframe) {
+    iframe.style.position = 'fixed';
+    iframe.style.inset = '0';
+    iframe.style.width = '100vw';
+    iframe.style.height = '100vh';
+    iframe.style.zIndex = '9998';
   }
+}
 });
 
 document.addEventListener('fullscreenchange', () => {
@@ -1900,11 +1911,15 @@ document.addEventListener('fullscreenchange', () => {
     const tab = document.getElementById('tab-wereldwijd');
     const btn = document.getElementById('btn-wereldwijd');
     const btnMin = document.getElementById('btn-minimaliseer');
-    const iframe = document.getElementById('wereldwijd-iframe');
-    if (tab) tab.style.display = 'none';
-    if (btn) { btn.style.background = 'var(--cream)'; btn.style.color = 'var(--stone-mid)'; }
-    if (btnMin) btnMin.style.display = 'none';
-    if (iframe) iframe.contentWindow.postMessage('minimaliserKaart', '*');
+   const iframe = document.getElementById('wereldwijd-iframe');
+    if (iframe) {
+      iframe.style.position = '';
+      iframe.style.inset = '';
+      iframe.style.width = '';
+      iframe.style.height = '';
+      iframe.style.zIndex = '';
+      iframe.contentWindow.postMessage('minimaliserKaart', '*');
+    }
   }
 });
 </script>
