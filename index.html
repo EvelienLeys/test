@@ -1875,32 +1875,36 @@ window.addEventListener('message', (e) => {
   if (e.data === 'kaartGemaximaliseerd') {
     const btnMin = document.getElementById('btn-minimaliseer');
     if (btnMin) btnMin.style.display = 'inline-block';
-    const iframe = document.getElementById('wereldwijd-iframe');
-    if (iframe) {
-      const rect = iframe.getBoundingClientRect();
-      const beschikbaar = window.innerHeight - rect.top;
-      iframe.style.height = beschikbaar + 'px';
-      iframe.scrollIntoView({ behavior: 'instant', block: 'start' });
-    }
   }
-  if (e.data === 'kaartGeminimaliseerd') {
-    const btnMin = document.getElementById('btn-minimaliseer');
-    if (btnMin) btnMin.style.display = 'none';
-    const iframe = document.getElementById('wereldwijd-iframe');
-    if (iframe) {
-      iframe.style.position = '';
-      iframe.style.inset = '';
-      iframe.style.width = '';
-      iframe.style.height = '75vh';
-      iframe.style.zIndex = '';
-    }
+ if (e.data === 'kaartGeminimaliseerd') {
+  const btnMin = document.getElementById('btn-minimaliseer');
+  if (btnMin) btnMin.style.display = 'none';
+  const iframe = document.getElementById('wereldwijd-iframe');
+  if (iframe) {
+    iframe.style.position = '';
+    iframe.style.inset = '';
+    iframe.style.width = '';
+    iframe.style.height = '75vh';
+    iframe.style.zIndex = '';
   }
+}
   if (e.data === 'mapFullscreenClosed') {
     const tab = document.getElementById('tab-wereldwijd');
     if (tab && tab.style.display === 'block') {
       tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  if (e.data === 'kaartGemaximaliseerd') {
+  const btnMin = document.getElementById('btn-minimaliseer');
+  if (btnMin) btnMin.style.display = 'inline-block';
+  const iframe = document.getElementById('wereldwijd-iframe');
+  if (iframe) {
+    // Bereken hoeveel schermruimte er nog is onder de bovenkant van de iframe
+    const rect = iframe.getBoundingClientRect();
+    const beschikbaar = window.innerHeight - rect.top;
+    iframe.style.height = beschikbaar + 'px';
+    iframe.scrollIntoView({ behavior: 'instant', block: 'start' });
   }
+}
 });
 
 document.addEventListener('fullscreenchange', () => {
