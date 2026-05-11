@@ -1885,6 +1885,13 @@ window.addEventListener('message', (e) => {
     if (tab && tab.style.display === 'block') {
       tab.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+    if (e.data === 'kaartGemaximaliseerd') {
+  const btnMin = document.getElementById('btn-minimaliseer');
+  if (btnMin) btnMin.style.display = 'inline-block';
+  // Scroll zodat de iframe bovenaan het viewport staat
+  const iframe = document.getElementById('wereldwijd-iframe');
+  if (iframe) iframe.scrollIntoView({ behavior: 'instant', block: 'start' });
+}
   }
 });
 
