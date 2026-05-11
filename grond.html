@@ -826,20 +826,6 @@ window.parent.postMessage('kaartGemaximaliseerd', '*');
   }
 }
 
-document.addEventListener('fullscreenchange', () => {
-  const btn = document.getElementById('btn-map-fullscreen');
-  if (!btn) return;
-  if (document.fullscreenElement) {
-    btn.textContent = '✕ Sluit volledig scherm';
-  } else {
-    const mapEl = document.getElementById('map');
-    mapEl.style.height = '';
-    btn.textContent = '⛶ Volledig scherm';
-    setTimeout(() => map.invalidateSize(), 200);
-    window.parent.postMessage('mapFullscreenClosed', '*');
-  }
-});
-
 // Luister naar berichten van de parent (minimaliseer-knop)
 window.addEventListener('message', (e) => {
   if (e.data === 'minimaliserKaart') {
