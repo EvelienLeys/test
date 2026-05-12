@@ -86,11 +86,12 @@ p:last-child { margin-bottom: 0; }
   background-image: url('https://www.flemishmastersinsitu.com/sites/vlaamsemeestersinsitu/files/public/media/images/2023-06/Aangepast%20Exterieur_Knop%204%201%20Icoon%20Kerkgebouw%20Goede%20Bijstand.jpg');
   background-size: cover; background-position: center 38%;
   opacity: 0.38;
-  animation: heroZoom 18s ease-in-out infinite alternate;
+  /*INZOOMEN FOTO*/
+  /*animation: heroZoom 18s ease-in-out infinite alternate; */
 }
-@keyframes heroZoom {
+/*@keyframes heroZoom {
   from { transform: scale(1); }
-  to   { transform: scale(1.06); }
+  to   { transform: scale(1.06); }*/
 }
 .hero-vignette {
   position: absolute; inset: 0;
@@ -163,7 +164,7 @@ p:last-child { margin-bottom: 0; }
   z-index: 3; cursor: pointer;
   animation: fadeUp 1s ease 1.2s both;
 }
-.hero-scroll span { font-family: var(--font-ui); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); text-shadow: 0 0 12px rgba(74,144,196,0.5); }
+.hero-scroll span { font-family: var(--font-ui); font-size: 0.6rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); }
 .hero-scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold), transparent); animation: scrollPulse 2s ease-in-out infinite; }
 @keyframes scrollPulse { 0%,100%{opacity:0.4;transform:scaleY(1)} 50%{opacity:1;transform:scaleY(1.2)} }
 @keyframes fadeUp { from{opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
@@ -221,37 +222,20 @@ body.rtl .section-title::after { margin-left: 0; margin-right: 0.5rem; }
 .subsection { font-family: var(--font-disp); font-style: italic; font-size: 1.05rem; color: var(--gold-dk); margin: 1.5rem 0 0.5rem; }
 .ornament { text-align: center; color: var(--gold); letter-spacing: 0.6em; font-size: 0.6rem; margin: 2rem 0; opacity: 0.7; }
 
-/* ── NIEUWS ── */
-.nieuws-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 1.4rem 0 1.8rem; }
-@media(max-width:600px){ .nieuws-grid { grid-template-columns: 1fr; } }
-.nieuws-card {
-  background: var(--white); border: 1px solid var(--border);
-  border-top: 3px solid var(--gold);
-  border-radius: var(--r); overflow: hidden;
-  box-shadow: var(--shadow); transition: box-shadow var(--t), transform var(--t);
-}
-.nieuws-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
-.nieuws-card img { width: 100%; height: 220px; object-fit: cover; object-position: center top; display: block; }
-.nieuws-card-body { padding: 1rem 1.2rem 1.1rem; }
-.nieuws-card-body h3 { font-family: var(--font-disp); font-size: 1rem; font-weight: 500; color: var(--stone-mid); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
-.nieuws-card-body p { font-size: 0.87rem; color: var(--muted); line-height: 1.55; margin-bottom: 0.6rem; }
-.nieuws-card-body a { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dk); }
-.nieuws-card-body a:hover { color: var(--gold); }
-  
 /* ── AGENDA ── */
 .agenda-wrap { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); }
 .agenda-month { background: var(--stone); color: var(--gold); font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.35rem 1rem; }
 .agenda-row { display: grid; grid-template-columns: 80px 1fr; border-bottom: 1px solid var(--border); background: var(--white); }
 .agenda-row:last-child { border-bottom: none; }
 .agenda-row.weekend .date-cell { background: var(--parchment); }
-.date-cell { background: var(--cream); border-right: 2px solid var(--border); padding: 0.5rem 0.7rem; display: flex; flex-direction: column; justify-content: center; }
+.date-cell { background: var(--cream); border-right: 2px solid var(--border); padding: 0.5rem 0.7rem; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
 .date-cell .dn { font-family: var(--font-ui); font-size: 0.57rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
 .date-cell .dd { font-family: var(--font-disp); font-size: 1.3rem; font-weight: 400; color: var(--stone-mid); line-height: 1; }
 .date-cell .dm { font-size: 0.55rem; font-weight: 500; text-transform: uppercase; color: var(--muted); letter-spacing: 0.06em; }
 .events-cell { padding: 0.4rem 1rem; display: flex; flex-direction: column; justify-content: center; }
 .ev-row { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.06rem 0; font-size: 0.86rem; color: var(--stone); }
 .ev-time { font-family: var(--font-ui); font-size: 0.7rem; font-weight: 600; color: var(--gold-dk); min-width: 40px; flex-shrink: 0; }
-.ev-dot { font-size: 0.5rem; color: var(--gold); flex-shrink: 0; }
+.ev-dot { font-size: 1rem; color: var(--gold); flex-shrink: 0; }
 .agenda-empty { padding: 1.2rem; font-style: italic; color: var(--muted); font-size: 0.9rem; }
 
 /* ── CARDS ── */
@@ -399,29 +383,6 @@ body.rtl .translation-notice {
   border-left: none;
   border-right: 4px solid var(--gold);
 }
-
- /* Wereldwijd tab — fullscreen overlay */
-#tab-wereldwijd.tab-fullscreen {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  margin: 0;
-  border-radius: 0;
-  border: none;
-  display: flex !important;
-  flex-direction: column;
-}
-#tab-wereldwijd.tab-fullscreen #wereldwijd-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-#tab-wereldwijd.tab-fullscreen #wereldwijd-iframe {
-  flex: 1;
-  height: 0; /* laat flex het vullen */
-  min-height: unset;
-} 
 </style>
 </head>
 <body>
@@ -455,21 +416,15 @@ body.rtl .translation-notice {
   </div>
   <div class="hero-content">
     <div class="hero-ornament">
-      <span></span>
-      <em data-i18n="hero_label">1664 · Brussel</em>
-      <span></span>
    </div>
   <h1 class="hero-title" data-i18n="hero_title">Onze-Lieve-Vrouw<br>van Goede Bijstand</h1>
   <p class="hero-sub" data-i18n="hero_sub">
-    Nederlandstalige parochie in Brussel-centrum
-  </p>
-  <p class="hero-link">
-    <a href="https://www.paulusgemeenschappen.be" target="_blank">paulusgemeenschappen.be →</a>
+    Kerk en Nederlandstalige parochie in Brussel-centrum
   </p>
   <p class="hero-date" data-i18n="hero_date">Kolenmarkt 91 · 1000 Brussel</p>
 </div>
   <div class="hero-scroll" onclick="document.getElementById('nav').scrollIntoView({behavior:'smooth'})">
-    <span data-i18n="hero_scroll" style="font-size:0.85rem;letter-spacing:0.25em;">🚪 Ontdekken</span>
+    <span data-i18n="hero_scroll" style="font-size:1.4rem;letter-spacing:0.25em;">🚪 Ontdekken</span>
     <div class="hero-scroll-line"></div>
   </div>
 </section>
@@ -480,6 +435,7 @@ body.rtl .translation-notice {
   <a onclick="go('agenda')"       data-page="agenda"       data-i18n="nav_agenda">Agenda</a>
   <a onclick="go('geschiedenis')" data-page="geschiedenis" data-i18n="nav_gesch">Geschiedenis</a>
   <a onclick="go('samenwerking')" data-page="samenwerking" data-i18n="nav_samen">Samenwerking</a>
+  <a onclick="go('grond')"        data-page="grond"        data-i18n="nav_grond">Grondbibliotheek</a>
   <a onclick="go('voorbij')"      data-page="voorbij"      data-i18n="nav_voorbij">Voorbije activiteiten</a>
   <a onclick="go('huren')"        data-page="huren"        data-i18n="nav_huren">Huren</a>
   <a onclick="go('steunen')"      data-page="steunen"      data-i18n="nav_steunen">Steunen</a>
@@ -495,22 +451,25 @@ body.rtl .translation-notice {
 </div>
 
 <!-- FOOTER -->
-<footer class="site-footer">
-  <span class="footer-cross">✦</span>
-  <p data-i18n="footer_line1">Onze-Lieve-Vrouw van Goede Bijstand</p>
-  <p>Kolenmarkt 91, 1000 Brussel</p>
-  <p><a href="mailto:kerkfabriek@goedebijstand.brussels">kerkfabriek@goedebijstand.brussels</a></p>
-  <p style="margin-top:0.8rem;">
-  <a href="#" onclick="go('privacy');return false;" style="font-size:0.8rem;color:var(--gold);opacity:0.7;">
-    Cookie- & privacybeleid
-  </a>
+<footer class="site-footer" style="padding:0.8rem 2rem;">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;max-width:1100px;margin:0 auto;">
+    <div style="display:flex;align-items:center;gap:0.8rem;">
+      <img src="goedebijstand_logo_klein_ingekleurd.png" alt="Goede Bijstand" style="height:44px;width:auto;object-fit:contain;background:white;padding:4px 6px;border-radius:3px;">
+      <div>
+        <p style="font-size:0.82rem;color:#fff;margin:0;font-family:var(--font-disp);" data-i18n="footer_line1">Onze-Lieve-Vrouw van Goede Bijstand</p>
+        <p style="font-size:0.73rem;color:rgba(255,255,255,0.6);margin:0;font-family:var(--font-ui);font-weight:300;letter-spacing:0.04em;"><a href="https://www.openstreetmap.org/#map=20/50.8455991/4.3477415&layers=H" target="_blank" style="color:rgba(255,255,255,0.6);text-decoration:none;">Kolenmarkt 91, 1000 Brussel</a></p>
+      </div>
+    </div>
+    <div style="text-align:right;">
+      <p style="font-size:0.68rem;margin-bottom:0.2rem;font-family:var(--font-ui);font-weight:300;letter-spacing:0.06em;text-transform:uppercase;">
+  <a href="#" onclick="go('privacy');return false;" style="color:#fff;opacity:0.8;">Cookie- &amp; privacybeleid</a>
   &nbsp;·&nbsp;
-  <a href="#" onclick="showGdpr();return false;" style="font-size:0.8rem;color:var(--gold);opacity:0.7;">
-    Cookie-instellingen
-  </a>
+  <a href="#" onclick="showGdpr();return false;" style="color:#fff;opacity:0.8;">Cookie-instellingen</a>
 </p>
-  <div class="footer-sep">
-    <p>Kerkfabriek Onze-Lieve-Vrouw van Goede Bijstand · 0211.215.223 – RPR Brussel</p>
+<p style="font-size:0.65rem;color:rgba(255,255,255,0.4);margin:0;font-family:var(--font-ui);font-weight:300;letter-spacing:0.05em;">
+  © Kerkfabriek OLV van Goede Bijstand 2026 · 0211.215.223 – RPR Brussel
+</p>
+    </div>
   </div>
 </footer>
 
@@ -522,9 +481,9 @@ const LANGS = {
 
 /* ═══════════════════════════ NEDERLANDS ═══════════════════════════ */
 nl: {
-  hero_label:"1664 · Brussel",
+  
   hero_title:"Onze-Lieve-Vrouw\nvan Goede Bijstand",
-  hero_sub:" Nederlandstalige parochie in Brussel-centrum ",
+  hero_sub:" Kerk en Nederlandstalige parochie in Brussel-centrum ",
   hero_date:"Kolenmarkt 91 · 1000 Brussel",
   hero_scroll:"Ontdekken",
 
@@ -541,6 +500,7 @@ welkom_card_contact:"Adres, openingsuren en hoe ons bereiken.",
   nav_agenda:"Agenda",
   nav_gesch:"Geschiedenis",
   nav_samen:"Samenwerking",
+  nav_grond:"Grondbibliotheek",
   nav_voorbij:"Voorbije activiteiten",
   nav_huren:"Gebruik van de kerk",
   nav_steunen:"Steunen",
@@ -554,21 +514,24 @@ welkom_card_contact:"Adres, openingsuren en hoe ons bereiken.",
   ag_leg_taize:"Taizé",
   ag_leg_night:"Bijstand by Night",
   ag_leg_act:"Activiteit",
-  ev_sun_eucharistie:"Mis met eucharistie",
-  ev_sun_woord:"Woorddienst met eucharistie",
-  ev_voorganger:"Voorganger",
-  
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "Concert",
+  ag_leg_drempel: "Kindernevendienst",
+  ev_sun_eucharistie:"Eucharistieviering",
+  ev_sun_woord:"Woorddienst met communie",
+  ev_voorganger:"Voorganger",  
   ev_taize:"Gebed in de geest van Taizé",
-  ev_night:"Bijstand by Night (18–22 u)",
+  ev_night:"Bijstand by Night (–22 u)",
   ev_lgbtq: 'Oecumenische viering van de LGBTQ+-gemeenschap',
   ev_palm:"Palmzondag – Viering",
   ev_holy_thu:"Witte Donderdag – Sedermaaltijd",
   ev_good_fri:"Goede Vrijdag – Kruishulde",
   ev_vigil:"Paaswake",
   ev_easter:"Paasviering",
-  ev_drempel:"Onze-Lieve-Heer Hemelvaart met Drempelviering",
-  ev_pinksterwake:"Pinksterwake (uitzonderlijk geen viering LGBTQ+)",
+  ev_drempel:"Onze-Lieve-Heer Hemelvaart met <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/drempelviering' target='_blank' rel='noopener noreferrer'>Drempelviering</a>",
+  ev_pinksterwake:"<a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/pinksterwake' target='_blank' rel='noopener noreferrer'>Pinksterwake</a> (uitzonderlijk geen viering LGBTQ+)",
   ev_pinkster:"Pinksteren - Woorddienst met eucharistie",
+  ev_cleanup: "Clean-Up",
   ev_14juni: "Geen viering (wegens tv-mis in Evere: iedereen welkom - <a href='https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/tv-mis'>meer info</a>)",
   ev_concert_juni:"Barokconcert klavecimbel en baroktrombone",
   gesch_title:"Geschiedenis van het gebouw",
@@ -595,15 +558,14 @@ welkom_card_contact:"Adres, openingsuren en hoe ons bereiken.",
   p_kerkfabriek:"Kerkfabriek",
   p_kerkfabriek_desc:"De grondwet (artikelen 19 tot 21) garandeert de vrijheid van alle erediensten en verbiedt de burgerlijke overheid tussen te komen bij de benoeming van bedienaren van de eredienst en de werking ervan. Erediensten zijn in 2002 een gewestbevoegdheid geworden inzake de <strong>erkenning van plaatselijke gemeenschappen</strong> (parochies en de tegenhangers daarvan uit de andere erediensten), de <strong>organisatie en financiering van de instellingen</strong> belast met het beheer van de temporaliën van de erediensten en de <strong>huisvestingstoelagen</strong> voor de bedienaren van de erediensten, alsook het toezicht op de instellingen die de temporaliën van de eredienst beheren. Op 23 december 2021 werd de <a href='https://plaatselijke-besturen.brussels/10-december-2021-ordonnantie-betreffende-het-beheer-van-de-materiele-belangen-van-de-erkende' target='_blank'>organieke ordonnantie</a> betreffende het beheer van de materiële belangen van de erkende plaatselijke levensbeschouwelijke gemeenschappen gepubliceerd in het Belgisch Staatsblad. Zo hervormt het Brussels Hoofdstedelijk Gewest de wettelijke basis voor levensbeschouwelijke instellingen.<br><br>Meer info: <a href='https://plaatselijke-besturen.brussels/levensbeschouwelijke-instellingen' target='_blank'>Brussel Plaatselijke Besturen</a><br><br>De raad van bestuur is samengesteld uit minstens vijf leden, van wie hoogstens twee derde van hetzelfde geslacht mag zijn.<br><br><strong>Samenstelling van het huidige bestuur:</strong><br>Evelien Leys - voorzitter, Lieven Baert - secretaris, Lode Vanderbeken - penningmeester, Laura Lievevrouw, Freddy Gerard.<br><br>Zij vergaderen maandelijks om 9 uur op de eerste zondag van de maand.",
   p_parochieploeg:"Parochieploeg",
-  p_parochieploeg_desc:"De parochieploeg bestaat uit zes leden: de bedienaar, drie pastores en twee leken. Ze vergadert elke eerste woensdagvoormiddag van de maand.<br><br><strong>Samenstelling</strong><br>Johnny De Mot, Magda De Cock, Goedele Miseur, Lieven Baert, Ellen Keersmaekers, Katia Vanhemelryck",
-  p_wereldwijd: "Wereldwijd",
+  p_parochieploeg_desc:"De parochieploeg bestaat momenteel uit zes leden. Ze vergadert elke eerste woensdag van de maand.<br><br><strong>Samenstelling</strong><br>Johnny De Mot, Magda De Cock, Goedele Miseur, Lieven Baert, Ellen Keersmaekers, Katia Vanhemelryck",
   p_sacramenten:"Sacramenten",
   p_paulus:"Paulusgemeenschappen",
   p_paulus_desc:"Samenwerkingsverband van Nederlandstalige geloofsgemeenschappen in Brussel. De Goede Bijstand is een van de ankerpunten.",
   p_taize:"Taizé",
-  p_taize_desc:"Elke derde zaterdag van de maand: een gebedsavond in de geest van Taizé, open voor iedereen — indien er die dag geen christelijke viering van de Paulusgemeenschappen plaatsvindt. Zie <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> voor alle info. Contact: bep.saintandre@gmail.com ",
+  p_taize_desc:"Elke derde zaterdag van de maand: een gebedsavond in de geest van Taizé, open voor iedereen. Zie <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> voor alle info. Contact: bep.saintandre@gmail.com ",
   p_lgbtq:"Gemeenschap LGBTQ+",
-  p_lgbtq_desc:"De kerk verwelkomt de LGBTQ+-gemeenschap en streeft naar een open en inclusieve ruimte voor iedereen. Elke vierde zaterdag van de maand: een oeucumenische dienst van en voor de LGBTQ-gemeenschap — indien er die dag geen christelijke viering van de Paulusgemeenschappen plaatsvindt. Zie <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> voor alle info.",
+  p_lgbtq_desc:"De kerk verwelkomt de LGBTQ+-gemeenschap en streeft naar een open en inclusieve ruimte voor iedereen. Elke vierde zaterdag van de maand: een oeucumenische dienst van en voor de LGBTQ-gemeenschap. Zie <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> voor alle info.",
   p_klank:"Week van de Klank",
   p_klank_desc:"Jaarlijks muzikaal festival dat de kerk als akoestische parel inzet voor hedendaagse en klassieke muziekproducties.",
   p_klank_link:"lasemaineduson.be →",
@@ -651,7 +613,7 @@ voorbij_trois_yt:"Les Trois Cordes (YouTube)",
   sb_open_body:"Elke dag: 9–17 u\nZondag: 10–17 u",
   sb_addr:"Adres",
   sb_trans:"Openbaar vervoer",
-  sb_trans_body:"Metro Beurs (lijnen 1 & 5) · Tram 4 & 10",
+  sb_trans_body:"<a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>Metro Beurs (lijnen 1 & 5) · Tram 4 & 10</a>\nBus: <a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>Anneessens (48) · Manneken-Pis (48/95)</a>",
   sb_free:"Gratis toegang",
   sb_masters:"Vlaamse Meesters in Situ",
   sb_masters_link:"Meer info →",
@@ -661,9 +623,8 @@ voorbij_trois_yt:"Les Trois Cordes (YouTube)",
 /* ═══════════════════════════ FRANÇAIS ═══════════════════════════ */
 fr: {
   translation_notice:"Ceci est une traduction automatique. Merci de signaler toute erreur à la fabrique d'église.",
-  hero_label:"1664 · Bruxelles",
   hero_title:"Notre-Dame\ndu Bon Secours",
-  hero_sub:"Paroisse néerlandophone dans le centre de Bruxelles",
+  hero_sub:"Église et paroisse néerlandophone dans le centre de Bruxelles",
   hero_date:"Rue du Marché au Charbon 91 · 1000 Bruxelles",
   hero_scroll:"Découvrir",
 
@@ -680,6 +641,7 @@ welkom_card_contact:"Adresse, heures d'ouverture et comment nous contacter.",
   nav_agenda:"Agenda",
   nav_gesch:"Histoire",
   nav_samen:"Partenariats",
+  nav_grond:"Bibliothèque de terres",
   nav_voorbij:"Activités passées",
   nav_huren:"Utilisation de l'église",
   nav_steunen:"Soutenir",
@@ -693,11 +655,14 @@ welkom_card_contact:"Adresse, heures d'ouverture et comment nous contacter.",
   ag_leg_taize:"Taizé",
   ag_leg_night:"Bon Secours by Night",
   ag_leg_act:"Activité",
-  ev_sun_eucharistie:"Messe avec eucharistie",
-  ev_sun_woord:"Célébration de la Parole avec eucharistie",
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "Concert",
+  ag_leg_drempel: "Célébration enfants",
+  ev_sun_eucharistie:"Célébration de l'Eucharistie",
+  ev_sun_woord:"Célébration de la Parole avec communion",
   ev_voorganger:"Célébrant",
   ev_taize:"Prière dans l'esprit de Taizé",
-  ev_night:"Bon Secours by Night (18h–22h)",
+  ev_night:"Bon Secours by Night (–22h)",
   ev_lgbtq: 'Célébration œcuménique de la communauté LGBTQ+',
   ev_palm:"Dimanche des Rameaux",
   ev_holy_thu:"Jeudi Saint – Repas de la Cène",
@@ -730,7 +695,6 @@ welkom_card_contact:"Adresse, heures d'ouverture et comment nous contacter.",
   samen_intro:"L'église est un lieu de rencontre pour diverses communautés et initiatives culturelles.",
   p_parochie:"Paroisse Bon Secours",
   p_parochie_desc:"La communauté paroissiale néerlandophone qui gère l'église.",
-  p_wereldwijd: "Dans le monde",
   p_paulus:"Communautés Paulus",
   p_paulus_desc:"Réseau de communautés de foi néerlandophones à Bruxelles.",
   p_taize:"Taizé",
@@ -784,7 +748,7 @@ voorbij_trois_yt:"Les Trois Cordes (YouTube)",
   sb_open_body:"Chaque jour : 9h–17h\nDimanche : 10h–17h",
   sb_addr:"Adresse",
   sb_trans:"Transports en commun",
-  sb_trans_body:"Métro Beurs (lignes 1 & 5) · Tram 4 & 10",
+  sb_trans_body:"<a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>Métro Beurs (lignes 1 & 5) · Tram 4 & 10</a>\nBus: <a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>Anneessens (48) · Manneken-Pis (48/95)</a>",
   sb_free:"Entrée libre",
   sb_masters:"Maîtres Flamands in Situ",
   sb_masters_link:"Plus d'info →",
@@ -794,9 +758,8 @@ voorbij_trois_yt:"Les Trois Cordes (YouTube)",
 /* ═══════════════════════════ ENGLISH ═══════════════════════════ */
 en: {
   translation_notice:"This is an auto-generated translation. Please notify the church board if you spot any errors.",
-  hero_label:"1664 · Brussels",
   hero_title:"Our Lady\nof Good Help",
-  hero_sub:"Dutch-speaking parish in central Brussels",
+  hero_sub:"Church and Dutch-speaking parish in central Brussels",
   hero_date:"Kolenmarkt 91 · 1000 Brussels",
   hero_scroll:"Discover",
 
@@ -813,6 +776,7 @@ welkom_card_contact:"Address, opening hours and how to reach us.",
   nav_agenda:"Agenda",
   nav_gesch:"History",
   nav_samen:"Partners",
+  nav_grond:"Soil Library",
   nav_voorbij:"Past activities",
   nav_huren:"Use of the church",
   nav_steunen:"Support",
@@ -826,11 +790,14 @@ welkom_card_contact:"Address, opening hours and how to reach us.",
   ag_leg_taize:"Taizé",
   ag_leg_night:"Good Help by Night",
   ag_leg_act:"Activity",
-  ev_sun_eucharistie:"Mass with Eucharist",
-  ev_sun_woord:"Liturgy of the Word with Eucharist",
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "Concert",
+  ag_leg_drempel: "Children's service",
+  ev_sun_eucharistie:"Holy Eucharist",
+  ev_sun_woord:"Liturgy of the Word with Holy Communion",
   ev_voorganger:"Celebrant",
   ev_taize:"Prayer in the spirit of Taizé",
-  ev_night:"Good Help by Night (6–10 PM)",
+  ev_night:"Good Help by Night (–10 PM)",
   ev_lgbtq: 'Ecumenical celebration of the LGBTQ+ community',
   ev_palm:"Palm Sunday – Service",
   ev_holy_thu:"Holy Thursday – Seder meal",
@@ -867,14 +834,13 @@ welkom_card_contact:"Address, opening hours and how to reach us.",
 p_kerkfabriek_desc:"The church board manages the building's administration, finances and heritage.",
 p_parochieploeg:"Parish Team",
 p_parochieploeg_desc:"The parish team consists of volunteers who support the parish's activities, from organising services to welcoming visitors.",
-p_wereldwijd: "Worldwide",
-  p_sacramenten:"Sacraments",
+p_sacramenten:"Sacraments",
   p_paulus:"Paulus Communities",
   p_paulus_desc:"Network of Dutch-speaking faith communities in Brussels. Good Help is one of the anchor points.",
   p_taize:"Taizé",
-  p_taize_desc:"Every third Saturday of the month: an evening of prayer open to everyone — provided no Christian service of the Paulus Communities takes place that day. See the <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> for full details. Contact: bep.saintandre@gmail.com",
+  p_taize_desc:"Every third Saturday of the month: an evening of prayer open to everyone. See the <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> for full details. Contact: bep.saintandre@gmail.com",
   p_lgbtq:"LGBTQ+ Community",
-  p_lgbtq_desc:"The church welcomes the LGBTQ+ community and strives to be an open and inclusive space for everyone. Every fourth Saturday of the month: an ecumenical service by and for the LGBTQ community — provided no Christian service of the Paulus Communities takes place that day. See the <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> for full details.",  p_klank:"Week of Sound",
+  p_lgbtq_desc:"The church welcomes the LGBTQ+ community and strives to be an open and inclusive space for everyone. Every fourth Saturday of the month: an ecumenical service by and for the LGBTQ community. See the <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> for full details.",  p_klank:"Week of Sound",
   p_klank_desc:"Annual music festival using the church as an acoustic gem for contemporary and classical music productions.",
   p_klank_link:"lasemaineduson.be →",
   p_meesters:"Flemish Masters in Situ",
@@ -921,7 +887,7 @@ voorbij_trois_yt:"Les Trois Cordes (YouTube)",
   sb_open_body:"Every day: 9 AM–5 PM\nSunday: 10 AM–5 PM",
   sb_addr:"Address",
   sb_trans:"Public transport",
-  sb_trans_body:"Metro Beurs (lines 1 & 5) · Tram 4 & 10",
+  sb_trans_body:"<a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>Metro Beurs (lines 1 & 5) · Tram 4 & 10</a>\nBus: <a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>Anneessens (48) · Manneken-Pis (48/95)</a>",
   sb_free:"Free admission",
   sb_masters:"Flemish Masters in Situ",
   sb_masters_link:"More info →",
@@ -931,9 +897,8 @@ voorbij_trois_yt:"Les Trois Cordes (YouTube)",
 /* ═══════════════════════════ DEUTSCH ═══════════════════════════ */
 de: {
   translation_notice:"Dies ist eine automatische Übersetzung. Bitte teilen Sie der Kirchenfabrik Fehler mit.",
-  hero_label:"1664 · Brüssel",
   hero_title:"Unsere Liebe Frau\nvom Guten Beistand",
-  hero_sub:"Niederländischsprachige Pfarrei im Zentrum von Brüssel",
+  hero_sub:"Kirche und Niederländischsprachige Pfarrei im Zentrum von Brüssel",
   hero_date:"Kolenmarkt 91 · 1000 Brüssel",
   hero_scroll:"Entdecken",
 
@@ -950,6 +915,7 @@ welkom_card_contact:"Adresse, Öffnungszeiten und Kontaktmöglichkeiten.",
   nav_agenda:"Programm",
   nav_gesch:"Geschichte",
   nav_samen:"Kooperationen",
+  nav_grond:"Erdbibliothek",
   nav_voorbij:"Vergangene Aktivitäten",
   nav_huren:"Nutzung der Kirche",
   nav_steunen:"Unterstützen",
@@ -963,11 +929,14 @@ welkom_card_contact:"Adresse, Öffnungszeiten und Kontaktmöglichkeiten.",
   ag_leg_taize:"Taizé",
   ag_leg_night:"Guter Beistand by Night",
   ag_leg_act:"Veranstaltung",
-  ev_sun_eucharistie:"Messe mit Eucharistie",
-  ev_sun_woord:"Wortgottesdienst mit Eucharistie",
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "Konzert",
+  ag_leg_drempel: "Kindergottesdienst",
+  ev_sun_eucharistie:"Eucharistiefeier",
+  ev_sun_woord:"Wortgottesdienst mit Kommunion",
   ev_voorganger:"Zelebrant",
   ev_taize:"Gebet im Geist von Taizé",
-  ev_night:"Guter Beistand by Night (18–22 Uhr)",
+  ev_night:"Guter Beistand by Night (–22 Uhr)",
   ev_lgbtq: 'Ökumenischer Gottesdienst der LGBTQ+-Gemeinschaft',
   ev_palm:"Palmsonntag – Gottesdienst",
   ev_holy_thu:"Gründonnerstag – Sedermahlzeit",
@@ -1000,13 +969,12 @@ welkom_card_contact:"Adresse, Öffnungszeiten und Kontaktmöglichkeiten.",
   samen_intro:"Die Kirche ist ein Begegnungsort für verschiedene Gemeinschaften und kulturelle Initiativen.",
   p_parochie:"Pfarrgemeinde Guter Beistand",
   p_parochie_desc:"Die niederländischsprachige Pfarrgemeinde, die die Kirche verwaltet und wöchentliche Gottesdienste organisiert.",
-  p_wereldwijd: "Weltweit",
   p_paulus:"Paulus-Gemeinschaften",
   p_paulus_desc:"Netzwerk niederländischsprachiger Glaubensgemeinschaften in Brüssel. Der Gute Beistand ist einer der Ankerpunkte.",
   p_taize:"Taizé",
-  p_taize_desc:"Jeden dritten Samstag im Monat: ein Gebetsabend im Geist von Taizé, offen für alle — sofern an diesem Tag kein christlicher Gottesdienst der Paulus-Gemeinschaften stattfindet. Siehe <a href='#' onclick='go(\"agenda\");return false;'>Programm</a> für alle Infos. Kontakt: bep.saintandre@gmail.com ",
+  p_taize_desc:"Jeden dritten Samstag im Monat: ein Gebetsabend im Geist von Taizé, offen für alle. Siehe <a href='#' onclick='go(\"agenda\");return false;'>Programm</a> für alle Infos. Kontakt: bep.saintandre@gmail.com ",
   p_lgbtq:"LGBTQ+-Gemeinschaft",
-  p_lgbtq_desc:"Die Kirche heißt die LGBTQ+-Gemeinschaft willkommen und strebt nach einem offenen und inklusiven Raum für alle. Jeden vierten Samstag im Monat: ein ökumenischer Gottesdienst von und für die LGBTQ-Gemeinschaft — sofern an diesem Tag kein christlicher Gottesdienst der Paulus-Gemeinschaften stattfindet. Siehe <a href='#' onclick='go(\"agenda\");return false;'>Programm</a> für alle Infos.",
+  p_lgbtq_desc:"Die Kirche heißt die LGBTQ+-Gemeinschaft willkommen und strebt nach einem offenen und inklusiven Raum für alle. Jeden vierten Samstag im Monat: ein ökumenischer Gottesdienst von und für die LGBTQ-Gemeinschaft. Siehe <a href='#' onclick='go(\"agenda\");return false;'>Programm</a> für alle Infos.",
   p_klank:"Woche des Klangs",
   p_klank_desc:"Jährliches Musikfestival, das die Kirche als akustisches Juwel für zeitgenössische und klassische Musikproduktionen nutzt.",
   p_klank_link:"lasemaineduson.be →",
@@ -1054,7 +1022,7 @@ voorbij_trois_yt:"Les Trois Cordes (YouTube)",
   sb_open_body:"Täglich: 9–17 Uhr\nSonntag: 10–17 Uhr",
   sb_addr:"Adresse",
   sb_trans:"Öffentliche Verkehrsmittel",
-  sb_trans_body:"Metro Beurs (Linien 1 & 5) · Tram 4 & 10",
+  sb_trans_body:"<a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>Metro Beurs (Linien 1 & 5) · Tram 4 & 10</a>\nBus: <a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>Anneessens (48) · Manneken-Pis (48/95)</a>",
   sb_free:"Eintritt frei",
   sb_masters:"Flämische Meister in Situ",
   sb_masters_link:"Mehr Infos →",
@@ -1064,9 +1032,8 @@ voorbij_trois_yt:"Les Trois Cordes (YouTube)",
 /* ═══════════════════════════ ESPAÑOL ═══════════════════════════ */
 es: {
   translation_notice:"Esta es una traducción automática. Le rogamos que comunique cualquier error a la junta parroquial.",
-  hero_label:"1664 · Bruselas",
   hero_title:"Nuestra Señora\ndel Buen Socorro",
-  hero_sub:"Parroquia neerlandófona en el centro de Bruselas",
+  hero_sub:"Iglesia y parroquia neerlandófona en el centro de Bruselas",
   hero_date:"Kolenmarkt 91 · 1000 Bruselas",
   hero_scroll:"Descubrir",
 
@@ -1083,6 +1050,7 @@ welkom_card_contact:"Dirección, horarios y cómo contactarnos.",
   nav_agenda:"Agenda",
   nav_gesch:"Historia",
   nav_samen:"Colaboraciones",
+  nav_grond:"Biblioteca de tierras",
   nav_voorbij:"Actividades pasadas",
   nav_huren:"Uso de la iglesia",
   nav_steunen:"Apoyar",
@@ -1096,11 +1064,14 @@ welkom_card_contact:"Dirección, horarios y cómo contactarnos.",
   ag_leg_taize:"Taizé",
   ag_leg_night:"Buen Socorro by Night",
   ag_leg_act:"Actividad",
-  ev_sun_eucharistie:"Misa con eucaristía",
-  ev_sun_woord:"Liturgia de la Palabra con eucaristía",
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "Concierto",
+  ag_leg_drempel: "Celebración infantil",
+  ev_sun_eucharistie:"la Eucaristía",
+  ev_sun_woord:"Servicio de la Palabra con la Sagrada Comunión",
   ev_voorganger:"Celebrante",
   ev_taize:"Oración en el espíritu de Taizé",
-  ev_night:"Buen Socorro by Night (18h–22h)",
+  ev_night:"Buen Socorro by Night (–22h)",
   ev_lgbtq: 'Celebración ecuménica de la comunidad LGBTQ+',
   ev_palm:"Domingo de Ramos – Celebración",
   ev_holy_thu:"Jueves Santo – Cena pascual",
@@ -1133,13 +1104,12 @@ welkom_card_contact:"Dirección, horarios y cómo contactarnos.",
   samen_intro:"La iglesia es un lugar de encuentro para diversas comunidades e iniciativas culturales.",
   p_parochie:"Parroquia Buen Socorro",
   p_parochie_desc:"La comunidad parroquial neerlandófona que gestiona la iglesia y organiza celebraciones semanales.",
-  p_wereldwijd: "Mundial",
   p_paulus:"Comunidades Paulus",
   p_paulus_desc:"Red de comunidades de fe neerlandófonas en Bruselas. Buen Socorro es uno de los puntos de referencia.",
   p_taize:"Taizé",
-  p_taize_desc:"Cada tercer sábado del mes: una velada de oración abierta a todos — siempre que ese día no tenga lugar una celebración cristiana de las Comunidades Paulus. Consulte la <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> para más información. Contacto: bep.saintandre@gmail.com",
+  p_taize_desc:"Cada tercer sábado del mes: una velada de oración abierta a todos. Consulte la <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> para más información. Contacto: bep.saintandre@gmail.com",
   p_lgbtq:"Comunidad LGBTQ+",
-  p_lgbtq_desc:"La iglesia acoge a la comunidad LGBTQ+ y aspira a ser un espacio abierto e inclusivo para todos. Cada cuarto sábado del mes: un servicio ecuménico organizado por y para la comunidad LGBTQ+ — siempre que ese día no tenga lugar una celebración cristiana de las Comunidades Paulus. Consulte la <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> para más información.",
+  p_lgbtq_desc:"La iglesia acoge a la comunidad LGBTQ+ y aspira a ser un espacio abierto e inclusivo para todos. Cada cuarto sábado del mes: un servicio ecuménico organizado por y para la comunidad LGBTQ+. Consulte la <a href='#' onclick='go(\"agenda\");return false;'>Agenda</a> para más información.",
   p_klank:"Semana del Sonido",
   p_klank_desc:"Festival musical anual que utiliza la iglesia como joya acústica para producciones musicales contemporáneas y clásicas.",
   p_klank_link:"lasemaineduson.be →",
@@ -1187,7 +1157,7 @@ voorbij_trois_yt:"Les Trois Cordes (YouTube)",
   sb_open_body:"Cada día: 9–17 h\nDomingo: 10–17 h",
   sb_addr:"Dirección",
   sb_trans:"Transporte público",
-  sb_trans_body:"Metro Beurs (líneas 1 & 5) · Tranvía 4 & 10",
+  sb_trans_body:"<a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>Metro Beurs (líneas 1 & 5) · Tranvía 4 & 10</a>\nBus: <a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>Anneessens (48) · Manneken-Pis (48/95)</a>",
   sb_free:"Entrada gratuita",
   sb_masters:"Maestros Flamencos in Situ",
   sb_masters_link:"Más información →",
@@ -1199,7 +1169,7 @@ ar: {
   translation_notice:"هذه ترجمة آلية. يُرجى إبلاغ مجلس الكنيسة عن أي أخطاء تلاحظها.",
   hero_label:"١٦٦٤ · بروكسل",
   hero_title:"سيدتنا العذراء\nذات المعونة الصالحة",
-  hero_sub:"رعية ناطقة بالهولندية في وسط بروكسل",
+  hero_sub:"الكنيسة والرعية الناطقة باللغة الهولندية في وسط بروكسل",
   hero_date:"كولنمارخت ٩١ · بروكسل ١٠٠٠",
   hero_scroll:"اكتشف",
 
@@ -1216,6 +1186,7 @@ welkom_card_contact:"العنوان وساعات الفتح وكيفية الت�
   nav_agenda:"جدول الأنشطة",
   nav_gesch:"التاريخ",
   nav_samen:"الشراكات",
+  nav_grond:"مكتبة التربة",
   nav_voorbij:"أنشطة سابقة",
   nav_huren:"استخدام الكنيسة",
   nav_steunen:"الدعم",
@@ -1229,12 +1200,15 @@ welkom_card_contact:"العنوان وساعات الفتح وكيفية الت�
   ag_leg_taize:"تيزيه",
   ag_leg_night:"الكنيسة ليلاً",
   ag_leg_act:"نشاط",
-  ev_sun_eucharistie:"قداس مع الإفخارستيا",
-  ev_sun_woord:"خدمة الكلمة مع الإفخارستيا",
+  ag_leg_lgbtq: "LGBTQ+",
+  ag_leg_concert: "حفلة موسيقية",
+  ag_leg_drempel: "قداس الأطفال",
+  ev_sun_eucharistie:"القداس الإلهي",
+  ev_sun_woord:"قداس مع القربان المقدس",
   ev_voorganger:"المحتفل",
   ev_sat:"قداس – فينيس تيريه",
   ev_taize:"صلاة على روح تيزيه",
-  ev_night:"الكنيسة ليلاً (١٨–٢٢)",
+  ev_night:"المساعدة الليلية (حتى الساعة 22:00)",
   ev_lgbtq: 'احتفال مسكوني لمجتمع LGBTQ+',
   ev_palm:"أحد الشعانين",
   ev_holy_thu:"خميس الأسرار – عشاء الفصح",
@@ -1267,13 +1241,12 @@ welkom_card_contact:"العنوان وساعات الفتح وكيفية الت�
   samen_intro:"الكنيسة مكان لقاء لمجتمعات متنوعة ومبادرات ثقافية.",
   p_parochie:"رعية المعونة الصالحة",
   p_parochie_desc:"المجتمع الرعوي الناطق بالهولندية الذي يدير الكنيسة وينظم قداسات أسبوعية.",
-  p_wereldwijd: "في العالم",
   p_paulus:"مجتمعات بولس",
   p_paulus_desc:"شبكة مجتمعات إيمانية ناطقة بالهولندية في بروكسل.",
   p_taize:"تيزيه",
-  p_taize_desc:"كل ثالث سبت من الشهر: أمسية صلاة بروح تايزي، مفتوحة للجميع — ما لم تُقم في ذلك اليوم احتفالية مسيحية لجماعات بولس. راجع <a href='#' onclick='go(\"agenda\");return false;'>البرنامج</a> للحصول على جميع المعلومات. للتواصل: bep.saintandre@gmail.com ",
+  p_taize_desc:"في كل يوم سبت ثالث من الشهر: أمسية صلاة بروح تايزيه، مفتوحة للجميع. راجع <a href='#' onclick='go(\"agenda\");return false;'>الأجندة</a> للحصول على جميع المعلومات. للتواصل: bep.saintandre@gmail.com ",
   p_lgbtq:"مجتمع LGBTQ+",
-p_lgbtq_desc:"ترحّب الكنيسة بمجتمع LGBTQ+ وتسعى لأن تكون فضاءً مفتوحاً وشاملاً للجميع. كل سبت رابع من الشهر: احتفال مسكوني من مجتمع LGBTQ+ ولأجله — ما لم تُقَم في ذلك اليوم احتفالية مسيحية لمجتمعات بولس. راجع <a href='#' onclick='go(\"agenda\");return false;'>جدول الأنشطة</a> للمزيد من المعلومات.",
+  p_lgbtq_desc:"ترحب الكنيسة بمجتمع LGBTQ+ وتسعى إلى توفير مساحة مفتوحة وشاملة للجميع. في كل يوم سبت رابع من الشهر: تُقام خدمة مسكونية من أجل مجتمع LGBTQ+ وبمشاركته. راجع <a href='#' onclick='go(\"agenda\");return false;'>الأجندة</a> للحصول على جميع المعلومات.",
   p_klank:"أسبوع الصوت",
   p_klank_desc:"مهرجان موسيقي سنوي يستخدم الكنيسة كجوهرة صوتية للإنتاجات الموسيقية المعاصرة والكلاسيكية.",
   p_klank_link:"lasemaineduson.be ←",
@@ -1321,7 +1294,7 @@ voorbij_trois_yt:"Les Trois Cordes (يوتيوب)",
   sb_open_body:"يومياً: ٩–١٧\nالأحد: ١٠–١٧",
   sb_addr:"العنوان",
   sb_trans:"النقل العام",
-  sb_trans_body:"مترو بورس (خطا ١ و٥)",
+  sb_trans_body:"<a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>مترو بورس (خطا ١ و٥)</a>\nحافلة: <a href='https://www.stib-mivb.be/startpagina/reizen/route-planner' target='_blank'>Anneessens (48) · Manneken-Pis (48/95)</a>",
   sb_free:"دخول مجاني",
   sb_masters:"الأساتذة الفلاماندييون في الموقع",
   sb_masters_link:"مزيد من المعلومات ←",
@@ -1413,8 +1386,10 @@ const FIXED = [
   { datum:'2026-04-04', tijd:'21:00', type:'viering', tk:'ev_vigil' },
   { datum:'2026-04-05', tijd:'11:00', type:'viering', tk:'ev_easter' },
   { datum:'2026-05-14', tijd:'11:00', type:'viering', tk:'ev_drempel' },
+  { datum:'2026-05-17', tijd:'12:00', type:'cleanup', tk:'ev_cleanup', link:'https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/zorg-voor-de-schepping' },
   { datum:'2026-05-23', tijd:'19:00', type:'viering', tk:'ev_pinksterwake', extra:'' },       //{ datum:'2026-05-23', tijd:'19:00', type:'viering', tk:'ev_pinksterwake', extra:'Johnny De Mot' },
   { datum:'2026-05-24', tijd:'11:00', type:'woord', tk:'ev_pinkster', extra:'', rol:'' },        //{ datum:'2026-05-24', tijd:'11:00', type:'woord', tk:'ev_pinkster', extra:'Katia Vanhemelryck & Nieneke Heesen', rol:'voorgangers' },
+  { datum:'2026-05-30', tijd:'19:00', type:'viering', tk:'ev_lgbtq' },
   { datum:'2026-06-14', tijd:'10:00', type:'viering', tk:'ev_14juni' },
   { datum:'2026-06-26', tijd:'19:00', type:'viering', tk:'ev_concert_juni', extra:'Baptiste Zeronian', gratis:true },
 ];
@@ -1491,17 +1466,18 @@ function buildAgenda() {
       } else {
         const zondagNr = Math.ceil(d.getDate() / 7);
         const isWoord  = zondagNr === 4 || ZONDAG_UITZONDERINGEN[sk] === 'woord';
+        const zondagNr3 = zondagNr === 3;
         const tkSun    = isWoord ? 'ev_sun_woord' : 'ev_sun_eucharistie';
         const vg       = VOORGANGERS[sk] || { naam: '', rol: '' };
-        (map[sk] = map[sk] || []).unshift({
-          datum:     sk,
-          tijd:      '11:00',
-          type:      'viering',
-          tekst:     t(tkSun),
-          voorganger: vg.naam,
-          extra:     vg.rol,
-          rol:       vg.rol
-        });
+       (map[sk] = map[sk] || []).unshift({
+  datum:     sk,
+  tijd:      '11:00',
+  type:      'viering',
+  tekst:     t(tkSun) + (zondagNr3 ? ' 👪 <em style="font-size:0.82rem;color:var(--muted);">Goede Bijtjes en Mosterdzaadjes</em>' : ''),
+  voorganger: vg.naam,
+  extra:     vg.rol,
+  rol:       vg.rol
+});
       }
     }
   }
@@ -1551,8 +1527,25 @@ function agendaHTML() {
       <div class="events-cell">
         ${evs.map(ev => `<div class="ev-row">
           <span class="ev-time">${ev.tijd}</span>
-          <span class="ev-dot">◆</span>
-          <span>${ev.tekst}${ev.gratis
+       <span class="ev-dot">${
+  ev.datum === '2026-06-14' ? '<span style="color:var(--gold-lt);font-size:1rem;">!</span>' :
+  ev.type === 'nacht' ? '🌙' :
+  ev.type === 'taize' ? '✝' :
+  ev.tk === 'ev_lgbtq' ? '✝' :
+  ev.tk === 'ev_concert_juni' ? '🎵' :
+  ev.tk === 'ev_drempel' ? '✝👪' :
+  ev.tk === 'ev_pinkster' ? '✝' :
+  ev.tk === 'ev_pinksterwake' ? '✝ <img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;">' :
+  ev.type === 'viering' ? '✝' :
+  ev.type === 'cleanup' ? `<img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;">` :
+ev.tekst?.includes(t('ev_sun_eucharistie')) ? '✝' :
+  ev.tekst?.includes(t('ev_sun_woord')) ? '✝' :
+  ev.type === 'cleanup' ? `<img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;display:inline-block;">` :
+  '◆'
+}</span>
+          <span>${ev.link
+            ? `<a href="${ev.link}" target="_blank">${ev.tekst}</a>`
+            : ev.tekst}${ev.gratis
             ? `<span style="margin-left:0.5rem;font-size:0.75rem;font-weight:600;color:var(--gold-dk);">(gratis)</span>`
             : ''}${ev.voorganger
             ? `<span style="margin-left:0.7rem;font-size:0.78rem;color:var(--muted);font-style:italic;">— ${ev.rol === 'voorgangers' ? 'Voorgangers' : t('ev_voorganger')}: ${ev.voorganger}</span>`
@@ -1564,7 +1557,7 @@ function agendaHTML() {
 
   if (!count) html += `<div class="agenda-empty">${t('ag_empty')}</div>`;
   html += '</div>';
-  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">◆ ${t('ag_leg_viering')} &nbsp;|&nbsp; ◆ ${t('ag_leg_taize')} &nbsp;|&nbsp; ◆ ${t('ag_leg_night')} &nbsp;|&nbsp; ◆ ${t('ag_leg_act')}</p>`;
+  html += `<p style="margin-top:0.8rem;font-size:0.8rem;font-style:italic;color:var(--muted);">✝ ${t('ag_leg_viering')} · ${t('ag_leg_taize')} · ${t('ag_leg_lgbtq')} &nbsp;|&nbsp; 🌙 ${t('ag_leg_night')} &nbsp;|&nbsp; 🎵 ${t('ag_leg_concert')} &nbsp;|&nbsp; 👪 ${t('ag_leg_drempel')} &nbsp;|&nbsp; <img src="paulusgemeenschappen_logo_tekening.png" style="height:1em;vertical-align:middle;display:inline-block;"> Paulusgemeenschappen</p>`;  
   return html;
 }
 
@@ -1637,7 +1630,7 @@ welkom: ()=>`
     </div>
   </div>
 </section>`,
-
+  
 agenda: ()=>`
 <section class="section">
   <h2 class="section-title">${t('ag_title')}</h2>
@@ -1675,8 +1668,7 @@ geschiedenis: ()=>`
     <div class="info-box">
       <h3>📍 ${t('sb_addr')}</h3>
       <p>Kolenmarkt 91<br>(kant Fontainasplein)<br>1000 Brussel</p>
-      <p style="margin-top:0.5rem;"><a href="https://maps.google.com/?q=Kolenmarkt+9
-      1,+1000+Brussel" target="_blank">${t('gesch_maps')}</a></p>
+      <p style="margin-top:0.5rem;"><a href="https://maps.google.com/?q=Kolenmarkt+91,+1000+Brussel" target="_blank">${t('gesch_maps')}</a></p>
     </div>
   </div>
 </section>`,
@@ -1703,20 +1695,20 @@ samenwerking: ()=>`
         id="btn-parochieploeg">
         ${t('p_parochieploeg')}
       </button>
-      <button onclick="toggleTab('wereldwijd')"
-  style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
-         padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
-         background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);"
-  id="btn-wereldwijd">
-  ${t('p_wereldwijd')}
-</button>
-<a href="https://www.paulusgemeenschappen.be/nl/vieringen-sacramenten#ziekenzalving" target="_blank"
-  style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
-         padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
-         background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);
-         text-decoration:none;display:inline-block;">
-  ${t('p_sacramenten')} ↗
-</a>
+      <button onclick="toggleTab('bijstandnight')"
+        style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+               padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
+               background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);"
+        id="btn-bijstandnight">
+        🌙 Bijstand by Night
+      </button>
+      <a href="https://www.paulusgemeenschappen.be/nl/vieringen-sacramenten#vormsel" target="_blank"
+        style="font-family:var(--font-ui);font-size:0.72rem;font-weight:600;letter-spacing:0.08em;
+               padding:0.35rem 0.9rem;border-radius:var(--r);cursor:pointer;transition:all var(--t);
+               background:var(--cream);border:1px solid var(--border);color:var(--stone-mid);
+               text-decoration:none;display:inline-block;">
+        ${t('p_sacramenten')} ↗
+      </a>
     </div>
     <div id="tab-kerkfabriek" style="display:none;margin-top:0.8rem;padding:0.9rem 1.1rem;
          background:var(--parchment);border-radius:var(--r);border:1px solid var(--border);
@@ -1727,43 +1719,47 @@ samenwerking: ()=>`
          background:var(--parchment);border-radius:var(--r);border:1px solid var(--border);
          font-size:0.9rem;color:var(--stone);">
       ${t('p_parochieploeg_desc')}
-   </div>
-    <div id="tab-wereldwijd" style="display:none;margin-top:0.8rem;
-         border-radius:var(--r);border:1px solid var(--border);overflow:hidden;">
-      <div id="wereldwijd-container" style="display:flex;flex-direction:column;background:var(--stone);">
-       <div style="padding:0.4rem 0.8rem;display:flex;justify-content:space-between;align-items:center;background:var(--stone);flex-shrink:0;">
-  <button onclick="minimaliserKaart()" id="btn-minimaliseer"
-    style="display:none;font-family:var(--font-ui);font-size:0.68rem;font-weight:600;
-           letter-spacing:0.08em;padding:0.3rem 0.8rem;border-radius:var(--r);cursor:pointer;
-           background:var(--stone);border:1px solid rgba(201,169,110,0.4);
-           color:rgba(201,169,110,0.8);transition:all var(--t);">
-  </button>
-  <div style="flex:1;"></div>
-  <button onclick="sluitWerelwijd()" id="btn-fullscreen"
-  style="font-family:var(--font-ui);font-size:0.68rem;font-weight:600;letter-spacing:0.08em;
-         padding:0.3rem 0.8rem;border-radius:var(--r);cursor:pointer;
-         background:var(--stone);border:1px solid rgba(201,169,110,0.4);
-         color:rgba(201,169,110,0.8);transition:all var(--t);">
-  ✕ Sluiten
-</button>
-</div>
-        <iframe 
-  id="wereldwijd-iframe"
-  src=""
-  style="width:100%;height:75vh;min-height:500px;border:none;display:block;flex:1;"
-  title="De Wereld van de Goede Bijstand">
-</iframe>
-      </div>
+    </div>
+    <div id="tab-bijstandnight" style="display:none;margin-top:0.8rem;padding:0.9rem 1.1rem;
+         background:var(--parchment);border-radius:var(--r);border:1px solid var(--border);
+         font-size:0.9rem;color:var(--stone);">
+      Elke vrijdagavond van mei t.e.m. augustus, tussen 18 en 22 uur, staat de kerk voor iedereen open.
     </div>
   </div>
   
-  <div class="partner"><strong>${t('p_paulus')}</strong><p>${t('p_paulus_desc')} <a href="https://www.paulusgemeenschappen.be/nl" target="_blank">paulusgemeenschappen.be →</a></p></div>
-  <div class="partner"><strong>${t('p_taize')}</strong><p>${t('p_taize_desc')}</p></div>
+  <div class="partner">
+  <img src="paulusgemeenschappen_logo.png" alt="Paulusgemeenschappen" style="height:40px;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+  </strong><p>${t('p_paulus_desc')} <a href="https://www.paulusgemeenschappen.be/nl" target="_blank">paulusgemeenschappen.be →</a></p>
+</div>
+  <div class="partner">
+    <img src="taize-logo-HR.jpg" alt="Taizé" style="height:40px;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+    <p>${t('p_taize_desc')}</p>
+  </div>
+  
   <div class="partner"><strong>${t('p_lgbtq')}</strong><p>${t('p_lgbtq_desc')}</p></div>
-  <div class="partner"><strong>${t('p_klank')}</strong><p>${t('p_klank_desc')} <a href="https://www.lasemaineduson.be" target="_blank">${t('p_klank_link')}</a></p></div>
-  <div class="partner"><strong>${t('p_meesters')}</strong><p>${t('p_meesters_desc')} <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('p_meesters_link')}</a></p></div>
-</section>`,
 
+ <div class="partner">
+    <img src="week_van_de_klank_logo.png" alt="Week van de Klank" style="height:60px;width:auto;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+    <p>${t('p_klank_desc')} <a href="https://www.lasemaineduson.be" target="_blank">${t('p_klank_link')}</a></p>
+  </div>
+
+  <div class="partner">
+    <img src="vlaamse-meesters-logo.png" alt="Vlaamse Meesters" style="height:60px;width:auto;object-fit:contain;object-position:left;margin-bottom:0.4rem;display:block;">
+    <p>${t('p_meesters_desc')} <a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('p_meesters_link')}</a></p>
+  </div>
+
+</section>`,
+  
+grond: ()=>`
+<section class="section" style="padding:0;border:none;margin:0;">
+  <iframe
+    src="grond.html"
+    style="width:100%;height:calc(100vh - 52px);border:none;display:block;"
+    title="Grondbibliotheek"
+    loading="lazy"
+  ></iframe>
+</section>`,
+  
 voorbij: ()=>`
 <section class="section">
   <h2 class="section-title">${t('voorbij_title')}</h2>
@@ -1894,6 +1890,12 @@ contact: ()=>`
     <a class="btn" href="mailto:kerkfabriek@goedebijstand.brussels">${t('contact_msg')}</a>
   </div>
   <div class="ornament">✦ ✦ ✦</div>
+  <p class="subsection" style="font-style:italic;font-size:0.9rem;color:var(--muted);margin-bottom:0.8rem;">Voor vragen i.v.m. de parochie / pastores</p>
+  <div class="contact-box" style="margin-bottom:1.5rem;">
+    <img src="paulusgemeenschappen_logo.png" alt="Paulusgemeenschappen" style="flex:1;height:auto;max-height:60px;object-fit:contain;object-position:left;">
+    <a class="btn" href="https://www.paulusgemeenschappen.be/nl/contact" target="_blank">Contactformulier →</a>
+  </div>
+  <div class="ornament">✦ ✦ ✦</div>
   <p class="subsection">${t('contact_open_title')}</p>
   <div class="huren-grid">
     <div class="info-box">
@@ -1913,7 +1915,7 @@ contact: ()=>`
   <h2 class="section-title">Cookie- &amp; privacybeleid</h2>
   <p>Deze website gebruikt uitsluitend <strong>functionele cookies</strong> om uw taalvoorkeur op te slaan (<code>gb_lang</code>) en uw cookiekeuze te bewaren (<code>gb_gdpr</code>). Er worden geen persoonsgegevens verzameld of gedeeld met derden. Er zijn geen tracking-, analyse- of advertentiecookies aanwezig.</p>
   <p style="margin-top:0.8rem;">Beheerder: <strong>Kerkfabriek Onze-Lieve-Vrouw van Goede Bijstand</strong><br>
-  Kolenmarkt 91, 1000 Brussel<br>
+  Bijstandsstraat 5, 1000 Brussel<br>
   <a href="mailto:kerkfabriek@goedebijstand.brussels">kerkfabriek@goedebijstand.brussels</a></p>
 </section>`,
 
@@ -1924,7 +1926,7 @@ function sidebarHTML() {
   <img src="${IMG_EXT}" alt="Goede Bijstand" class="sidebar-img">
   <div class="sidebar-box">
     <h3>📍 ${t('sb_addr')}</h3>
-    <p class="addr">Kolenmarkt 91<br>(kant Fontainasplein)<br>1000 Brussel</p>
+    <p class="addr"><a href="https://www.openstreetmap.org/#map=20/50.8455991/4.3477415&layers=H" target="_blank" style="color:var(--stone-mid);">Kolenmarkt 91</a><br>(kant Fontainasplein)<br>1000 Brussel</p>
   </div>
   <div class="sidebar-box">
     <h3>🕐 ${t('sb_open')}</h3>
@@ -1944,6 +1946,22 @@ function sidebarHTML() {
 
 /* ─── ROUTER ─── */
 function render(key) {
+  // Volledig scherm voor grond-pagina
+  const pageWrap = document.querySelector('.page-wrap');
+  const sidebar  = document.getElementById('sidebar');
+  const twoCol   = document.querySelector('.two-col');
+
+  if (key === 'grond') {
+    pageWrap.style.maxWidth  = '100%';
+    pageWrap.style.padding   = '0';
+    twoCol.style.display     = 'block';
+    sidebar.style.display    = 'none';
+  } else {
+    pageWrap.style.maxWidth  = '';
+    pageWrap.style.padding   = '';
+    twoCol.style.display     = '';
+    sidebar.style.display    = '';
+  }
   const fn = PAGES[key];
   const noticeKey = `gb_notice_${LANG}`;
   const noticeSeen = sessionStorage.getItem(noticeKey);
@@ -1958,7 +1976,7 @@ function render(key) {
     : '<section class="section"><p>404</p></section>';
   document.getElementById('sidebar').innerHTML = sidebarHTML();
   document.querySelectorAll('nav a[data-page]').forEach(a => a.classList.toggle('active', a.dataset.page===key));
-  const pageKey = {agenda:'nav_agenda',geschiedenis:'nav_gesch',samenwerking:'nav_samen',voorbij:'nav_voorbij',huren:'nav_huren',steunen:'nav_steunen',contact:'nav_contact'}[key];
+  const pageKey = {agenda:'nav_agenda',geschiedenis:'nav_gesch',samenwerking:'nav_samen',grond:'nav_grond',voorbij:'nav_voorbij',huren:'nav_huren',steunen:'nav_steunen',contact:'nav_contact'}[key];
   document.title = (t(pageKey)||key) + ' — ' + (t('hero_title')||'Goede Bijstand').replace('\n',' ');
 }
 
@@ -1982,6 +2000,7 @@ function gdprAccept() {
 function showGdpr() {
   document.getElementById('gdprOverlay').classList.remove('hidden');
 }
+  
 /* ─── INIT ─── */
 (function init() {
   const isRtl = LANGS[LANG]?.rtl === true;
@@ -1999,7 +2018,7 @@ function showGdpr() {
 })();
 
 function toggleTab(id) {
-  ['kerkfabriek','parochieploeg','wereldwijd'].forEach(name => {
+  ['kerkfabriek','parochieploeg','bijstandnight'].forEach(name => {
     const tab = document.getElementById('tab-' + name);
     const btn = document.getElementById('btn-' + name);
     if (!tab) return;
