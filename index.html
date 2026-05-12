@@ -1953,6 +1953,19 @@ function sidebarHTML() {
 }
 
 /* ─── ROUTER ─── */
+
+// Luister naar taalwijzigingen vanuit de kerksite
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'setLang' && TX[e.data.lang]) {
+    const lang = e.data.lang;
+    // Arabic en andere talen die grond.html niet kent, vallen terug op Engels
+    const safeLang = TX[lang] ? lang : 'en';
+    document.querySelectorAll('.lang-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.lang === safeLang)
+    );
+    applyLanguage(safeLang);
+  }
+});
   
 function render(key) {
   // Volledig scherm voor grond-pagina
