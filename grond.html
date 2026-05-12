@@ -862,10 +862,10 @@ function applyLanguage(lang) {
 /* ══════════════════════════════════════════
    INIT
 ══════════════════════════════════════════ */
-// Start with aarde layer active
+// Start: alle grondpunten op de kaart
 aardeMarkers.forEach(m => m.addTo(map));
+buildLegend('nl');
 applyLanguage('nl');
-setLayer('aarde');
 document.getElementById('map-count').style.display = 'none';
 ;
 
@@ -878,6 +878,18 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 
 // Load shell pins from shared storage
 loadSchelpPins();
+  
+window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'setLang' && TX[e.data.lang]) {
+    const lang = e.data.lang;
+    const safeLang = TX[lang] ? lang : 'en';
+    document.querySelectorAll('.lang-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.lang === safeLang)
+    );
+    applyLanguage(safeLang);
+  }
+}
+
 </script>
 </body>
 </html>
