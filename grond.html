@@ -750,32 +750,16 @@ function applyLanguage(lang) {
   document.getElementById('stat-stories').textContent      = t.statStories;
   document.getElementById('txt-map-label').textContent     = t.mapLabel;
   document.getElementById('txt-map-caption').textContent   = t.mapCaption;
-  const elAarde = document.getElementById('layer-aarde-label');
-  if (elAarde) elAarde.textContent = t.layerAarde;
-  const elSchelp = document.getElementById('layer-schelp-label');
-  if (elSchelp) elSchelp.textContent = t.layerSchelp;
-  document.getElementById('schelp-form-title').textContent = t.schelpFormTitle;
-  document.getElementById('schelp-form-intro').textContent = t.schelpFormIntro;
-  document.getElementById('lbl-city').textContent          = t.lblCity;
-  document.getElementById('lbl-name').textContent          = t.lblName;
-  document.getElementById('lbl-msg').textContent           = t.lblMsg;
-  document.getElementById('sf-city').placeholder           = t.cityPh;
-  document.getElementById('sf-name').placeholder           = t.namePh;
-  document.getElementById('sf-msg').placeholder            = t.msgPh;
-  document.getElementById('btn-pin-label').textContent     = t.btnPin;
-  document.getElementById('schelp-list-title').textContent = t.listSchelpTitle;
   document.getElementById('txt-art-headline').textContent  = t.artHeadline;
   document.getElementById('txt-art-deck').textContent      = t.artDeck;
   document.getElementById('txt-art-p1').textContent        = t.artP1;
   document.getElementById('txt-art-p2').textContent        = t.artP2;
   document.getElementById('txt-list-title').textContent    = t.listTitle;
   document.getElementById('txt-list-body').textContent     = t.listBody;
-  const elListBtn = document.getElementById('txt-list-btn');
-  if (elListBtn) elListBtn.textContent = t.listBtn;
+  document.getElementById('btn-toggle-list').textContent   = t.listBtn;
   document.getElementById('txt-footer').innerHTML          = t.footer;
   updateAardePopups(lang);
   buildLegend(lang);
-  updateCount();
 }
 
   function toggleList() {
