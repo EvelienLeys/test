@@ -750,8 +750,10 @@ function applyLanguage(lang) {
   document.getElementById('stat-stories').textContent      = t.statStories;
   document.getElementById('txt-map-label').textContent     = t.mapLabel;
   document.getElementById('txt-map-caption').textContent   = t.mapCaption;
-  document.getElementById('layer-aarde-label').textContent = t.layerAarde;
-  document.getElementById('layer-schelp-label').textContent= t.layerSchelp;
+  const elAarde = document.getElementById('layer-aarde-label');
+  if (elAarde) elAarde.textContent = t.layerAarde;
+  const elSchelp = document.getElementById('layer-schelp-label');
+  if (elSchelp) elSchelp.textContent = t.layerSchelp;
   document.getElementById('schelp-form-title').textContent = t.schelpFormTitle;
   document.getElementById('schelp-form-intro').textContent = t.schelpFormIntro;
   document.getElementById('lbl-city').textContent          = t.lblCity;
@@ -768,7 +770,8 @@ function applyLanguage(lang) {
   document.getElementById('txt-art-p2').textContent        = t.artP2;
   document.getElementById('txt-list-title').textContent    = t.listTitle;
   document.getElementById('txt-list-body').textContent     = t.listBody;
-  document.getElementById('txt-list-btn').textContent      = t.listBtn;
+  const elListBtn = document.getElementById('txt-list-btn');
+  if (elListBtn) elListBtn.textContent = t.listBtn;
   document.getElementById('txt-footer').innerHTML          = t.footer;
   updateAardePopups(lang);
   buildLegend(lang);
@@ -892,10 +895,10 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 // Load shell pins from shared storage
 loadSchelpPins();
 
-  window.addEventListener('message', function(e) {
+ // Ontvang taalwijziging van de kerksite (parent)
+window.addEventListener('message', function(e) {
   if (e.data && e.data.type === 'setLang' && TX[e.data.lang]) {
-    const lang = e.data.lang;
-    const safeLang = TX[lang] ? lang : 'en';
+    const safeLang = TX[e.data.lang] ? e.data.lang : 'en';
     document.querySelectorAll('.lang-btn').forEach(b =>
       b.classList.toggle('active', b.dataset.lang === safeLang)
     );
