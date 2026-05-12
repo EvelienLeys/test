@@ -1577,8 +1577,19 @@ const PAGES = {
 
 welkom: ()=>`
 <section class="section">
-  <img src="goede_bijstand_welkomstfoto.jpg" class="church-photo" style="height:340px;object-fit:cover;object-position:center 30%;" alt="Interieur Goede Bijstand">
-  <p style="font-family:var(--font-disp);font-size:1.1rem;font-style:italic;color:var(--stone-mid);margin-bottom:1.6rem;">${t('welkom_intro')}</p>
+ <img src="goede_bijstand_welkomstfoto.jpg" 
+     class="church-photo" 
+     style="height:340px;object-fit:cover;object-position:center 30%;cursor:zoom-in;" 
+     alt="Interieur Goede Bijstand"
+     onclick="document.getElementById('foto-overlay').style.display='flex'">
+
+<div id="foto-overlay" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);cursor:zoom-out;align-items:center;justify-content:center;padding:1rem;">
+  <img src="goede_bijstand_welkomstfoto.jpg" 
+       alt="Interieur Goede Bijstand" 
+       style="max-width:100%;max-height:100%;object-fit:contain;border-radius:var(--r);box-shadow:var(--shadow-lg);">
+  <button onclick="document.getElementById('foto-overlay').style.display='none'" 
+          style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:white;font-size:2rem;cursor:pointer;line-height:1;">✕</button>
+</div>
 
 <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0 1.8rem;">
   <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 Nieuws</h2>
