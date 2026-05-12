@@ -891,6 +891,17 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
 
 // Load shell pins from shared storage
 loadSchelpPins();
+
+  window.addEventListener('message', function(e) {
+  if (e.data && e.data.type === 'setLang' && TX[e.data.lang]) {
+    const lang = e.data.lang;
+    const safeLang = TX[lang] ? lang : 'en';
+    document.querySelectorAll('.lang-btn').forEach(b =>
+      b.classList.toggle('active', b.dataset.lang === safeLang)
+    );
+    applyLanguage(safeLang);
+  }
+});
 </script>
 </body>
 </html>
