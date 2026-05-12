@@ -573,35 +573,6 @@ let schelpPins = [];
 ══════════════════════════════════════════ */
 let activeLayer = 'aarde';
 
-function setLayer(layer) {
-  activeLayer = layer;
-
-  // Toggle buttons
-  document.getElementById('btn-layer-aarde').classList.toggle('active', layer === 'aarde');
-  document.getElementById('btn-layer-schelp').classList.toggle('active', layer === 'schelp');
-
-  // Show/hide aarde markers
-  aardeMarkers.forEach(m => layer === 'aarde' ? m.addTo(map) : map.removeLayer(m));
-
-  // Show/hide schelp markers + Brussel pin
-  if (layer === 'schelp') {
-    brusselMarker.addTo(map);
-    schelpMarkers.forEach(m => m.addTo(map));
-  } else {
-    map.removeLayer(brusselMarker);
-    schelpMarkers.forEach(m => map.removeLayer(m));
-  }
-
-  // Toggle legend vs schelp form
-  document.getElementById('legend').style.display = layer === 'aarde' ? 'flex' : 'none';
-  document.getElementById('map-count').style.display = layer === 'schelp' ? 'block' : 'none';
-  document.getElementById('schelp-panel').classList.toggle('visible', layer === 'schelp');
-  document.getElementById('schelp-list-wrap').style.display = layer === 'schelp' && schelpPins.length > 0 ? 'block' : 'none';
-
-  updateCount();
-  if (layer === 'aarde') { buildLegend(activeLang); } 
-}
-
 /* ══════════════════════════════════════════
    SCHELP STORAGE & RENDERING
 ══════════════════════════════════════════ */
@@ -862,10 +833,10 @@ function applyLanguage(lang) {
 /* ══════════════════════════════════════════
    INIT
 ══════════════════════════════════════════ */
-// Start with aarde layer active
+// Start: alle grondpunten op de kaart
 aardeMarkers.forEach(m => m.addTo(map));
+buildLegend('nl');
 applyLanguage('nl');
-setLayer('aarde');
 document.getElementById('map-count').style.display = 'none';
 ;
 
