@@ -864,10 +864,18 @@ function applyLanguage(lang) {
 ══════════════════════════════════════════ */
 // Start: alle grondpunten op de kaart
 aardeMarkers.forEach(m => m.addTo(map));
-buildLegend('nl');
-applyLanguage('nl');
+
+// Taal overnemen van de hoofdsite (localStorage) of default 'nl'
+const savedLang = (function() {
+  try { return localStorage.getItem('gb_lang') || 'nl'; } catch(e) { return 'nl'; }
+})();
+const initLang = TX[savedLang] ? savedLang : 'nl';
+document.querySelectorAll('.lang-btn').forEach(b =>
+  b.classList.toggle('active', b.dataset.lang === initLang)
+);
+buildLegend(initLang);
+applyLanguage(initLang);
 document.getElementById('map-count').style.display = 'none';
-;
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -888,7 +896,7 @@ window.addEventListener('message', function(e) {
     );
     applyLanguage(safeLang);
   }
-}
+});  
 
 </script>
 </body>
