@@ -1321,6 +1321,14 @@ function setLang(l) {
   });
   const cur = document.querySelector('nav a.active');
   render(cur?.dataset.page ?? 'agenda');
+
+ // Stuur taal door naar grond.html iframe (als die zichtbaar is)
+  const grondFrame = document.querySelector('#main iframe[src="grond.html"]');
+  if (grondFrame) {
+    try {
+      grondFrame.contentWindow.postMessage({ type: 'setLang', lang: l }, '*');
+    } catch(e) {}
+  } 
 }
 
 /* ─── DATE HELPERS ─── */
