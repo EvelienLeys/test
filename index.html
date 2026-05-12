@@ -2113,6 +2113,11 @@ function sluitFoto() {
   document.body.style.overflow = '';
 }
 
+  function syncGrondLang(iframe) {
+  try {
+    iframe.contentWindow.postMessage({ type: 'setLang', lang: LANG }, '*');
+  } catch(e) {}
+}
 </script>
 </body>
 </html>
