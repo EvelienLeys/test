@@ -1583,14 +1583,6 @@ welkom: ()=>`
      alt="Interieur Goede Bijstand"
      onclick="openFoto()">
 
-<div id="foto-overlay" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);cursor:zoom-out;align-items:center;justify-content:center;padding:1rem;">
-  <img src="goede_bijstand_welkomstfoto.jpg" 
-       alt="Interieur Goede Bijstand" 
-       style="max-width:100%;max-height:100%;object-fit:contain;border-radius:var(--r);box-shadow:var(--shadow-lg);">
-  <button onclick="document.getElementById('foto-overlay').style.display='none'" 
-          style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:white;font-size:2rem;cursor:pointer;line-height:1;">✕</button>
-</div>
-
 <div style="background:var(--parchment);border:1px solid var(--border);border-left:5px solid var(--gold);border-radius:var(--r);padding:1.4rem 1.6rem;margin:1.4rem 0 1.8rem;">
   <h2 class="section-title" style="font-size:1.3rem;margin-bottom:1.2rem;">📰 Nieuws</h2>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start;">
@@ -2076,11 +2068,12 @@ window.addEventListener('message', (e) => {
     // Scroll naar de tab
     setTimeout(() => tab.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
   }
-  if (e.data === 'sluitWerelwijd') {
+   if (e.data === 'sluitWerelwijd') {
     sluitWerelwijd();
   }
+}); 
 
-  function openFoto() {
+function openFoto() {
   let overlay = document.getElementById('foto-overlay');
   if (!overlay) {
     overlay = document.createElement('div');
@@ -2103,8 +2096,7 @@ function sluitFoto() {
   if (overlay) overlay.style.display = 'none';
   document.body.style.overflow = '';
 }
-  
-});
+
 </script>
 </body>
 </html>
