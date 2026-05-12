@@ -1957,11 +1957,13 @@ function sidebarHTML() {
 // Luister naar taalwijzigingen vanuit de kerksite
 window.addEventListener('message', function(e) {
   if (e.data && e.data.type === 'setLang' && TX[e.data.lang]) {
-    activeLang = e.data.lang;
+    const lang = e.data.lang;
+    // Arabic en andere talen die grond.html niet kent, vallen terug op Engels
+    const safeLang = TX[lang] ? lang : 'en';
     document.querySelectorAll('.lang-btn').forEach(b =>
-      b.classList.toggle('active', b.dataset.lang === e.data.lang)
+      b.classList.toggle('active', b.dataset.lang === safeLang)
     );
-    applyLanguage(e.data.lang);
+    applyLanguage(safeLang);
   }
 });
   
@@ -2133,6 +2135,12 @@ function sluitFoto() {
   document.body.style.overflow = '';
 }
 
+  function syncGrondLang(iframe) {
+  try {
+    iframe.contentWindow.postMessage({ type: 'setLang', lang: LANG }, '*');
+  } catch(e) {}
+}
+  
 </script>
 </body>
 </html>
