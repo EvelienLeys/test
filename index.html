@@ -221,6 +221,23 @@ body.rtl .section-title::after { margin-left: 0; margin-right: 0.5rem; }
 .subsection { font-family: var(--font-disp); font-style: italic; font-size: 1.05rem; color: var(--gold-dk); margin: 1.5rem 0 0.5rem; }
 .ornament { text-align: center; color: var(--gold); letter-spacing: 0.6em; font-size: 0.6rem; margin: 2rem 0; opacity: 0.7; }
 
+/* ── NIEUWS ── */
+.nieuws-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 1.4rem 0 1.8rem; }
+@media(max-width:600px){ .nieuws-grid { grid-template-columns: 1fr; } }
+.nieuws-card {
+  background: var(--white); border: 1px solid var(--border);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--r); overflow: hidden;
+  box-shadow: var(--shadow); transition: box-shadow var(--t), transform var(--t);
+}
+.nieuws-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+.nieuws-card img { width: 100%; height: 220px; object-fit: cover; object-position: center top; display: block; }
+.nieuws-card-body { padding: 1rem 1.2rem 1.1rem; }
+.nieuws-card-body h3 { font-family: var(--font-disp); font-size: 1rem; font-weight: 500; color: var(--stone-mid); margin-bottom: 0.4rem; display: flex; align-items: center; gap: 0.5rem; }
+.nieuws-card-body p { font-size: 0.87rem; color: var(--muted); line-height: 1.55; margin-bottom: 0.6rem; }
+.nieuws-card-body a { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold-dk); }
+.nieuws-card-body a:hover { color: var(--gold); }
+  
 /* ── AGENDA ── */
 .agenda-wrap { border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); }
 .agenda-month { background: var(--stone); color: var(--gold); font-family: var(--font-ui); font-size: 0.62rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.35rem 1rem; }
@@ -1562,6 +1579,33 @@ welkom: ()=>`
 <section class="section">
   <img src="goede_bijstand_welkomstfoto.jpg" class="church-photo" style="height:340px;object-fit:cover;object-position:center 30%;" alt="Interieur Goede Bijstand">
   <p style="font-family:var(--font-disp);font-size:1.1rem;font-style:italic;color:var(--stone-mid);margin-bottom:1.6rem;">${t('welkom_intro')}</p>
+
+  <div style="margin:1.4rem 0 0.4rem;">
+  <h2 class="section-title" style="font-size:1.3rem;">📰 Nieuws</h2>
+</div>
+<div class="nieuws-grid">
+  <div class="nieuws-card">
+    <img src="drempelviering_2026_affiche.png" alt="Drempelviering 2026">
+    <div class="nieuws-card-body">
+      <h3>👪 Drempelviering op Hemelvaart</h3>
+      <p>14 mei 2026 · 11u · O.L.V. Goede Bijstand<br>
+      Met doopsel van Larissa, Ilona en Mare.<br>
+      Goede Bijtjes (3–6 j.) &amp; Mosterdzaadjes (7–13 j.) welkom!</p>
+      <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/drempelviering" target="_blank" rel="noopener">Meer info →</a>
+    </div>
+  </div>
+  <div class="nieuws-card">
+    <img src="cleanup_affiche.png" alt="Clean-up Zorg voor de schepping">
+    <div class="nieuws-card-body">
+      <h3><img src="paulusgemeenschappen_logo_tekening.png" style="height:1.1em;vertical-align:middle;"> Clean-up: Zorg voor de schepping</h3>
+      <p>Zondag 17 mei · 9:30u · Pastorie Goede Bijstand<br>
+      Na de viering: clean-up samen met de gemeenschap.<br>
+      Afronden in de kerk.</p>
+      <a href="https://www.paulusgemeenschappen.be/nl/activiteiten-vorming/zorg-voor-de-schepping" target="_blank" rel="noopener">Meer info →</a>
+    </div>
+  </div>
+</div>
+
   <div class="card-grid">
     <div class="card" onclick="go('agenda')">
       <div class="card-icon">📅</div>
