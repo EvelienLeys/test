@@ -1581,7 +1581,7 @@ welkom: ()=>`
      class="church-photo" 
      style="height:340px;object-fit:cover;object-position:center 30%;cursor:zoom-in;" 
      alt="Interieur Goede Bijstand"
-     onclick="document.getElementById('foto-overlay').style.display='flex'">
+     onclick="openFoto()">
 
 <div id="foto-overlay" onclick="this.style.display='none'" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.92);cursor:zoom-out;align-items:center;justify-content:center;padding:1rem;">
   <img src="goede_bijstand_welkomstfoto.jpg" 
@@ -2079,6 +2079,31 @@ window.addEventListener('message', (e) => {
   if (e.data === 'sluitWerelwijd') {
     sluitWerelwijd();
   }
+
+  function openFoto() {
+  let overlay = document.getElementById('foto-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'foto-overlay';
+    overlay.style.cssText = 'position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,0.92);display:flex;align-items:center;justify-content:center;padding:1rem;cursor:zoom-out;';
+    overlay.innerHTML = `
+      <img src="goede_bijstand_welkomstfoto.jpg" style="max-width:100%;max-height:100%;object-fit:contain;border-radius:2px;">
+      <button onclick="event.stopPropagation();sluitFoto()" style="position:absolute;top:1rem;right:1rem;background:none;border:none;color:white;font-size:2.5rem;cursor:pointer;line-height:1;">✕</button>
+    `;
+    overlay.onclick = sluitFoto;
+    document.body.appendChild(overlay);
+  } else {
+    overlay.style.display = 'flex';
+  }
+  document.body.style.overflow = 'hidden';
+}
+
+function sluitFoto() {
+  const overlay = document.getElementById('foto-overlay');
+  if (overlay) overlay.style.display = 'none';
+  document.body.style.overflow = '';
+}
+  
 });
 </script>
 </body>
