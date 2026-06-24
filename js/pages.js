@@ -362,4 +362,5 @@ function sidebarHTML() {
   <p style="font-size:0.72rem;font-style:italic;color:var(--gold);margin-bottom:0.5rem;">Dominique Provost - Art in Flanders</p>
   <p><a href="https://www.flemishmastersinsitu.com/nl/locaties/onze-lieve-vrouw-van-goede-bijstandkerk-brussel" target="_blank">${t('sb_masters_link')}</a></p>
 </div>
+`;
 }
